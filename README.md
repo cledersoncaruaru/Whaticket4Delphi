@@ -31,8 +31,10 @@ Este projeto tem como objetivo fornecer uma alternativa 100% Delphi para integra
 
 ```text
 /
-├── src/                 # Código-fonte principal em Delphi
-├── wwwroot/             # Arquivos JS, CSS e HTML do frontend (Bootstrap + Nifty)
-├── config.ini           # Arquivo de configuração local
+├── Source/                       # Código-fonte principal em Delphi
+├── Bin/                          # Local a Onde fica o Binario,Dlls e todos os Arquivos Necessarios para rodar o Sistema
+├── Bin/wwwroot/                  # Arquivos JS, CSS e HTML do frontend (Bootstrap + Nifty)
+├── Bin/Configuracao.ini          # Arquivo de configuração local
+├── Bin/Configuracao.ini          # Arquivo de configuração de Portas de SSL para Aplicação
 ├── README.md
 └── ...
