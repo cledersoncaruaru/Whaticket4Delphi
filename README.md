@@ -18,6 +18,8 @@ Este projeto tem como objetivo fornecer uma alternativa 100% Delphi para integra
   - HTML, JavaScript, CSS
 - ✅ Testado com Delphi nas versões:
   - **11.0**, **12.0**, **12.1**, **12.2**, **12.3**
+  - ✅ Teste com Intraweb: Todas as Versões 16. alguma 15. pode pegar, dúvidas baixe a versão trial sem limitações do Intraweb 
+       https://www.atozed.com/intraweb/download/v16/
 
 ## 🧩 Tecnologias Utilizadas
 
