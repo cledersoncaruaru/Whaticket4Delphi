@@ -4,7 +4,7 @@
         <ProjectVersion>20.3</ProjectVersion>
         <FrameworkType>VCL</FrameworkType>
         <Base>True</Base>
-        <Config Condition="'$(Config)'==''">Debug</Config>
+        <Config Condition="'$(Config)'==''">Release</Config>
         <Platform Condition="'$(Platform)'==''">Win64</Platform>
         <TargetedPlatforms>3</TargetedPlatforms>
         <AppType>Console</AppType>
@@ -274,7 +274,6 @@
             </Delphi.Personality>
             <Deployment Version="5">
                 <DeployFile LocalName="..\bin\ProjetoERPIntraweb.exe" Configuration="Debug" Class="ProjectOutput"/>
-                <DeployFile LocalName="..\bin\WhaticketIW.exe" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName="..\bin\WhaticketIW.exe" Configuration="Debug" Class="ProjectOutput"/>
                 <DeployFile LocalName="..\bin\WhaticketIW.rsm" Configuration="Debug" Class="DebugSymbols"/>
                 <DeployClass Name="AdditionalDebugSymbols">
