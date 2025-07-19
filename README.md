@@ -44,6 +44,23 @@ Senha:123456
  - Abra o Serviço marque Tipo de Inicialização para "Automatico", Clique em Iniciar, e pronto o serviço rodando 
 
 
+## Screenshots
+
+<img src="https://github.com/cledersoncaruaru/Whaticket4Delphi/tree/main/images/Agendamentos.png" width="350"> 
+<img src="https://github.com/cledersoncaruaru/Whaticket4Delphi/tree/main/images/Atendimento.png" width="350"> 
+<img src="https://github.com/cledersoncaruaru/Whaticket4Delphi/tree/main/images/Atendimento2.png" width="350"> 
+<img src="https://github.com/cledersoncaruaru/Whaticket4Delphi/tree/main/images/Codigo.png" width="350">
+<img src="https://github.com/cledersoncaruaru/Whaticket4Delphi/tree/main/images/Codigo2.png" width="350">
+<img src="https://github.com/cledersoncaruaru/Whaticket4Delphi/tree/main/images/Comando.png" width="350">
+<img src="https://github.com/cledersoncaruaru/Whaticket4Delphi/tree/main/images/Conexões.png" width="350">
+<img src="https://github.com/cledersoncaruaru/Whaticket4Delphi/tree/main/images/Contato.png" width="350">
+<img src="https://github.com/cledersoncaruaru/Whaticket4Delphi/tree/main/images/DashBoard.png" width="350">
+<img src="https://github.com/cledersoncaruaru/Whaticket4Delphi/tree/main/images/Kanban.png" width="350">
+<img src="https://github.com/cledersoncaruaru/Whaticket4Delphi/tree/main/images/Loguin.png" width="350">
+<img src="https://github.com/cledersoncaruaru/Whaticket4Delphi/tree/main/images/Servico2.png" width="350">
+<img src="https://github.com/cledersoncaruaru/Whaticket4Delphi/tree/main/images/Serviço.png" width="350">
+<img src="https://github.com/cledersoncaruaru/Whaticket4Delphi/tree/main/images/Tarefas.png" width="350">
+
 
 ## 🗂 Estrutura do Projeto
 
