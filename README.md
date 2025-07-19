@@ -27,6 +27,13 @@ Este projeto tem como objetivo fornecer uma alternativa 100% Delphi para integra
 - [Evolution API](https://github.com/EvolutionAPI/evolution-api)
 - [PostgreSQL](https://www.postgresql.org/)
 
+## Usuario e Senha Padrão 
+
+Usuario:admin@admin.com
+Senha:123456
+
+
+
 ## 🗂 Estrutura do Projeto
 
 ```text

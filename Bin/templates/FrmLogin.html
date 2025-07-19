@@ -931,6 +931,7 @@
             document.querySelectorAll('.social-btn').forEach(btn => {
                 btn.addEventListener('click', handleSocialLogin);
             });
+
         }
 
         function handleLogin(event) {
@@ -1008,7 +1009,7 @@
 
         // ===== TOGGLE DE SENHA =====
         function togglePassword() {
-            const passwordInput = document.getElementById('password');
+            const passwordInput = document.getElementById('SENHA');
             const toggleIcon = document.getElementById('passwordToggleIcon');
 
             if (passwordInput.type === 'password') {
