@@ -66,7 +66,7 @@ Senha:123456
 - Esse Projeto pode ser utilizado com base para outros Projetos
 - Você tem o Demo de como trabalhar com Menus, chamando apartir de um FormBase
 - Você tem Demos de como Utilizar Modais
-- Você tem Demo de Como Abrir putros Forms 
+- Você tem Demo de Como Abrir outros Forms 
 - Exemplo de Crud
 - Exemplos de Chamadas a APis com o RestRequest3Delphi
 - Exemplo de WebHook em uma Aplicação Intrawqeb
