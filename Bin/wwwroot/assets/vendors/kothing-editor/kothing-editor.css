@@ -1,0 +1,2778 @@
+.kothing-editor {
+  background-color: #fff;
+  border: 1px solid #dadada;
+  border-radius: 6px;
+  -moz-border-radius: 6px;
+  -webkit-border-radius: 6px;
+  box-sizing: border-box;
+  color: #000;
+  font-family: Helvetica Neue,sans-serif;
+  height: auto;
+  text-align: left;
+  width: auto;
+}
+
+.kothing-editor * {
+  -webkit-user-drag: none;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.kothing-editor .ke-container {
+  height: 100%;
+  position: relative;
+  width: 100%;
+}
+
+.kothing-editor-common button, .kothing-editor-common input, .kothing-editor-common select, .kothing-editor-common textarea {
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.kothing-editor-common blockquote, .kothing-editor-common body, .kothing-editor-common button, .kothing-editor-common code, .kothing-editor-common dd, .kothing-editor-common div, .kothing-editor-common dl, .kothing-editor-common dt, .kothing-editor-common fieldset, .kothing-editor-common form, .kothing-editor-common h1, .kothing-editor-common h2, .kothing-editor-common h3, .kothing-editor-common h4, .kothing-editor-common h5, .kothing-editor-common h6, .kothing-editor-common input, .kothing-editor-common legend, .kothing-editor-common li, .kothing-editor-common ol, .kothing-editor-common p, .kothing-editor-common pre, .kothing-editor-common select, .kothing-editor-common td, .kothing-editor-common textarea, .kothing-editor-common th, .kothing-editor-common ul {
+  border: 0;
+  margin: 0;
+}
+
+.kothing-editor-common dl, .kothing-editor-common li, .kothing-editor-common menu, .kothing-editor-common ol, .kothing-editor-common ul {
+  list-style: none !important;
+}
+
+.kothing-editor-common hr {
+  margin: 6px 0 !important;
+}
+
+.kothing-editor textarea {
+  border: 0;
+  padding: 0;
+  resize: none;
+}
+
+.kothing-editor button {
+  background-color: transparent;
+  border: none;
+  border-radius: 0;
+  cursor: pointer;
+  outline: none;
+  touch-action: manipulation;
+}
+
+.kothing-editor button, .kothing-editor input, .kothing-editor select, .kothing-editor textarea {
+  border-radius: 0;
+  vertical-align: middle;
+}
+
+.kothing-editor .ke-btn {
+  border-radius: 3px;
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  min-width: 30px;
+}
+
+.kothing-editor .ke-btn:enabled:focus, .kothing-editor .ke-btn:enabled:hover {
+  background-color: #ebebeb;
+  border-color: #d1d1d1;
+  outline: 0 none;
+}
+
+.kothing-editor .ke-btn:enabled:active {
+  background-color: #ebebeb;
+  border-color: #c1c1c1;
+  -webkit-box-shadow: inset 0 3px 5px #c1c1c1;
+  box-shadow: inset 0 3px 5px #c1c1c1;
+}
+
+.kothing-editor .ke-btn-primary {
+  background-color: #3f9dff;
+  border: 1px solid #3f9dff;
+  border-radius: 3px;
+  border-radius: 2px;
+  color: #fafafa;
+  display: inline-block;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 6px;
+  text-align: center;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  transition: all .3s;
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  -ms-transition: all .3s;
+  -o-transition: all .3s;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.kothing-editor .ke-btn-primary:focus, .kothing-editor .ke-btn-primary:hover {
+  background-color: #3295fd;
+  border-color: #3295fd;
+  color: #fff;
+  outline: 0 none;
+}
+
+.kothing-editor .ke-btn-primary:active {
+  background-color: #3295fd;
+  border-color: #3295fd;
+  -webkit-box-shadow: inset 0 3px 5px #4592ff;
+  box-shadow: inset 0 3px 5px #4592ff;
+  color: #fff;
+}
+
+.kothing-editor input, .kothing-editor select, .kothing-editor textarea {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #000;
+}
+
+.kothing-editor input:not([type=checkbox]):focus, .kothing-editor select:focus, .kothing-editor textarea:focus {
+  border: 1px solid #80bdff;
+  -webkit-box-shadow: 0 0 0 .2rem #c7deff;
+  box-shadow: 0 0 0 .05rem #c7deff;
+  outline: 0;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.kothing-editor .ke-btn:enabled.active {
+  color: #4592ff;
+  outline: 0 none;
+}
+
+.kothing-editor .ke-btn:enabled.active:focus, .kothing-editor .ke-btn:enabled.active:hover {
+  background-color: #e5e5e5;
+  border-color: #d1d1d1;
+  outline: 0 none;
+}
+
+.kothing-editor .ke-btn:enabled.active:active {
+  background-color: #d1d1d1;
+  border-color: #c1c1c1;
+  -webkit-box-shadow: inset 0 3px 5px #c1c1c1;
+  box-shadow: inset 0 3px 5px #c1c1c1;
+}
+
+.kothing-editor .ke-btn:enabled.on {
+  background-color: #e5e5e5;
+  border-color: #d1d1d1;
+  outline: 0 none;
+}
+
+.kothing-editor .ke-btn:enabled.on:focus, .kothing-editor .ke-btn:enabled.on:hover {
+  background-color: #d1d1d1;
+  border-color: #c1c1c1;
+  outline: 0 none;
+}
+
+.kothing-editor .ke-btn:enabled.on:active {
+  background-color: #c1c1c1;
+  border-color: #b1b1b1;
+  -webkit-box-shadow: inset 0 3px 5px #b1b1b1;
+  box-shadow: inset 0 3px 5px #b1b1b1;
+}
+
+.kothing-editor .ke-btn-list:disabled, .kothing-editor .ke-btn:disabled, .kothing-editor button:disabled {
+  background-color: inherit;
+  color: #bdbdbd;
+  cursor: not-allowed;
+}
+
+.kothing-editor button * {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  pointer-events: none;
+}
+
+.kothing-editor .ke-svg, .kothing-editor button.ke-btn-select .arrow-icon, .kothing-editor button > svg {
+  fill: currentColor;
+  display: block;
+  float: none;
+  margin: auto;
+  text-align: center;
+}
+
+.kothing-editor .ke-btn-select .arrow-icon > svg {
+  float: right;
+  height: 10px;
+  -webkit-transition: .3s ease-out;
+  -moz-transition: .3s ease-out;
+  -ms-transition: .3s ease-out;
+  -o-transition: .3s ease-out;
+  transition: .3s ease-out;
+  width: 10px;
+}
+
+.kothing-editor .ke-btn-select.on .arrow-icon > svg {
+  transform: rotate(180deg);
+}
+
+.kothing-editor .close > svg, .kothing-editor .ke-dialog-close > svg {
+  height: 10px;
+  width: 10px;
+}
+
+.kothing-editor .ke-btn-list > .ke-list-icon {
+  display: inline-block;
+  height: 16px;
+  margin: -1px 10px 0 0;
+  vertical-align: middle;
+  width: 16px;
+}
+
+.kothing-editor .ke-line-breaker > button > svg {
+  height: 24px;
+  width: 24px;
+}
+
+.kothing-editor button > i:before {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: auto;
+  display: inline-block;
+  font-size: 15px;
+  font-style: normal;
+  font-variant: normal;
+  line-height: 2;
+}
+
+.kothing-editor button > [class=ke-icon-text] {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.kothing-editor .ke-arrow, .kothing-editor .ke-arrow:after {
+  border: 11px solid transparent;
+  display: block;
+  height: 0;
+  position: absolute;
+  width: 0;
+}
+
+.kothing-editor .ke-arrow.ke-arrow-up {
+  border-bottom-color: rgba(0, 0, 0, 0.25);
+  border-top-width: 0;
+  left: 20px;
+  margin-left: -11px;
+  top: -11px;
+}
+
+.kothing-editor .ke-arrow.ke-arrow-up:after {
+  border-bottom-color: #fff;
+  border-top-width: 0;
+  content: " ";
+  margin-left: -11px;
+  top: 1px;
+}
+
+.kothing-editor .ke-toolbar .ke-arrow.ke-arrow-up:after {
+  border-bottom-color: #fafafa;
+}
+
+.kothing-editor .ke-arrow.ke-arrow-down {
+  border-bottom-width: 0;
+  border-top-color: rgba(0, 0, 0, 0.25);
+  left: 0;
+  margin-left: -11px;
+  top: 0;
+}
+
+.kothing-editor .ke-arrow.ke-arrow-down:after {
+  border-bottom-width: 0;
+  border-top-color: #fff;
+  content: " ";
+  margin-left: -11px;
+  top: -12px;
+}
+
+.kothing-editor .ke-toolbar .ke-arrow.ke-arrow-down:after {
+  border-top-color: #fafafa;
+}
+
+.kothing-editor .ke-loading-box {
+  background-color: #fff;
+  display: none;
+  filter: alpha(opacity=70);
+  height: 100%;
+  left: 0;
+  opacity: .7;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 9990;
+}
+
+.kothing-editor .ke-loading-box .ke-loading-effect {
+  animation: spinner .8s linear infinite;
+  border-radius: 50%;
+  border-right: 2px solid transparent;
+  border-top: 2px solid #07d;
+  display: block;
+  height: 25px;
+  left: 50%;
+  margin: -25px 0 0 -25px;
+  position: absolute;
+  top: 50%;
+  width: 25px;
+}
+
+.kothing-editor .ke-line-breaker {
+  border-top: 1px solid #3288ff;
+  cursor: text;
+  display: none;
+  height: 1px;
+  position: absolute;
+  width: 100%;
+  z-index: 7;
+}
+
+.kothing-editor .ke-line-breaker > button.ke-btn {
+  background-color: #fff;
+  border: 1px solid #0c2240;
+  cursor: pointer;
+  display: inline-block;
+  float: none;
+  height: 30px;
+  left: -50%;
+  opacity: .6;
+  position: relative;
+  top: -15px;
+  width: 30px;
+}
+
+.kothing-editor .ke-line-breaker > button.ke-btn:hover {
+  background-color: #fff;
+  border-color: #041b39;
+  opacity: .9;
+}
+
+.kothing-editor .ke-line-breaker-component {
+  background-color: #fff;
+  border: 1px solid #0c2240;
+  border-radius: 4px;
+  cursor: pointer;
+  display: none;
+  height: 24px;
+  opacity: .6;
+  position: absolute;
+  width: 24px;
+  z-index: 7;
+}
+
+.kothing-editor .ke-line-breaker-component:hover {
+  opacity: .9;
+}
+
+.kothing-editor .ke-toolbar {
+  background-color: #fbfbfb;
+  border-bottom: 1px solid #dadada;
+  border-radius: 6px 6px 0 0;
+  display: block;
+  height: auto;
+  overflow: visible;
+  padding: 6px 6px 2px;
+  position: relative;
+  width: 100%;
+}
+
+.kothing-editor .ke-toolbar-cover {
+  background-color: #fefefe;
+  cursor: not-allowed;
+  display: none;
+  filter: alpha(opacity=50);
+  font-size: 36px;
+  height: 100%;
+  left: 0;
+  opacity: .5;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 4;
+}
+
+.kothing-editor .ke-toolbar-separator-vertical {
+  background-color: #f0f0f0;
+  display: inline-block;
+  height: 1.5rem;
+  line-height: 1.5rem;
+  margin: 0 4px 6px;
+  width: 1px;
+}
+
+.kothing-editor .ke-toolbar.ke-toolbar-balloon, .kothing-editor .ke-toolbar.ke-toolbar-inline {
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+  display: none;
+  position: absolute;
+  z-index: 9990;
+}
+
+.kothing-editor .ke-toolbar.ke-toolbar-balloon {
+  width: auto;
+}
+
+.kothing-editor .ke-toolbar.ke-toolbar-sticky {
+  position: fixed;
+  top: 0;
+}
+
+.kothing-editor .ke-toolbar-sticky-dummy {
+  display: none;
+  position: static;
+  z-index: -1;
+}
+
+.kothing-editor .ke-btn-module {
+  display: inline-block;
+}
+
+.kothing-editor .ke-btn-module-border {
+  border: 1px solid #dadada;
+  border-radius: 4px;
+}
+
+.kothing-editor .ke-btn-module-enter {
+  background-color: transparent;
+  display: block;
+  height: 1px;
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.kothing-editor .ke-toolbar-more-layer {
+  background-color: #f3f3f3;
+  margin: 0 -3px;
+}
+
+.kothing-editor .ke-toolbar-more-layer .ke-more-layer {
+  border-top: 1px solid #dadada;
+  display: none;
+}
+
+.kothing-editor .ke-toolbar-more-layer .ke-more-layer .ke-more-form {
+  display: inline-block;
+  height: auto;
+  padding: 4px 3px 0;
+  width: 100%;
+}
+
+.kothing-editor .ke-btn-module .ke-btn > .txt {
+  align-items: center;
+  display: flex;
+  flex: auto;
+  height: 30px;
+  line-height: 30px;
+  overflow: hidden;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.kothing-editor .ke-btn-module .ke-btn > .txt span {
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.kothing-editor .ke-btn-module .ke-btn-more.ke-btn-more-text {
+  padding: 0 4px;
+  width: auto;
+}
+
+.kothing-editor .ke-btn-module .ke-btn-more:focus, .kothing-editor .ke-btn-module .ke-btn-more:hover {
+  background-color: #d1d1d1;
+  border-color: #c1c1c1;
+  color: #000;
+  outline: 0 none;
+}
+
+.kothing-editor .ke-btn-module .ke-btn-more.on {
+  background-color: #d1d1d1;
+  border-color: #c1c1c1;
+  color: #333;
+  outline: 0 none;
+}
+
+.kothing-editor .ke-btn-module .ke-btn-more.on:hover {
+  background-color: #c1c1c1;
+  border-color: #b1b1b1;
+  color: #000;
+  outline: 0 none;
+}
+
+.kothing-editor .ke-menu-list {
+  margin: 0;
+  padding: 0;
+}
+
+.kothing-editor .ke-menu-list li {
+  float: left;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+.kothing-editor .ke-menu-list li .ke-btn, .kothing-editor .ke-menu-list li .ke-btn-select {
+  font-size: 16px;
+  height: 28px;
+  line-height: 28px;
+  margin: 2px;
+  min-width: 30px;
+}
+
+.kothing-editor .ke-btn-select {
+  display: flex;
+  overflow: hidden;
+  padding: 0 6px;
+  text-align: left;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: auto;
+}
+
+.kothing-editor .ke-btn-select.ke-btn-tool-font, .kothing-editor .ke-btn-select.ke-btn-tool-format, .kothing-editor .ke-btn-select.ke-btn-tool-size {
+  width: 75px;
+}
+
+.kothing-editor .ke-btn-tray {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  width: 100%;
+}
+
+.kothing-editor .ke-menu-tray {
+  height: 0;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.kothing-editor .ke-submenu {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.kothing-editor .ke-list-layer {
+  background-color: #fff;
+  border-radius: 6px;
+  -webkit-box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+  -moz-box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+  display: none;
+  left: 1px;
+  padding: 6px 0;
+  position: absolute;
+  top: 33px;
+  z-index: 100;
+}
+
+.kothing-editor .ke-list-layer .ke-list-inner {
+  margin: 0;
+  overflow-x: initial;
+  overflow-y: initial;
+  overflow: visible;
+  padding: 0;
+}
+
+.kothing-editor .ke-list-layer button {
+  margin: 0;
+  width: 100%;
+}
+
+.kothing-editor .ke-list-inner .ke-list-basic {
+  padding: 0;
+  width: 100%;
+}
+
+.kothing-editor .ke-list-inner .ke-list-basic li {
+  width: 100%;
+}
+
+.kothing-editor .ke-list-inner .ke-list-basic li > button {
+  min-width: 100%;
+  width: max-content;
+}
+
+.kothing-editor .ke-list-inner .ke-list-basic li button.active {
+  background-color: #80bdff;
+  border: 1px solid #3f9dff;
+  border-left: 0;
+  border-right: 0;
+}
+
+.kothing-editor .ke-list-inner .ke-list-basic li button.active:hover {
+  background-color: #3f9dff;
+  border: 1px solid #4592ff;
+  border-left: 0;
+  border-right: 0;
+}
+
+.kothing-editor .ke-list-inner .ke-list-basic li button.active:active {
+  background-color: #4592ff;
+  border: 1px solid #407dd1;
+  border-left: 0;
+  border-right: 0;
+  -webkit-box-shadow: inset 0 3px 5px #407dd1;
+  box-shadow: inset 0 3px 5px #407dd1;
+}
+
+.kothing-editor .ke-btn-list {
+  cursor: pointer;
+  font-size: 12px;
+  height: auto;
+  line-height: normal;
+  min-height: 32px;
+  padding: 0 14px;
+  text-align: left;
+  text-decoration: none;
+  text-indent: 0;
+  width: 100%;
+}
+
+.kothing-editor .ke-btn-list.default_value {
+  background-color: #f3f3f3;
+  border-bottom: 1px dotted #b1b1b1;
+  border-top: 1px dotted #b1b1b1;
+}
+
+.kothing-editor .ke-btn-list:focus, .kothing-editor .ke-btn-list:hover {
+  background-color: #e5e5e5;
+  border-color: #d1d1d1;
+  outline: 0 none;
+}
+
+.kothing-editor .ke-btn-list:active {
+  background-color: #d1d1d1;
+  border-color: #c1c1c1;
+  -webkit-box-shadow: inset 0 3px 5px #c1c1c1;
+  box-shadow: inset 0 3px 5px #c1c1c1;
+}
+
+.kothing-editor .ke-list-layer.ke-list-font-size {
+  max-height: 300px;
+  min-width: 140px;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.kothing-editor .ke-list-layer.ke-list-font-family {
+  min-width: 156px;
+}
+
+.kothing-editor .ke-list-layer.ke-list-font-family .default {
+  border-bottom: 1px solid #ccc;
+}
+
+.kothing-editor .ke-list-layer.ke-list-line {
+  width: 125px;
+}
+
+.kothing-editor .ke-list-layer.ke-list-align .ke-list-inner {
+  left: 9px;
+  width: 125px;
+}
+
+.kothing-editor .ke-list-layer.ke-list-format {
+  min-width: 156px;
+}
+
+.kothing-editor .ke-list-layer.ke-list-format li {
+  padding: 0;
+  width: 100%;
+}
+
+.kothing-editor .ke-list-layer.ke-list-format ul .ke-btn-list {
+  line-height: 100%;
+}
+
+.kothing-editor .ke-list-layer.ke-list-format ul .ke-btn-list[data-value=h1] {
+  height: 40px;
+}
+
+.kothing-editor .ke-list-layer.ke-list-format ul .ke-btn-list[data-value=h2] {
+  height: 36px;
+}
+
+.kothing-editor .ke-list-layer.ke-list-format ul p {
+  font-size: 13px;
+}
+
+.kothing-editor .ke-list-layer.ke-list-format ul div {
+  font-size: 13px;
+  padding: 4px 2px;
+}
+
+.kothing-editor .ke-list-layer.ke-list-format ul h1 {
+  color: #333;
+  font-size: 2em;
+  font-weight: 700;
+}
+
+.kothing-editor .ke-list-layer.ke-list-format ul h2 {
+  color: #333;
+  font-size: 1.5em;
+  font-weight: 700;
+}
+
+.kothing-editor .ke-list-layer.ke-list-format ul h3 {
+  color: #333;
+  font-size: 1.17em;
+  font-weight: 700;
+}
+
+.kothing-editor .ke-list-layer.ke-list-format ul h4 {
+  color: #333;
+  font-size: 1em;
+  font-weight: 700;
+}
+
+.kothing-editor .ke-list-layer.ke-list-format ul h5 {
+  color: #333;
+  font-size: .83em;
+  font-weight: 700;
+}
+
+.kothing-editor .ke-list-layer.ke-list-format ul h6 {
+  color: #333;
+  font-size: .67em;
+  font-weight: 700;
+}
+
+.kothing-editor .ke-list-layer.ke-list-format ul blockquote {
+  background-color: transparent;
+  border-color: #b1b1b1;
+  border-left: 5px #b1b1b1;
+  border-style: solid;
+  color: #999;
+  font-size: 13px;
+  height: 22px;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0 0 0 7px;
+}
+
+.kothing-editor .ke-list-layer.ke-list-format ul pre {
+  background-color: #f9f9f9;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  color: #666;
+  font-size: 13px;
+  margin: 0;
+  padding: 4px 11px;
+}
+
+.kothing-editor .ke-selector-table {
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  display: none;
+  float: left;
+  font-size: 14px;
+  left: 1px;
+  list-style: none;
+  margin: 2px 0 0;
+  padding: 5px 0;
+  position: absolute;
+  text-align: left;
+  top: 30px;
+  z-index: 5;
+}
+
+.kothing-editor .ke-selector-table .ke-table-size {
+  font-size: 18px;
+  padding: 0 5px;
+}
+
+.kothing-editor .ke-selector-table .ke-table-size-picker {
+  cursor: pointer;
+  font-size: 18px;
+  height: 10em;
+  position: absolute !important;
+  width: 10em;
+  z-index: 3;
+}
+
+.kothing-editor .ke-selector-table .ke-table-size-highlighted {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsQAAA7EAZUrDhsAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAADJmlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxNDIgNzkuMTYwOTI0LCAyMDE3LzA3LzEzLTAxOjA2OjM5ICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo4QTZCNzMzN0I3RUYxMUU4ODcwQ0QwMjM1NTgzRTJDNyIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo4QTZCNzMzNkI3RUYxMUU4ODcwQ0QwMjM1NTgzRTJDNyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0MgMjAxOCAoV2luZG93cykiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo0MzYyNEUxRUI3RUUxMUU4ODZGQzgwRjNBODgyNTdFOSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo0MzYyNEUxRkI3RUUxMUU4ODZGQzgwRjNBODgyNTdFOSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pl0yAuwAAABBSURBVDhPY/wPBAxUAGCDGvdBeWSAeicIDTfIXREiQArYeR9hEBOEohyMGkQYjBpEGAxjg6ib+yFMygCVvMbAAABj0hwMTNeKJwAAAABJRU5ErkJggg==") repeat;
+  font-size: 18px;
+  height: 1em;
+  position: absolute !important;
+  width: 1em;
+  z-index: 2;
+}
+
+.kothing-editor .ke-selector-table .ke-table-size-unhighlighted {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASAgMAAAAroGbEAAAACVBMVEUAAIj4+Pjp6ekKlAqjAAAAAXRSTlMAQObYZgAAAAFiS0dEAIgFHUgAAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfYAR0BKhmnaJzPAAAAG0lEQVQI12NgAAOtVatWMTCohoaGUY+EmIkEAEruEzK2J7tvAAAAAElFTkSuQmCC") repeat;
+  font-size: 18px;
+  height: 10em;
+  position: relative !important;
+  width: 10em;
+  z-index: 1;
+}
+
+.kothing-editor .ke-selector-table .ke-table-size-display {
+  padding-left: 5px;
+}
+
+.kothing-editor .ke-list-layer .ke-selector-color {
+  display: flex;
+  height: auto;
+  margin: auto;
+  max-width: 282px;
+  padding: 0 6px;
+  width: max-content;
+}
+
+.kothing-editor .ke-list-layer .ke-selector-color .ke-color-pallet {
+  height: 100%;
+  padding: 0;
+  width: 100%;
+}
+
+.kothing-editor .ke-list-layer .ke-selector-color .ke-color-pallet li {
+  display: flex;
+  float: left;
+  margin: 0;
+  position: relative;
+}
+
+.kothing-editor .ke-list-layer .ke-selector-color .ke-color-pallet button {
+  display: block;
+  height: 30px;
+  text-indent: -9999px;
+  width: 30px;
+}
+
+.kothing-editor .ke-list-layer .ke-selector-color .ke-color-pallet button.active, .kothing-editor .ke-list-layer .ke-selector-color .ke-color-pallet button:focus, .kothing-editor .ke-list-layer .ke-selector-color .ke-color-pallet button:hover {
+  border: 3px solid #fff;
+}
+
+.kothing-editor .ke-submenu-form-group {
+  display: flex;
+  height: auto;
+  padding: 4px;
+  width: 100%;
+}
+
+.kothing-editor .ke-submenu-form-group input {
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  color: #555;
+  display: inline-block;
+  flex: auto;
+  font-size: 12px;
+  height: 33px;
+  padding: 0 4px;
+  width: auto;
+}
+
+.kothing-editor .ke-submenu-form-group button {
+  float: right;
+  height: 30px;
+  margin: 0 0 0 4px !important;
+  width: 30px;
+}
+
+.kothing-editor .ke-submenu-form-group button.ke-btn {
+  border: 1px solid #ccc;
+}
+
+.kothing-editor .ke-submenu-form-group > div {
+  position: relative;
+}
+
+.kothing-editor .ke-submenu-form-group .ke-color-input {
+  border: none;
+  outline: none;
+  width: 72px;
+}
+
+.kothing-editor .ke-wrapper {
+  height: auto;
+  overflow: hidden;
+  position: relative !important;
+  width: 100%;
+}
+
+.kothing-editor .ke-wrapper .ke-wrapper-inner {
+  height: 100%;
+  min-height: 65px;
+  overflow-x: auto;
+  overflow-y: auto;
+  user-select: text;
+  -o-user-select: text;
+  -moz-user-select: text;
+  -khtml-user-select: text;
+  -webkit-user-select: text;
+  -ms-user-select: text;
+  width: 100%;
+}
+
+.kothing-editor .ke-wrapper .ke-wrapper-inner:focus {
+  outline: none;
+}
+
+.kothing-editor .ke-wrapper .ke-wrapper-code {
+  border: none;
+  box-shadow: none;
+  font-size: 13px;
+  margin: 0;
+  outline: none;
+  padding: 4px;
+  resize: none !important;
+  word-break: break-all;
+}
+
+.kothing-editor .ke-wrapper .ke-wrapper-wysiwyg {
+  background-color: #fff;
+  display: block;
+}
+
+.kothing-editor .ke-wrapper .ke-wrapper-code-mirror {
+  font-size: 13px;
+}
+
+.kothing-editor .ke-wrapper .ke-placeholder {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  color: #b1b1b1;
+  display: none;
+  font-size: 13px;
+  left: 0;
+  line-height: 1.5;
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+  overflow: hidden;
+  padding-left: 16px;
+  padding-right: 16px;
+  padding-top: 16px;
+  pointer-events: none;
+  position: absolute;
+  right: 0;
+  text-overflow: ellipsis;
+  top: 0;
+  white-space: nowrap;
+  z-index: 1;
+}
+
+.kothing-editor .ke-resizing-bar {
+  align-items: center;
+  background-color: #fafafa;
+  border-radius: 0 0 6px 6px;
+  border-top: 1px solid #dadada;
+  cursor: ns-resize;
+  display: flex;
+  height: auto;
+  line-height: 24px;
+  padding: 0 12px;
+  position: relative;
+  width: auto;
+}
+
+.kothing-editor .ke-resizing-bar .ke-navigation {
+  background: transparent;
+  color: #666;
+  flex: auto;
+  font-size: 10px;
+  height: auto;
+  line-height: 1.5;
+  margin: 0;
+  min-height: 18px;
+  padding: 0;
+  position: relative;
+  width: auto;
+}
+
+.kothing-editor .ke-resizing-bar .ke-resizing-icon {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: row-resize;
+  height: 4px;
+  left: calc(50% - 10px);
+  position: absolute;
+  top: calc(50% - 2px);
+  width: 20px;
+  z-index: 2;
+}
+
+.kothing-editor .ke-resizing-bar .ke-powered-by {
+  color: #999;
+  font-family: Helvetica Neue,sans-serif;
+  font-size: 12px;
+  margin-left: 16px;
+}
+
+.kothing-editor .ke-resizing-bar .ke-powered-by a {
+  color: #999;
+  text-decoration: none;
+}
+
+.kothing-editor .ke-resizing-bar.ke-resizing-none {
+  cursor: default;
+}
+
+.kothing-editor .ke-resizing-back {
+  cursor: default;
+  display: none;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 9990;
+}
+
+.kothing-editor .ke-resizing-bar .ke-char-counter-wrapper {
+  background: transparent;
+  color: #999;
+  display: block;
+  flex: none;
+  font-size: 13px;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  width: auto;
+}
+
+.kothing-editor .ke-resizing-bar .ke-char-counter-wrapper.ke-blink {
+  animation: blinker .2s linear infinite;
+  color: #b94a48;
+}
+
+.kothing-editor .ke-resizing-bar .ke-char-counter-wrapper .ke-char-label {
+  margin-right: 4px;
+}
+
+.kothing-editor .ke-dialog {
+  display: none;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 9990;
+}
+
+.kothing-editor .ke-dialog button, .kothing-editor .ke-dialog input, .kothing-editor .ke-dialog label {
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-back {
+  background: rgba(55, 58, 71, 0.9);
+  height: 100%;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  transition: opacity .3s;
+  transition-duration: .3s;
+  -webkit-transition: opacity .3s;
+  -webkit-transition-duration: .3s;
+  width: 100%;
+}
+
+.kothing-editor .ke-dialog.dialog--open .ke-dialog-back {
+  opacity: .5;
+  pointer-events: auto;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.kothing-editor .ke-dialog.dialog--close .ke-dialog-inner, .kothing-editor .ke-dialog.dialog--open .ke-dialog-inner {
+  -webkit-animation-duration: .2s;
+  animation-duration: .2s;
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-timing-function: ease-in-out;
+  animation-timing-function: ease-in-out;
+  opacity: 1;
+  -webkit-transform-origin: 50% 100%;
+  transform-origin: 50% 100%;
+}
+
+.kothing-editor .ke-dialog.dialog--open .ke-dialog-inner {
+  -webkit-animation-name: anim-open;
+  animation-name: anim-open;
+  display: block;
+}
+
+.kothing-editor .ke-dialog.dialog--close .ke-dialog-inner {
+  -webkit-animation-name: anim-close;
+  animation-name: anim-close;
+  display: none;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-content {
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  background-color: #fff;
+  border-radius: 6px;
+  -webkit-box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+  -moz-box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+  margin: 20px auto;
+  max-width: 500px;
+  outline: 0;
+  position: relative;
+  width: auto;
+}
+
+@media screen and (max-width: 509px) {
+  .kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-content {
+    width: 100%;
+  }
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-content label {
+  display: inline-block;
+  margin-bottom: 5px;
+  max-width: 100%;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-content .ke-btn-primary {
+  border-radius: 4px;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42857143;
+  text-align: center;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-header {
+  border-bottom: 1px solid #e5e5e5;
+  height: 50px;
+  padding: 6px 15px;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-header .ke-dialog-close {
+  -webkit-appearance: none;
+  filter: alpha(opacity=100);
+  float: right;
+  font-weight: 700;
+  opacity: 1;
+  padding: 6px 0;
+  text-shadow: 0 1px 0 #fff;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-header .ke-modal-title {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 2.5;
+  margin: 0;
+  padding: 0;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-body {
+  padding: 15px;
+  position: relative;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-form {
+  margin-bottom: 10px;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-form:last-child {
+  margin-bottom: 0;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner input:disabled {
+  background-color: #f3f3f3;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-size-text {
+  width: 100%;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-size-text .size-h, .kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-size-text .size-w {
+  text-align: center;
+  width: 70px;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-size-x {
+  margin: 0 8px;
+  text-align: center;
+  width: 25px;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-footer {
+  border-top: 1px solid #e5e5e5;
+  padding: 10px 15px 15px;
+  text-align: right;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-footer > div {
+  float: left;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-footer > div > label {
+  margin-top: 5px;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-btn-radio {
+  margin-left: 12px;
+  margin-right: 6px;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-btn-check {
+  height: 1rem;
+  margin-left: 12px;
+  margin-right: 4px;
+  width: 1rem;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-form .ke-dialog-btn-check {
+  cursor: pointer;
+  margin-left: 0;
+  margin-right: 4px;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-form .ke-dialog-btn-check._ke_image_check_proportion {
+  margin-left: 4px;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-form .ke-dialog-form-files {
+  align-items: center;
+  display: flex;
+  position: relative;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-form .ke-dialog-form-files > input {
+  flex: auto;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-form .ke-dialog-form-files .ke-dialog-files-edge-button {
+  border: 1px solid #ccc;
+  flex: auto;
+  opacity: .8;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-form .ke-dialog-form-files .ke-dialog-files-edge-button.ke-file-remove > svg {
+  height: 8px;
+  width: 8px;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-form .ke-dialog-form-files .ke-dialog-files-edge-button:hover {
+  background-color: #f0f0f0;
+  outline: 0 none;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-form .ke-dialog-form-files .ke-dialog-files-edge-button:active {
+  background-color: #e9e9e9;
+  -webkit-box-shadow: inset 0 3px 5px #d6d6d6;
+  box-shadow: inset 0 3px 5px #d6d6d6;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-form .ke-input-select {
+  display: inline-block;
+  font-size: 14px;
+  height: 30px;
+  line-height: 1.42857143;
+  text-align: center;
+  width: auto;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-form .ke-input-control {
+  display: inline-block;
+  font-size: 14px;
+  height: 30px;
+  line-height: 1.42857143;
+  text-align: center;
+  width: 70px;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-form .ke-input-form {
+  display: block;
+  font-size: 14px;
+  height: 30px;
+  line-height: 30px;
+  padding: 0 4px;
+  width: 100%;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-form .ke-input-form.ke-input-url:disabled {
+  color: #999;
+  text-decoration: line-through;
+}
+
+.kothing-editor .ke-input-form._ke_image_file, .kothing-editor .ke-input-form.ke-input-url {
+  margin-right: 4px;
+}
+
+.kothing-editor .ke-anchor-preview-icon {
+  fill: currentColor;
+  color: #4592ff;
+  display: block;
+  flex: unset;
+  float: none;
+  height: 16px;
+  line-height: 1.5;
+  margin: auto;
+  text-align: center;
+  width: 16px;
+}
+
+.kothing-editor .ke-link-preview {
+  background-color: transparent;
+  color: #666;
+  display: block;
+  flex: auto;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 400;
+  height: auto;
+  margin: 0;
+  max-height: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: pre;
+  word-break: break-all;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-form .ke-video-ratio {
+  margin-left: 4px;
+  width: 70px;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-form a {
+  color: #004cff;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-link-preview {
+  background-color: transparent;
+  color: #666;
+  display: block;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 400;
+  height: auto;
+  max-height: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: pre;
+  word-break: break-all;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-anchor-preview-form {
+  display: flex;
+  margin-top: 4px;
+  width: 100%;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-btn-revert {
+  border: 1px solid #ccc;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-btn-revert:hover {
+  background-color: #e5e5e5;
+  border-color: #d1d1d1;
+  outline: 0 none;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-btn-revert:active {
+  background-color: #d1d1d1;
+  border-color: #c1c1c1;
+  -webkit-box-shadow: inset 0 3px 5px #c1c1c1;
+  box-shadow: inset 0 3px 5px #c1c1c1;
+}
+
+.kothing-editor .ke-dialog-tabs {
+  border-bottom: 1px solid #e5e5e5;
+  width: 100%;
+}
+
+.kothing-editor .ke-dialog-tabs ._ke_tab_link {
+  background-color: #e5e5e5;
+  border-color: transparent;
+  border-radius: 0;
+  border-right: 1px solid #e5e5e5;
+  outline: none;
+  padding: 4px 12px;
+  transition: .3s;
+}
+
+.kothing-editor .ke-dialog-tabs ._ke_tab_link:hover {
+  background-color: #f0f0f0;
+}
+
+.kothing-editor .ke-dialog-tabs ._ke_tab_link.active {
+  background-color: #fff;
+  border-bottom: 1px solid #fff;
+  margin-bottom: -1px;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-form .ke-input-form.ke-math-exp {
+  border: 1px solid #ccc;
+  font-size: 13px;
+  height: 4rem;
+  padding: 4px;
+  resize: vertical;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-form .ke-input-select.ke-math-size {
+  height: 28px;
+  margin-left: 1em;
+  width: 6em;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-form .ke-math-preview {
+  font-size: 13px;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-form .ke-math-preview > span {
+  -webkit-box-shadow: 0 0 0 .1rem #c7deff;
+  box-shadow: 0 0 0 .1rem #c7deff;
+  display: inline-block;
+  padding: 0 4px;
+}
+
+.kothing-editor .ke-dialog .ke-dialog-inner .ke-dialog-form .ke-link-preview {
+  background-color: transparent;
+  color: #666;
+  display: block;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 400;
+  height: auto;
+  margin: 4px 0 0 4px;
+  max-height: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: pre;
+  word-break: break-all;
+}
+
+.kothing-editor .ke-controller .ke-arrow.ke-arrow-up {
+  border-bottom-color: rgba(0, 0, 0, 0.4);
+}
+
+.kothing-editor .ke-controller {
+  word-wrap: normal;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  display: none;
+  letter-spacing: normal;
+  line-break: auto;
+  overflow: visible;
+  position: absolute;
+  text-align: start;
+  text-decoration: none;
+  text-shadow: none;
+  text-transform: none;
+  white-space: normal;
+  word-break: normal;
+  word-spacing: normal;
+  z-index: 6;
+}
+
+.kothing-editor .ke-controller .ke-btn-group {
+  display: flex;
+  left: 0;
+  padding: 2px;
+  position: relative;
+  top: 0;
+  vertical-align: middle;
+}
+
+.kothing-editor .ke-controller .ke-btn-group .ke-btn-group-sub {
+  display: none;
+  left: 50%;
+  min-width: auto;
+  width: max-content;
+}
+
+.kothing-editor .ke-controller .ke-btn-group .ke-btn-group-sub button {
+  margin: 0;
+  min-width: 72px;
+}
+
+.kothing-editor .ke-controller .ke-btn-group button {
+  border: none;
+  border-radius: 4px;
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 400;
+  height: auto;
+  line-height: 1.5;
+  margin: 1px;
+  min-height: 30px;
+  padding: 5px 10px;
+  position: relative;
+  text-align: center;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.kothing-editor .ke-controller .ke-btn-group button:focus:enabled, .kothing-editor .ke-controller .ke-btn-group button:hover:enabled {
+  background-color: #e5e5e5;
+  border-color: #d1d1d1;
+  outline: 0 none;
+}
+
+.kothing-editor .ke-controller .ke-btn-group button:active:enabled {
+  background-color: #d1d1d1;
+  border-color: #c1c1c1;
+  -webkit-box-shadow: inset 0 3px 5px #c1c1c1;
+  box-shadow: inset 0 3px 5px #c1c1c1;
+}
+
+.kothing-editor .ke-controller .ke-btn-group button span {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.kothing-editor .ke-controller .ke-btn-group button:enabled.active {
+  color: #4592ff;
+  outline: 0 none;
+}
+
+.kothing-editor .ke-controller .ke-btn-group button:enabled.active:focus, .kothing-editor .ke-controller .ke-btn-group button:enabled.active:hover {
+  background-color: #e5e5e5;
+  border-color: #d1d1d1;
+  outline: 0 none;
+}
+
+.kothing-editor .ke-controller .ke-btn-group button:enabled.active:active {
+  background-color: #d1d1d1;
+  border-color: #c1c1c1;
+  -webkit-box-shadow: inset 0 3px 5px #c1c1c1;
+  box-shadow: inset 0 3px 5px #c1c1c1;
+}
+
+.kothing-editor .ke-controller .ke-btn-group button:enabled.on {
+  background-color: #e5e5e5;
+  border-color: #d1d1d1;
+  outline: 0 none;
+}
+
+.kothing-editor .ke-controller .ke-btn-group button:enabled.on:focus, .kothing-editor .ke-controller .ke-btn-group button:enabled.on:hover {
+  background-color: #d1d1d1;
+  border-color: #c1c1c1;
+  outline: 0 none;
+}
+
+.kothing-editor .ke-controller .ke-btn-group button:enabled.on:active {
+  background-color: #c1c1c1;
+  border-color: #b1b1b1;
+  -webkit-box-shadow: inset 0 3px 5px #b1b1b1;
+  box-shadow: inset 0 3px 5px #b1b1b1;
+}
+
+.kothing-editor .ke-controller-resizing {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.42857143;
+  margin-top: -50px !important;
+  padding: 0;
+}
+
+.kothing-editor .ke-controller-resizing .ke-btn-group .ke-btn-group-sub.ke-resizing-align-list {
+  left: 57px;
+  width: 74px;
+}
+
+.kothing-editor .ke-resizing-container {
+  background-color: transparent;
+  display: none;
+  outline: 1px solid #3f9dff;
+  position: absolute;
+}
+
+.kothing-editor .ke-resizing-container .ke-modal-resize {
+  background-color: #3f9dff;
+  display: inline-block;
+  opacity: .3;
+  position: absolute;
+}
+
+.kothing-editor .ke-resizing-container .ke-resize-dot {
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.kothing-editor .ke-resizing-container .ke-resize-dot > span {
+  background-color: #3f9dff;
+  border: 1px solid #4592ff;
+  height: 7px;
+  position: absolute;
+  width: 7px;
+}
+
+.kothing-editor .ke-resizing-container .ke-resize-dot > span.tl {
+  cursor: nw-resize;
+  left: -5px;
+  top: -5px;
+}
+
+.kothing-editor .ke-resizing-container .ke-resize-dot > span.tr {
+  cursor: ne-resize;
+  right: -5px;
+  top: -5px;
+}
+
+.kothing-editor .ke-resizing-container .ke-resize-dot > span.bl {
+  bottom: -5px;
+  cursor: sw-resize;
+  left: -5px;
+}
+
+.kothing-editor .ke-resizing-container .ke-resize-dot > span.br {
+  bottom: -5px;
+  cursor: se-resize;
+  right: -5px;
+}
+
+.kothing-editor .ke-resizing-container .ke-resize-dot > span.lw {
+  bottom: 50%;
+  cursor: w-resize;
+  left: -7px;
+}
+
+.kothing-editor .ke-resizing-container .ke-resize-dot > span.th {
+  cursor: n-resize;
+  left: 50%;
+  top: -7px;
+}
+
+.kothing-editor .ke-resizing-container .ke-resize-dot > span.rw {
+  bottom: 50%;
+  cursor: e-resize;
+  right: -7px;
+}
+
+.kothing-editor .ke-resizing-container .ke-resize-dot > span.bh {
+  bottom: -7px;
+  cursor: s-resize;
+  right: 50%;
+}
+
+.kothing-editor .ke-resizing-container .ke-resize-display {
+  background-color: #333;
+  border-radius: 4px;
+  bottom: 0;
+  color: #fff;
+  font-size: 12px;
+  margin: 5px;
+  padding: 5px;
+  position: absolute;
+  right: 0;
+}
+
+.kothing-editor .ke-controller-table, .kothing-editor .ke-controller-table-cell {
+  width: auto;
+}
+
+.kothing-editor .ke-controller-link, .kothing-editor .ke-controller-table, .kothing-editor .ke-controller-table-cell {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.42857143;
+  padding: 0;
+}
+
+.kothing-editor .ke-controller-link:after, .kothing-editor .ke-controller-link:before {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.kothing-editor .ke-controller-link .link-content {
+  margin: 0;
+  padding: 0;
+}
+
+.kothing-editor .ke-controller-link .link-content a {
+  color: #4592ff;
+  display: inline-block;
+  margin-left: 5px;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.kothing-editor .ke-file-browser {
+  display: none;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  z-index: 9990;
+}
+
+.kothing-editor .ke-file-browser button, .kothing-editor .ke-file-browser input, .kothing-editor .ke-file-browser label {
+  color: #111;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.kothing-editor .ke-file-browser .ke-file-browser-back {
+  background-color: #222;
+  opacity: .5;
+}
+
+.kothing-editor .ke-file-browser .ke-file-browser-back, .kothing-editor .ke-file-browser .ke-file-browser-inner {
+  display: block;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.kothing-editor .ke-file-browser .ke-file-browser-inner .ke-file-browser-content {
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+  margin: 20px auto;
+  max-width: 100%;
+  outline: 0;
+  position: relative;
+  width: 960px;
+}
+
+.kothing-editor .ke-file-browser .ke-file-browser-header {
+  border-bottom: 1px solid #e5e5e5;
+  height: auto;
+  min-height: 50px;
+  padding: 6px 15px;
+}
+
+.kothing-editor .ke-file-browser .ke-file-browser-header .ke-file-browser-close {
+  -webkit-appearance: none;
+  filter: alpha(opacity=100);
+  float: right;
+  font-weight: 700;
+  opacity: 1;
+  text-shadow: 0 1px 0 #fff;
+}
+
+.kothing-editor .ke-file-browser .ke-file-browser-header .ke-file-browser-close > svg {
+  height: 12px;
+  width: 12px;
+}
+
+.kothing-editor .ke-file-browser .ke-file-browser-header .ke-file-browser-title {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 2.2;
+  margin: 0;
+  padding: 0;
+}
+
+.kothing-editor .ke-file-browser .ke-file-browser-tags {
+  display: block;
+  margin: 0 -15px;
+  padding: 0;
+  text-align: left;
+  width: 100%;
+}
+
+.kothing-editor .ke-file-browser .ke-file-browser-tags a {
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  background-color: #f5f5f5;
+  border-radius: 32px;
+  -moz-border-radius: 32px;
+  -webkit-border-radius: 32px;
+  color: #333;
+  cursor: pointer;
+  display: inline-block;
+  margin: 8px 0 8px 8px;
+  padding: 6px 12px;
+  text-decoration: none;
+}
+
+.kothing-editor .ke-file-browser .ke-file-browser-tags a:hover {
+  background-color: #e5e5e5;
+}
+
+.kothing-editor .ke-file-browser .ke-file-browser-tags a:active {
+  background-color: #d1d1d1;
+}
+
+.kothing-editor .ke-file-browser .ke-file-browser-tags a.on {
+  background-color: #ebf3fe;
+  color: #4592ff;
+}
+
+.kothing-editor .ke-file-browser .ke-file-browser-tags a.on:hover {
+  background-color: #d8e8fe;
+}
+
+.kothing-editor .ke-file-browser .ke-file-browser-tags a.on:active {
+  background-color: #c7deff;
+}
+
+.kothing-editor .ke-file-browser .ke-file-browser-body {
+  height: auto;
+  min-height: 350px;
+  overflow-y: auto;
+  padding: 20px;
+  position: relative;
+}
+
+.kothing-editor .ke-file-browser .ke-file-browser-body .ke-file-browser-list {
+  position: relative;
+  width: 100%;
+}
+
+@media screen and (max-width: 992px) {
+  .kothing-editor .ke-file-browser .ke-file-browser-inner .ke-file-browser-content {
+    width: 748px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .kothing-editor .ke-file-browser .ke-file-browser-inner .ke-file-browser-content {
+    width: 600px;
+  }
+}
+
+.kothing-editor .ke-file-browser .ke-file-browser-list .ke-file-item-column {
+  display: block;
+  float: left;
+  height: auto;
+  position: relative;
+}
+
+.kothing-editor .ke-file-browser .ke-file-browser-list.ke-image-list .ke-file-item-column {
+  margin: 0 10px;
+  width: calc(25% - 20px);
+}
+
+@media screen and (max-width: 992px) {
+  .kothing-editor .ke-file-browser .ke-file-browser-list.ke-image-list .ke-file-item-column {
+    width: calc(33% - 20px);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .kothing-editor .ke-file-browser .ke-file-browser-list.ke-image-list .ke-file-item-column {
+    width: calc(50% - 20px);
+  }
+}
+
+.kothing-editor .ke-file-browser .ke-file-browser-list.ke-image-list .ke-file-item-img {
+  border-radius: 4px;
+  cursor: pointer;
+  display: block;
+  height: auto;
+  margin: 10px 0;
+  outline: 0;
+  position: relative;
+  width: 100%;
+}
+
+.kothing-editor .ke-file-browser .ke-file-browser-list.ke-image-list .ke-file-item-img:hover {
+  -webkit-box-shadow: 0 0 0 .2rem #3288ff;
+  box-shadow: 0 0 0 .2rem #3288ff;
+  opacity: .8;
+}
+
+.kothing-editor .ke-file-browser .ke-file-browser-list.ke-image-list .ke-file-item-img > img {
+  border-radius: 4px;
+  display: block;
+  height: auto;
+  outline: 0;
+  position: relative;
+  width: 100%;
+}
+
+.kothing-editor .ke-file-browser .ke-file-browser-list.ke-image-list .ke-file-item-img > .ke-file-img-name {
+  background-color: transparent;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  bottom: 0;
+  color: #fff;
+  font-size: 13px;
+  height: 30px;
+  left: 0;
+  padding: 5px 10px;
+  position: absolute;
+  width: 100%;
+  z-index: 1;
+}
+
+.kothing-editor .ke-file-browser .ke-file-browser-list.ke-image-list .ke-file-item-img > .ke-file-img-name.ke-file-name-back {
+  background-color: #333;
+  opacity: .6;
+}
+
+.kothing-editor .ke-notice {
+  background-color: #f2dede;
+  border: 1px solid #eed3d7;
+  color: #b94a48;
+  display: none;
+  font-size: 13px;
+  height: auto;
+  margin: 0;
+  padding: 15px;
+  position: absolute;
+  top: 0;
+  user-select: text;
+  -o-user-select: text;
+  -moz-user-select: text;
+  -khtml-user-select: text;
+  -webkit-user-select: text;
+  -ms-user-select: text;
+  width: 100%;
+  word-break: break-all;
+  z-index: 7;
+}
+
+.kothing-editor .ke-notice button {
+  float: right;
+  padding: 7px;
+}
+
+.kothing-editor .ke-tooltip {
+  overflow: visible;
+  position: relative;
+}
+
+.kothing-editor .ke-tooltip .ke-tooltip-inner {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  background: transparent;
+  bottom: auto;
+  display: block;
+  float: none;
+  left: 50%;
+  line-height: 1.5;
+  margin: 0;
+  opacity: 0;
+  padding: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 120%;
+  transition: opacity .5s;
+  visibility: hidden;
+  width: auto;
+  z-index: 1;
+  z-index: 100;
+}
+
+.kothing-editor .ke-tooltip .ke-tooltip-inner .ke-tooltip-text {
+  background-color: #333;
+  border-radius: 3px;
+  color: #fff;
+  cursor: auto;
+  display: inline-block;
+  font-size: .9em;
+  left: -50%;
+  line-height: unset;
+  margin: 0;
+  padding: 4px 6px;
+  position: relative;
+  text-align: center;
+  white-space: nowrap;
+  width: auto;
+}
+
+.kothing-editor .ke-tooltip .ke-tooltip-inner .ke-tooltip-text:after {
+  border: 5px solid transparent;
+  border-bottom-color: #333;
+  bottom: 100%;
+  content: "";
+  left: 50%;
+  margin-left: -5px;
+  position: absolute;
+}
+
+.kothing-editor .ke-tooltip:hover .ke-tooltip-inner {
+  opacity: 1;
+  visibility: visible;
+}
+
+.ke_tooltip {
+  -webkit-font-smoothing: antialiased;
+  background-color: #222;
+  border-radius: 3px;
+  color: #fff;
+  font-size: .815em;
+  left: 0;
+  opacity: 0;
+  padding: 4px 10px;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  transition-duration: .3s;
+  transition-property: opacity;
+  z-index: 19999;
+}
+
+.ke_tooltip.tooltip__visible {
+  opacity: .8;
+}
+
+.ke_tooltip.trans__toTop {
+  transform: translateY(10px);
+  transition-property: opacity,transform;
+}
+
+.ke_tooltip.trans__toTop.tooltip__visible {
+  transform: translateY(0);
+}
+
+.ke_tooltip.trans__toBottom {
+  transform: translateY(0);
+  transition-property: opacity,transform;
+}
+
+.ke_tooltip.trans__toBottom.tooltip__visible {
+  transform: translateY(6px);
+}
+
+.ke_tooltip.trans__rotate {
+  border-radius: 100px 100px 3px 3px;
+  transform: rotateX(90deg);
+  transition-property: opacity,transform,border-radius;
+}
+
+.ke_tooltip.trans__rotate.tooltip__visible {
+  border-radius: 3px;
+  transform: rotateX(0deg);
+}
+
+.ke_tooltip.trans__scale {
+  transform: skew(50deg) scale(0);
+  transition-property: opacity,transform;
+}
+
+.ke_tooltip.trans__scale.tooltip__visible {
+  transform: skew(0deg) scale(1);
+}
+
+.ke_tooltip.trans__skew {
+  transform: skewX(50deg);
+  transition-property: opacity,transform;
+}
+
+.ke_tooltip.trans__skew.tooltip__visible {
+  transform: skewX(0deg);
+}
+
+.ke_tooltip:after {
+  content: "";
+  position: absolute;
+}
+
+.ke_tooltip.tooltip__bottom:after {
+  border-bottom-color: #222;
+  border-top-color: transparent;
+  bottom: 100% !important;
+  top: auto !important;
+}
+
+.ke_tooltip.direction__top:after {
+  border: 6px solid transparent;
+  border-top-color: #222;
+  left: calc(50% - 6px);
+  top: 100%;
+}
+
+.ke_tooltip.direction__bottom:after {
+  border: 6px solid transparent;
+  border-bottom-color: #222;
+  left: calc(50% - 6px);
+  top: -12px;
+}
+
+.ke_tooltip.direction__left:after {
+  border: 6px solid transparent;
+  border-left-color: #222;
+  right: -12px;
+  top: calc(50% - 6px);
+}
+
+.ke_tooltip.direction__right:after {
+  border: 6px solid transparent;
+  border-right-color: #222;
+  left: -12px;
+  top: calc(50% - 6px);
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes spinner {
+  to {
+    transform: rotate(361deg);
+  }
+}
+
+@-webkit-keyframes anim-open {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 50px, 0);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateZ(0);
+  }
+}
+
+@keyframes anim-open {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 50px, 0);
+    transform: translate3d(0, 50px, 0);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+}
+
+@-webkit-keyframes anim-close {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateZ(0);
+  }
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 50px, 0);
+  }
+}
+
+@keyframes anim-close {
+  0% {
+    opacity: 1;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 50px, 0);
+    transform: translate3d(0, 50px, 0);
+  }
+}
+
+@-webkit-keyframes anim-elem {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 25px, 0);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateZ(0);
+  }
+}
+
+@keyframes anim-elem {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 25px, 0);
+    transform: translate3d(0, 25px, 0);
+  }
+  to {
+    opacity: 1;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+}
+
+.kothing-editor-editable {
+  word-wrap: break-word;
+  background-color: #fff;
+  color: #333;
+  font-family: Helvetica Neue;
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 0;
+  padding: 16px;
+  word-break: normal;
+}
+
+.kothing-editor-editable * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.kothing-editor-editable.ke-rtl * {
+  direction: rtl;
+}
+
+.kothing-editor-editable audio, .kothing-editor-editable figcaption, .kothing-editor-editable figure, .kothing-editor-editable iframe, .kothing-editor-editable img, .kothing-editor-editable td, .kothing-editor-editable th, .kothing-editor-editable video {
+  position: relative;
+}
+
+.kothing-editor-editable .__ke__float-left {
+  float: left;
+}
+
+.kothing-editor-editable .__ke__float-right {
+  float: right;
+}
+
+.kothing-editor-editable .__ke__float-center {
+  float: center;
+}
+
+.kothing-editor-editable .__ke__float-none {
+  float: none;
+}
+
+.kothing-editor-editable span {
+  display: inline;
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+
+.kothing-editor-editable span.katex {
+  display: inline-block;
+}
+
+.kothing-editor-editable span.katex * {
+  direction: ltr;
+}
+
+.kothing-editor-editable a {
+  color: #004cff;
+  text-decoration: none;
+}
+
+.kothing-editor-editable span[style~="color:"] a {
+  color: inherit;
+}
+
+.kothing-editor-editable a:focus, .kothing-editor-editable a:hover {
+  color: #0093ff;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.kothing-editor-editable a.on {
+  background-color: #e8f7ff;
+  color: #0093ff;
+}
+
+.kothing-editor-editable pre {
+  word-wrap: break-word;
+  background-color: #f9f9f9;
+  border: 1px solid #e1e1e1;
+  border-radius: 2px;
+  color: #666;
+  display: block;
+  font-family: monospace;
+  line-height: 1.45;
+  margin: 0 0 10px;
+  overflow: visible;
+  padding: 8px;
+  white-space: pre-wrap !important;
+}
+
+.kothing-editor-editable ol {
+  list-style-type: decimal;
+}
+
+.kothing-editor-editable ol, .kothing-editor-editable ul {
+  display: block;
+  list-style-position: outside;
+  margin-block-end: 1em;
+  margin-block-start: 1em;
+  margin-inline-end: 0;
+  margin-inline-start: 0;
+  padding-inline-start: 40px;
+}
+
+.kothing-editor-editable ul {
+  list-style-type: disc;
+}
+
+.kothing-editor-editable li {
+  display: list-item;
+  margin-bottom: 5px;
+  text-align: -webkit-match-parent;
+}
+
+.kothing-editor-editable ol ol, .kothing-editor-editable ol ul, .kothing-editor-editable ul ol, .kothing-editor-editable ul ul {
+  margin: 0;
+}
+
+.kothing-editor-editable ol ol, .kothing-editor-editable ul ol {
+  list-style-type: lower-alpha;
+}
+
+.kothing-editor-editable ol ol ol, .kothing-editor-editable ul ol ol, .kothing-editor-editable ul ul ol {
+  list-style-type: upper-roman;
+}
+
+.kothing-editor-editable ol ul, .kothing-editor-editable ul ul {
+  list-style-type: circle;
+}
+
+.kothing-editor-editable ol ol ul, .kothing-editor-editable ol ul ul, .kothing-editor-editable ul ul ul {
+  list-style-type: square;
+}
+
+.kothing-editor-editable sub, .kothing-editor-editable sup {
+  font-size: 75%;
+  line-height: 0;
+}
+
+.kothing-editor-editable sub {
+  vertical-align: sub;
+}
+
+.kothing-editor-editable sup {
+  vertical-align: super;
+}
+
+.kothing-editor-editable p {
+  display: block;
+  margin: 0 0 10px;
+}
+
+.kothing-editor-editable div {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+.kothing-editor-editable blockquote {
+  border: solid #b1b1b1;
+  border-width: 0 0 0 5px;
+  color: #999;
+  display: block;
+  font-family: inherit;
+  font-size: inherit;
+  margin-block-end: 1em;
+  margin-block-start: 1em;
+  margin-inline-end: 0;
+  margin-inline-start: 0;
+  padding: 0 5px 0 20px;
+}
+
+.kothing-editor-editable blockquote blockquote {
+  border-color: #c1c1c1;
+}
+
+.kothing-editor-editable blockquote blockquote blockquote {
+  border-color: #d1d1d1;
+}
+
+.kothing-editor-editable blockquote blockquote blockquote blockquote {
+  border-color: #e1e1e1;
+}
+
+.kothing-editor-editable.ke-rtl blockquote {
+  border-left-width: 0;
+  border-right-width: 5px;
+  padding-left: 5px;
+  padding-right: 20px;
+}
+
+.kothing-editor-editable h1 {
+  font-size: 2em;
+  margin-block-end: .67em;
+  margin-block-start: .67em;
+}
+
+.kothing-editor-editable h1, .kothing-editor-editable h2 {
+  display: block;
+  font-weight: 700;
+  margin-inline-end: 0;
+  margin-inline-start: 0;
+}
+
+.kothing-editor-editable h2 {
+  font-size: 1.5em;
+  margin-block-end: .83em;
+  margin-block-start: .83em;
+}
+
+.kothing-editor-editable h3 {
+  font-size: 1.17em;
+  margin-block-end: 1em;
+  margin-block-start: 1em;
+}
+
+.kothing-editor-editable h3, .kothing-editor-editable h4 {
+  display: block;
+  font-weight: 700;
+  margin-inline-end: 0;
+  margin-inline-start: 0;
+}
+
+.kothing-editor-editable h4 {
+  font-size: 1em;
+  margin-block-end: 1.33em;
+  margin-block-start: 1.33em;
+}
+
+.kothing-editor-editable h5 {
+  font-size: .83em;
+  margin-block-end: 1.67em;
+  margin-block-start: 1.67em;
+}
+
+.kothing-editor-editable h5, .kothing-editor-editable h6 {
+  display: block;
+  font-weight: 700;
+  margin-inline-end: 0;
+  margin-inline-start: 0;
+}
+
+.kothing-editor-editable h6 {
+  font-size: .67em;
+  margin-block-end: 2.33em;
+  margin-block-start: 2.33em;
+}
+
+.kothing-editor-editable hr {
+  border-color: #000;
+  border-image: initial;
+  border-width: 1px 0 0;
+  display: flex;
+  height: 1px;
+}
+
+.kothing-editor-editable hr.__ke__solid {
+  border-style: solid none none;
+}
+
+.kothing-editor-editable hr.__ke__dotted {
+  border-style: dotted none none;
+}
+
+.kothing-editor-editable hr.__ke__dashed {
+  border-style: dashed none none;
+}
+
+.kothing-editor-editable hr.on {
+  border-color: #4592ff;
+  -webkit-box-shadow: 0 0 0 .1rem #c7deff;
+  box-shadow: 0 0 0 .1rem #c7deff;
+}
+
+.kothing-editor-editable table {
+  background-color: transparent;
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  border-spacing: 0;
+  display: table;
+  margin: 0 0 10px;
+  max-width: 100%;
+  table-layout: auto;
+  width: 100%;
+}
+
+.kothing-editor-editable.ke-rtl table {
+  margin: 0 0 10px auto;
+}
+
+.kothing-editor-editable table thead {
+  border-bottom: 2px solid #333;
+}
+
+.kothing-editor-editable table tr {
+  border: 1px solid #efefef;
+}
+
+.kothing-editor-editable table th {
+  background-color: #f3f3f3;
+}
+
+.kothing-editor-editable table td, .kothing-editor-editable table th {
+  background-clip: padding-box;
+  border: 1px solid #e1e1e1;
+  padding: .4em;
+}
+
+.kothing-editor-editable table.ke-table-size-auto {
+  width: auto !important;
+}
+
+.kothing-editor-editable table.ke-table-size-100 {
+  width: 100% !important;
+}
+
+.kothing-editor-editable table.ke-table-layout-auto {
+  table-layout: auto !important;
+}
+
+.kothing-editor-editable table.ke-table-layout-fixed {
+  table-layout: fixed !important;
+}
+
+.kothing-editor-editable table td.ke-table-selected-cell, .kothing-editor-editable table th.ke-table-selected-cell {
+  outline: 1px double #4592ff;
+}
+
+.kothing-editor-editable.ke-disabled * {
+  user-select: none;
+  -o-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+}
+
+.kothing-editor-editable .ke-component {
+  display: flex;
+  margin: 0 0 10px;
+  padding: 1px;
+}
+
+.kothing-editor-editable[contenteditable=true] .ke-component {
+  outline: 1px dashed #e1e1e1;
+}
+
+.kothing-editor-editable[contenteditable=true] .ke-component.ke-component-copy {
+  -webkit-box-shadow: 0 0 0 .2rem #80bdff;
+  box-shadow: 0 0 0 .2rem #3f9dff;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.kothing-editor-editable audio, .kothing-editor-editable iframe, .kothing-editor-editable img, .kothing-editor-editable video {
+  display: block;
+  height: auto;
+  margin: 0;
+  max-width: 100%;
+  padding: 0;
+  width: auto;
+}
+
+.kothing-editor-editable[contenteditable=true] figure:after {
+  background: transparent;
+  bottom: 0;
+  content: "";
+  cursor: default;
+  display: block;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
+}
+
+.kothing-editor-editable[contenteditable=true] figure a, .kothing-editor-editable[contenteditable=true] figure iframe, .kothing-editor-editable[contenteditable=true] figure img, .kothing-editor-editable[contenteditable=true] figure video {
+  z-index: 0;
+}
+
+.kothing-editor-editable[contenteditable=true] figure figcaption {
+  display: block;
+  z-index: 2;
+}
+
+.kothing-editor-editable[contenteditable=true] figure figcaption:focus {
+  border-color: #80bdff;
+  -webkit-box-shadow: 0 0 0 .2rem #c7deff;
+  box-shadow: 0 0 0 .2rem #c7deff;
+  outline: 0;
+}
+
+.kothing-editor-editable .ke-image-container, .kothing-editor-editable .ke-video-container {
+  height: auto;
+  max-width: 100%;
+  width: auto;
+}
+
+.kothing-editor-editable figure {
+  display: block;
+  margin: 0;
+  outline: none;
+  padding: 0;
+}
+
+.kothing-editor-editable figure figcaption {
+  background-color: #f9f9f9;
+  margin: 0;
+  outline: none;
+  padding: 1em .5em;
+}
+
+.kothing-editor-editable figure figcaption p {
+  line-height: 2;
+  margin: 0;
+}
+
+.kothing-editor-editable .ke-image-container a img {
+  margin: 1px;
+  outline: 1px solid #4592ff;
+  padding: 1px;
+}
+
+.kothing-editor-editable .ke-video-container iframe, .kothing-editor-editable .ke-video-container video {
+  border: 0;
+  height: 100%;
+  left: 0;
+  outline: 1px solid #9e9e9e;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.kothing-editor-editable .ke-video-container figure {
+  left: 0;
+  max-width: 100%;
+  width: 100%;
+}
+
+.kothing-editor-editable audio {
+  height: 54px;
+  width: 300px;
+}
+
+.kothing-editor-editable audio.active {
+  outline: 2px solid #80bdff;
+}
+
+.kothing-editor-editable.ke-show-block div, .kothing-editor-editable.ke-show-block h1, .kothing-editor-editable.ke-show-block h2, .kothing-editor-editable.ke-show-block h3, .kothing-editor-editable.ke-show-block h4, .kothing-editor-editable.ke-show-block h5, .kothing-editor-editable.ke-show-block h6, .kothing-editor-editable.ke-show-block li, .kothing-editor-editable.ke-show-block ol, .kothing-editor-editable.ke-show-block p, .kothing-editor-editable.ke-show-block pre, .kothing-editor-editable.ke-show-block ul {
+  border: 1px dashed #3f9dff !important;
+  padding: 14px 8px 8px !important;
+}
+
+.kothing-editor-editable.ke-show-block ol, .kothing-editor-editable.ke-show-block ul {
+  border: 1px dashed #d539ff !important;
+}
+
+.kothing-editor-editable.ke-show-block pre {
+  border: 1px dashed #27c022 !important;
+}
+
+.ke-show-block p {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA0AAAAPAQMAAAAF7dc0AAAABlBMVEWAgID////n1o2sAAAAAnRSTlP/AOW3MEoAAAAaSURBVAjXY/j/gwGCPvxg+F4BQiAGDP1HQQByxxw0gqOzIwAAAABJRU5ErkJggg==") no-repeat;
+}
+
+.ke-show-block div {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABUAAAAPAQMAAAAxlBYoAAAABlBMVEWAgID////n1o2sAAAAAnRSTlP/AOW3MEoAAAAmSURBVAjXY/j//wcDDH+8XsHwDYi/hwNx1A8w/nYLKH4XoQYJAwCXnSgcl2MOPgAAAABJRU5ErkJggg==") no-repeat;
+}
+
+.ke-show-block h1 {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAPAQMAAAA4f7ZSAAAABlBMVEWAgID////n1o2sAAAAAnRSTlP/AOW3MEoAAAAfSURBVAjXY/j/v4EBhr+9B+LzEPrDeygfhI8j1CBhAEhmJGY4Rf6uAAAAAElFTkSuQmCC") no-repeat;
+}
+
+.ke-show-block h2 {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAPAQMAAAA4f7ZSAAAABlBMVEWAgID////n1o2sAAAAAnRSTlP/AOW3MEoAAAAmSURBVAjXY/j/v4EBhr+dB+LtQPy9geEDEH97D8T3gbgdoQYJAwA51iPuD2haEAAAAABJRU5ErkJggg==") no-repeat;
+}
+
+.ke-show-block h3 {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAPAQMAAAA4f7ZSAAAABlBMVEWAgID////n1o2sAAAAAnRSTlP/AOW3MEoAAAAiSURBVAjXY/j/v4EBhr+dB+LtQPy9geHDeQgN5p9HqEHCADeWI+69VG2MAAAAAElFTkSuQmCC") no-repeat;
+}
+
+.ke-show-block h4 {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAPAQMAAADTSA1RAAAABlBMVEWAgID////n1o2sAAAAAnRSTlP/AOW3MEoAAAAiSURBVAjXY/j//wADDH97DsTXIfjDdiDdDMTfIRhZHRQDAKJOJ6L+K3y7AAAAAElFTkSuQmCC") no-repeat;
+}
+
+.ke-show-block h5 {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAPAQMAAAA4f7ZSAAAABlBMVEWAgID////n1o2sAAAAAnRSTlP/AOW3MEoAAAAlSURBVAjXY/j/v4EBhr+1A/F+IO5vYPiwHUh/B2IQfR6hBgkDABlWIy5uM+9GAAAAAElFTkSuQmCC") no-repeat;
+}
+
+.ke-show-block h6 {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABEAAAAPAQMAAAA4f7ZSAAAABlBMVEWAgID////n1o2sAAAAAnRSTlP/AOW3MEoAAAAiSURBVAjXY/j/v4EBhr+dB+LtQLy/geFDP5S9HSKOrA6KAR9GIza1ptJnAAAAAElFTkSuQmCC") no-repeat;
+}
+
+.ke-show-block li {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAA7SURBVDhPYxgFcNDQ0PAfykQBIHEYhgoRB/BpwCfHBKWpBkaggYxQGgOgBzyQD1aLLA4TGwWDGjAwAACR3RcEU9Ui+wAAAABJRU5ErkJggg==") no-repeat;
+}
+
+.ke-show-block ol {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAYAAABiDJ37AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAABHSURBVDhPYxgFcNDQ0PAfhKFcFIBLHCdA1oBNM0kGEmMAPgOZoDTVANUNxAqQvURMECADRiiNAWCagDSGGhyW4DRrMAEGBgAu0SX6WpGgjAAAAABJRU5ErkJggg==") no-repeat;
+}
+
+.ke-show-block ul {
+  background: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAMCAYAAABiDJ37AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAA1SURBVDhPYxgFDA0NDf+hTBSALI5LDQgwQWmqgVEDKQcsUBoF4ItFGEBXA+QzQpmDGjAwAAA8DQ4Lni6gdAAAAABJRU5ErkJggg==") no-repeat;
+}
+
+.kothing-editor-editable .__ke__p-bordered, .kothing-editor .__ke__p-bordered {
+  border-bottom: 1px solid #b1b1b1;
+  border-top: 1px solid #b1b1b1;
+  padding: 4px 0;
+}
+
+.kothing-editor-editable .__ke__p-spaced, .kothing-editor .__ke__p-spaced {
+  letter-spacing: 1px;
+}
+
+.kothing-editor-editable .__ke__p-neon, .kothing-editor .__ke__p-neon {
+  animation: neonFlicker 1.5s infinite alternate;
+  background: #000;
+  border: 2px solid #fff;
+  border-radius: 6px;
+  color: #fff;
+  font-style: italic;
+  font-weight: 200;
+  padding: 6px 4px;
+  text-transform: uppercase;
+}
+
+@keyframes neonFlicker {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, to {
+    box-shadow: 0 0 .5px #fff,inset 0 0 .5px #fff,0 0 2px #08f,inset 0 0 2px #08f,0 0 4px #08f,inset 0 0 4px #08f;
+    text-shadow: -.2rem -.2rem 1rem #fff,.2rem .2rem 1rem #fff,0 0 2px #f40,0 0 4px #f40,0 0 6px #f40,0 0 8px #f40,0 0 10px #f40;
+  }
+  20%, 24%, 55% {
+    box-shadow: none;
+    text-shadow: none;
+  }
+}
+
+.kothing-editor-editable .__ke__t-shadow, .kothing-editor .__ke__t-shadow {
+  text-shadow: -.2rem -.2rem 1rem #fff,.2rem .2rem 1rem #fff,0 0 .2rem #999,0 0 .4rem #888,0 0 .6rem #777,0 0 .8rem #666,0 0 1rem #555;
+}
+
+.kothing-editor-editable .__ke__t-code, .kothing-editor .__ke__t-code {
+  background-color: rgba(27, 31, 35, 0.05);
+  border-radius: 6px;
+  color: #666;
+  font-family: monospace;
+  padding: .2em .4em;
+}
+
+/*# sourceMappingURL=kothing-editor.css.map */

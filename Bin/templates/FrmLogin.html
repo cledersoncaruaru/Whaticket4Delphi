@@ -1,0 +1,1182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+    <meta name="description" content="Zap Zap Web 4D - Sistema de Gerenciamento WhatsApp">
+    <title>Login | Zap Zap Web 4D</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap 5 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- SweetAlert2 -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css" rel="stylesheet">
+
+
+    <style>
+        /* ===== VARIÁVEIS CSS ===== */
+        :root {
+            --primary-blue: #25476a;
+            --primary-blue-light: #2e5a7a;
+            --primary-blue-dark: #1d3a52;
+            --accent-blue: #3498db;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --medium-gray: #e9ecef;
+            --dark-gray: #6c757d;
+            --text-dark: #212529;
+            --text-muted: #6c757d;
+            --shadow-light: 0 2px 10px rgba(37, 71, 106, 0.1);
+            --shadow-medium: 0 4px 20px rgba(37, 71, 106, 0.15);
+            --shadow-strong: 0 8px 30px rgba(37, 71, 106, 0.2);
+            --border-radius: 8px;
+            --border-radius-lg: 12px;
+            --font-primary: 'Inter', sans-serif;
+            --font-secondary: 'Roboto', sans-serif;
+            --transition: all 0.3s ease;
+        }
+
+        /* ===== RESET E BODY ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-light) 100%);
+            color: var(--text-dark);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* ===== FUNDO CORPORATIVO ===== */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+                linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-blue-light) 50%, var(--primary-blue-dark) 100%);
+            z-index: -2;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+                linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes gridMove {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(50px, 50px);
+            }
+        }
+
+        /* ===== ESTRUTURA PRINCIPAL ===== */
+        .root.front-container {
+            min-height: 100vh;
+            position: relative;
+        }
+
+        .content {
+            min-height: 100vh;
+        }
+
+        .content__boxed {
+            position: relative;
+        }
+
+        .content__wrap {
+            width: 100%;
+            max-width: 420px;
+            position: relative;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== LOGO E CABEÇALHO ===== */
+        .brand-section {
+            text-align: center;
+            /* margin-bottom: 40px; */
+            color: var(--white);
+        }
+
+        .brand-logo {
+            width: 80px;
+            height: 80px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            box-shadow: var(--shadow-medium);
+            animation: logoFloat 3s ease-in-out infinite;
+        }
+
+        .brand-logo i {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+        }
+
+        @keyframes logoFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        .brand-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-subtitle {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        /* ===== CARD PRINCIPAL ===== */
+        .card {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            border: none;
+            box-shadow: var(--shadow-strong);
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--accent-blue), var(--primary-blue));
+            background-size: 200% 100%;
+            animation: gradientShift 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+
+            0%,
+            100% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(37, 71, 106, 0.25);
+        }
+
+        .card-body {
+            /* padding: 40px 35px; */
+            position: relative;
+        }
+
+        /* ===== CABEÇALHO DO FORMULÁRIO ===== */
+        .form-header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .form-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin-bottom: 8px;
+        }
+
+        .form-header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* ===== CAMPOS DE INPUT ===== */
+        .form-group {
+            margin-bottom: 24px;
+            position: relative;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1rem;
+            z-index: 2;
+            transition: var(--transition);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px 20px 14px 45px;
+            background: var(--white);
+            border: 2px solid var(--medium-gray);
+            border-radius: var(--border-radius);
+            color: var(--text-dark);
+            font-size: 0.95rem;
+            font-family: var(--font-primary);
+            transition: var(--transition);
+            font-weight: 400;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(37, 71, 106, 0.1);
+            background: var(--white);
+        }
+
+        .form-control:focus+.input-icon {
+            color: var(--primary-blue);
+        }
+
+        .form-control:hover {
+            border-color: var(--primary-blue-light);
+        }
+
+        .form-control::placeholder {
+            color: var(--text-muted);
+            opacity: 0.7;
+        }
+
+        /* ===== TOGGLE DE SENHA ===== */
+        .password-toggle {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            padding: 5px;
+            transition: var(--transition);
+            z-index: 2;
+        }
+
+        .password-toggle:hover {
+            color: var(--primary-blue);
+        }
+
+        /* ===== CHECKBOX CUSTOMIZADO ===== */
+        .form-check {
+            margin-bottom: 28px;
+        }
+
+        .form-check-input {
+            display: none;
+        }
+
+        .form-check-label {
+            display: flex;
+            align-items: center;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            padding-left: 30px;
+            font-weight: 400;
+        }
+
+        .form-check-label::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 18px;
+            height: 18px;
+            border: 2px solid var(--medium-gray);
+            border-radius: 3px;
+            background: var(--white);
+            transition: var(--transition);
+        }
+
+        .form-check-label::after {
+            content: '✓';
+            position: absolute;
+            left: 3px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--white);
+            font-size: 0.75rem;
+            font-weight: 600;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .form-check-input:checked+.form-check-label::before {
+            border-color: var(--primary-blue);
+            background: var(--primary-blue);
+        }
+
+        .form-check-input:checked+.form-check-label::after {
+            opacity: 1;
+        }
+
+        .form-check-input:checked+.form-check-label {
+            color: var(--primary-blue);
+        }
+
+        /* ===== BOTÕES ===== */
+        .btn-primary {
+            width: 100%;
+            padding: 14px 30px;
+            background: var(--primary-blue);
+            border: none;
+            border-radius: var(--border-radius);
+            color: var(--white);
+            font-size: 1rem;
+            font-weight: 600;
+            font-family: var(--font-primary);
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: none;
+            letter-spacing: 0.3px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-blue-light);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        /* ===== BOTÃO SECUNDÁRIO ===== */
+        .btn-secondary {
+            background: var(--accent-blue);
+            margin-top: 15px;
+        }
+
+        .btn-secondary:hover {
+            background: #2980b9;
+        }
+
+        /* ===== SEÇÃO DE SESSÃO ===== */
+        .session-section {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid var(--medium-gray);
+        }
+
+        .session-section .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ===== LINKS DO FOOTER ===== */
+        .footer-links {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 1px solid var(--medium-gray);
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .footer-link {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            position: relative;
+            font-weight: 400;
+        }
+
+        .footer-link:hover {
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        .footer-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-blue);
+            transition: width 0.3s ease;
+        }
+
+        .footer-link:hover::after {
+            width: 100%;
+        }
+
+        /* ===== LOGIN SOCIAL ===== */
+        .social-section {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .social-title {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            position: relative;
+            font-weight: 400;
+        }
+
+        .social-title::before,
+        .social-title::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 35%;
+            height: 1px;
+            background: var(--medium-gray);
+        }
+
+        .social-title::before {
+            left: 0;
+        }
+
+        .social-title::after {
+            right: 0;
+        }
+
+        .social-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .social-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 2px solid var(--medium-gray);
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .social-btn:hover {
+            border-color: var(--primary-blue);
+            background: var(--primary-blue);
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-light);
+        }
+
+        .social-btn i {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+
+        .social-btn:hover i {
+            color: var(--white);
+        }
+
+        /* ===== CONTROLES INFERIORES ===== */
+        .bottom-controls {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .btn-outline {
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: var(--border-radius);
+            color: var(--white);
+            font-weight: 500;
+            transition: var(--transition);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-outline:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            color: var(--white);
+            text-decoration: none;
+            transform: translateY(-2px);
+        }
+
+        /* ===== INDICADOR DE STATUS ===== */
+        .status-indicator {
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.85rem;
+            font-weight: 400;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            background: #28a745;
+            border-radius: 50%;
+            animation: statusPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes statusPulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.6;
+                transform: scale(1.3);
+            }
+        }
+
+        /* ===== RESPONSIVIDADE ===== */
+        @media (max-width: 768px) {
+            .content__wrap {
+                max-width: 100%;
+                padding: 0 20px;
+            }
+
+            .card-body {
+                padding: 30px 25px;
+            }
+
+            .brand-title {
+                font-size: 1.75rem;
+            }
+
+            .brand-logo {
+                width: 70px;
+                height: 70px;
+            }
+
+            .brand-logo i {
+                font-size: 2rem;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                text-align: center;
+                gap: 12px;
+            }
+
+            .social-buttons {
+                gap: 10px;
+            }
+
+            .bottom-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .content {
+                padding: 20px 15px;
+            }
+
+            .brand-title {
+                font-size: 1.5rem;
+            }
+
+            .brand-subtitle {
+                font-size: 0.9rem;
+            }
+
+            .form-header h2 {
+                font-size: 1.3rem;
+            }
+
+            .form-control {
+                padding: 12px 18px 12px 40px;
+                font-size: 0.9rem;
+            }
+
+            .btn-primary {
+                padding: 12px 25px;
+                font-size: 0.95rem;
+            }
+        }
+
+        /* ===== LOADING STATES ===== */
+        .btn-primary.loading {
+            pointer-events: none;
+            opacity: 0.8;
+        }
+
+        .btn-primary.loading::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 18px;
+            height: 18px;
+            border: 2px solid transparent;
+            border-top: 2px solid var(--white);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+
+        /* ===== ANIMAÇÕES DE ENTRADA ===== */
+        .form-group {
+            animation: slideInLeft 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+        .form-group:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .form-group:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .form-group:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .form-group:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .footer-links,
+        .social-section {
+            animation: fadeIn 0.8s ease-out;
+            animation-fill-mode: both;
+            animation-delay: 0.6s;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* ===== EFEITOS ESPECIAIS ===== */
+        .form-control:focus {
+            position: relative;
+        }
+
+        .form-control:focus::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: var(--border-radius);
+            background: linear-gradient(45deg, transparent, rgba(37, 71, 106, 0.05), transparent);
+            pointer-events: none;
+        }
+
+        /* ===== CUSTOMIZAÇÃO SWEETALERT ===== */
+        .swal2-popup {
+            border-radius: var(--border-radius-lg) !important;
+            border: 1px solid var(--medium-gray) !important;
+        }
+
+        .swal2-confirm {
+            background: var(--primary-blue) !important;
+            border-radius: var(--border-radius) !important;
+        }
+
+        .swal2-cancel {
+            background: var(--dark-gray) !important;
+            border-radius: var(--border-radius) !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root" class="root front-container">
+        <section id="content" class="content">
+            <div class="content__boxed w-100 min-vh-100 d-flex flex-column align-items-center justify-content-center">
+                <div class="content__wrap">
+
+                    <div class="brand-section">
+                        <div class="brand-logo">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <h1 class="brand-title">{%NOMESISTEMA%}</h1>
+                        <p class="brand-subtitle">{%DESCRICAOSISTEMA%}</p>
+                    </div>
+
+                    <div class="card shadow-lg">
+                        <div class="card-body">
+
+                            <div class="form-header">
+                                <h2>Acesso ao Sistema</h2>
+                                <p>Entre com suas credenciais para continuar</p>
+                            </div>
+
+                            <form id="loginForm">
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <i class="fas fa-user input-icon"></i>
+                                        {%EMAIL placeholder="Email do Usuario"%}
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <i class="fas fa-lock input-icon"></i>
+                                        {%SENHA placeholder="Senha"%}
+                                        <button type="button" class="password-toggle" onclick="togglePassword()">
+                                            <i class="fas fa-eye" id="passwordToggleIcon"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="form-check">
+                                    <input id="rememberMe" class="form-check-input" type="checkbox">
+                                    <label for="rememberMe" class="form-check-label">
+                                        Lembrar usuário
+                                    </label>
+                                </div>
+
+                                <div class="form-group">
+                                    <button class="btn btn-primary" type="submit" id="BTN_LOGIN">Entrar</button>
+                                </div>
+
+
+                            </form>
+
+                            <div class="footer-links">
+                                <a href="#" class="footer-link" id="forgotPassword">Esqueceu a senha?</a>
+                                <a href="#" class="footer-link" id="createAccount">Criar nova conta</a>
+                            </div>
+
+                            <div class="social-section">
+                                <p class="social-title">Ou entre com</p>
+                                <div class="social-buttons">
+                                    <a href="#" class="social-btn">
+                                        <i class="fab fa-facebook-f"></i>
+                                    </a>
+                                    <a href="#" class="social-btn">
+                                        <i class="fab fa-twitter"></i>
+                                    </a>
+                                    <a href="#" class="social-btn">
+                                        <i class="fab fa-google"></i>
+                                    </a>
+                                    <a href="#" class="social-btn">
+                                        <i class="fab fa-instagram"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="bottom-controls">
+                        <a href="#" class="btn-outline" onclick="changeBackground()">
+                            <i class="fas fa-palette"></i>
+                            Alterar Tema
+                        </a>
+                        <a href="#" class="btn-outline" onclick="window.history.back()">
+                            <i class="fas fa-arrow-left"></i>
+                            Voltar
+                        </a>
+                    </div>
+
+                    <div class="status-indicator">
+                        <div class="status-dot"></div>
+                        <span>Sistema Online</span>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', function () {
+            setupEventListeners();
+            loadSavedData();
+        });
+
+        function setupEventListeners() {
+            document.getElementById('loginForm').addEventListener('submit', handleLogin);
+            document.getElementById('btnSession').addEventListener('click', handleSessionEnd);
+            document.getElementById('forgotPassword').addEventListener('click', showPasswordRecovery);
+            document.getElementById('createAccount').addEventListener('click', showRegisterInfo);
+            document.querySelectorAll('.social-btn').forEach(btn => {
+                btn.addEventListener('click', handleSocialLogin);
+            });
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            if (!email || !password) {
+                showAlert('error', 'Erro', 'Por favor, preencha todos os campos obrigatórios.');
+                return;
+            }
+
+            if (!isValidEmail(email)) {
+                showAlert('error', 'Erro', 'Por favor, insira um email válido.');
+                return;
+            }
+
+            // Iniciar loading
+            const btn = document.getElementById('btnLogin');
+            btn.classList.add('loading');
+            btn.disabled = true;
+
+            // Simular processo de login
+            setTimeout(() => {
+                showAlert('success', 'Sucesso!', 'Login realizado com sucesso!').then(() => {
+                    // Salvar dados se "lembrar usuário" estiver marcado
+                    const rememberMe = document.getElementById('rememberMe').checked;
+                    if (rememberMe) {
+                        saveUserData(email);
+                    }
+                    console.log('✅ Login bem-sucedido para:', email);
+                });
+
+                btn.classList.remove('loading');
+                btn.disabled = false;
+            }, 1500);
+        }
+
+        // ===== MANIPULAÇÃO DE SESSÃO =====
+        function handleSessionEnd(event) {
+            event.preventDefault();
+
+            const sessionId = document.getElementById('sessionId').value.trim();
+
+            if (!sessionId) {
+                showAlert('warning', 'Atenção', 'Por favor, insira o ID da sessão.');
+                return;
+            }
+
+            Swal.fire({
+                title: 'Confirmar Ação',
+                text: 'Tem certeza que deseja encerrar esta sessão?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#25476a',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Sim, encerrar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    const btn = document.getElementById('btnSession');
+                    btn.classList.add('loading');
+                    btn.disabled = true;
+
+                    setTimeout(() => {
+                        showAlert('info', 'Sessão Encerrada', `Sessão ${sessionId} foi encerrada com sucesso.`);
+                        document.getElementById('sessionId').value = '';
+                        btn.classList.remove('loading');
+                        btn.disabled = false;
+                    }, 1000);
+                }
+            });
+        }
+
+        // ===== TOGGLE DE SENHA =====
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.getElementById('passwordToggleIcon');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        }
+
+        // ===== RECUPERAÇÃO DE SENHA =====
+        function showPasswordRecovery(event) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: 'Recuperar Senha',
+                html: '<input type="email" id="recoveryEmail" class="swal2-input" placeholder="Seu email" style="border: 2px solid #e9ecef; border-radius: 8px;">',
+                showCancelButton: true,
+                confirmButtonText: 'Enviar',
+                cancelButtonText: 'Cancelar',
+                confirmButtonColor: '#25476a',
+                cancelButtonColor: '#6c757d',
+                preConfirm: () => {
+                    const email = document.getElementById('recoveryEmail').value;
+                    if (!email) {
+                        Swal.showValidationMessage('Por favor, digite seu email');
+                        return false;
+                    }
+                    if (!isValidEmail(email)) {
+                        Swal.showValidationMessage('Por favor, digite um email válido');
+                        return false;
+                    }
+                    return email;
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    showAlert('success', 'Email Enviado', 'Instruções de recuperação foram enviadas para seu email.');
+                }
+            });
+        }
+
+        // ===== INFORMAÇÕES DE REGISTRO =====
+        function showRegisterInfo(event) {
+            event.preventDefault();
+            showAlert('info', 'Registro', 'Entre em contato com o administrador para criar uma nova conta.');
+        }
+
+        // ===== LOGIN SOCIAL =====
+        function handleSocialLogin(event) {
+            event.preventDefault();
+
+            const platform = event.currentTarget.querySelector('i').classList[1].split('-')[1];
+            const platformName = platform.charAt(0).toUpperCase() + platform.slice(1);
+
+            showAlert('info', 'Login Social', `Funcionalidade de login com ${platformName} em desenvolvimento.`);
+        }
+
+        // ===== ALTERAR TEMA =====
+        function changeBackground() {
+            const themes = [
+                { primary: '#25476a', light: '#2e5a7a', dark: '#1d3a52' },
+                { primary: '#2c3e50', light: '#34495e', dark: '#1a252f' },
+                { primary: '#8e44ad', light: '#9b59b6', dark: '#6c3483' },
+                { primary: '#27ae60', light: '#2ecc71', dark: '#1e8449' },
+                { primary: '#e74c3c', light: '#ec7063', dark: '#c0392b' }
+            ];
+
+            const currentTheme = themes[Math.floor(Math.random() * themes.length)];
+
+            document.documentElement.style.setProperty('--primary-blue', currentTheme.primary);
+            document.documentElement.style.setProperty('--primary-blue-light', currentTheme.light);
+            document.documentElement.style.setProperty('--primary-blue-dark', currentTheme.dark);
+
+            showToast('success', 'Tema alterado com sucesso!');
+        }
+
+        // ===== UTILITÁRIOS =====
+        function isValidEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+        function saveUserData(email) {
+            try {
+                localStorage.setItem('zapzap_remember_email', email);
+                localStorage.setItem('zapzap_remember_timestamp', Date.now().toString());
+            } catch (error) {
+                console.error('Erro ao salvar dados:', error);
+            }
+        }
+
+        function loadSavedData() {
+            try {
+                const savedEmail = localStorage.getItem('zapzap_remember_email');
+                const timestamp = localStorage.getItem('zapzap_remember_timestamp');
+
+                if (savedEmail && timestamp) {
+                    const thirtyDaysAgo = Date.now() - (30 * 24 * 60 * 60 * 1000);
+
+                    if (parseInt(timestamp) > thirtyDaysAgo) {
+                        document.getElementById('email').value = savedEmail;
+                        document.getElementById('rememberMe').checked = true;
+                    } else {
+                        localStorage.removeItem('zapzap_remember_email');
+                        localStorage.removeItem('zapzap_remember_timestamp');
+                    }
+                }
+            } catch (error) {
+                console.error('Erro ao carregar dados salvos:', error);
+            }
+        }
+
+        function showAlert(type, title, text) {
+            const icons = {
+                success: 'success',
+                error: 'error',
+                warning: 'warning',
+                info: 'info'
+            };
+
+            const colors = {
+                success: '#25476a',
+                error: '#e74c3c',
+                warning: '#f39c12',
+                info: '#3498db'
+            };
+
+            return Swal.fire({
+                icon: icons[type],
+                title: title,
+                text: text,
+                confirmButtonColor: colors[type]
+            });
+        }
+
+        function showToast(type, message) {
+            const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true
+            });
+
+            Toast.fire({
+                icon: type,
+                title: message
+            });
+        }
+
+        // ===== CONSOLE PERSONALIZADO =====
+        console.log(`
+%c
+╔══════════════════════════════════════════════════════════════╗
+║                    ZAP ZAP WEB 4D                            ║
+║                Sistema de Gerenciamento WhatsApp             ║
+║                     VERSÃO CORPORATIVA                       ║
+║                                                              ║
+║  🏢 Status: Sistema Inicializado                            ║
+║  🎨 Tema: Corporativo (#25476a + Branco)                   ║
+║  ⚡ Tecnologias: HTML5, CSS3, JavaScript ES6+               ║
+║  📱 Design: Interface Responsiva e Profissional            ║
+╚══════════════════════════════════════════════════════════════╝
+        `, 'color: #25476a; font-family: monospace; font-size: 12px;');
+    </script>
+</body>
+
+</html>

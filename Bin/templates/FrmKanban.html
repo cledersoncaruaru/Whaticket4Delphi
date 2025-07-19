@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        /* Reset e configurações gerais */
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Header */
+        h1 {
+            font-weight: 600;
+            font-size: 1.8rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Colunas do Kanban */
+        .kanban-column {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 0 8px 15px 8px;
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            min-height: 400px;
+        }
+
+        .kanban-column:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .kanban-column h2 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: 600;
+            padding: 8px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Área dos cards */
+        .kanban-cards {
+            min-height: 300px;
+            padding: 8px;
+            border: 2px dashed #e0e0e0;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .kanban-cards.drag-over {
+            background: rgba(0, 123, 255, 0.1);
+            border-color: #007bff;
+            border-style: solid;
+            transform: scale(1.02);
+        }
+
+        /* Cards dos tickets */
+        .kanban-card {
+            background: #ffffff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+            cursor: grab;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .kanban-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+
+        .kanban-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .kanban-card:active {
+            cursor: grabbing;
+            transform: rotate(5deg);
+        }
+
+        .kanban-card.dragging {
+            opacity: 0.7;
+            transform: rotate(5deg) scale(1.05);
+            z-index: 1000;
+        }
+
+        /* Conteúdo dos cards */
+        .kanban-card-header {
+            display: flex;
+            justify-content: between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .kanban-card-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #2c3e50;
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+
+        .kanban-card-client {
+            font-weight: 500;
+            font-size: 0.85rem;
+            color: #34495e;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+        }
+
+        .kanban-card-client::before {
+            content: '👤';
+            margin-right: 5px;
+        }
+
+        .kanban-card-phone {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+        }
+
+        .kanban-card-phone::before {
+            content: '📞';
+            margin-right: 5px;
+        }
+
+        .kanban-card-description {
+            font-size: 0.8rem;
+            color: #666;
+            line-height: 1.3;
+            margin-bottom: 10px;
+        }
+
+        .kanban-card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            padding-top: 8px;
+            border-top: 1px solid #ecf0f1;
+        }
+
+        .kanban-card-priority {
+            padding: 3px 6px;
+            border-radius: 10px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        .priority-baixa {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .priority-media {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .priority-alta {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .priority-urgente {
+            background: #dc3545;
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .kanban-card-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .card-action-btn {
+            background: none;
+            border: none;
+            padding: 3px;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            font-size: 0.8rem;
+        }
+
+        .card-action-btn:hover {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .edit-btn {
+            color: #007bff;
+        }
+
+        .delete-btn {
+            color: #dc3545;
+        }
+
+        /* Botão de adicionar ticket */
+        .btn-success {
+            background: linear-gradient(45deg, #28a745, #20c997);
+            border: none;
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.3);
+        }
+
+        /* Modal customizado */
+        .modal-content {
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 15px 15px 0 0;
+            border-bottom: none;
+        }
+
+        .modal-title {
+            font-weight: 600;
+        }
+
+        .btn-close {
+            filter: invert(1);
+        }
+
+        .form-control,
+        .form-select {
+            border-radius: 8px;
+            border: 2px solid #e9ecef;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .container-fluid {
+                padding: 8px;
+            }
+
+            .kanban-column {
+                margin: 0 4px 12px 4px;
+                padding: 12px;
+                min-height: 250px;
+            }
+
+            .kanban-column h2 {
+                font-size: 1rem;
+            }
+
+            .kanban-cards {
+                min-height: 150px;
+            }
+
+            h1 {
+                font-size: 1.4rem;
+                text-align: center;
+                margin-bottom: 15px;
+            }
+
+            .d-flex.justify-content-between {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .btn-success {
+                align-self: center;
+                font-size: 0.85rem;
+                padding: 6px 12px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .kanban-column {
+                margin: 0 0 12px 0;
+                padding: 10px;
+            }
+
+            .kanban-card {
+                padding: 10px;
+            }
+
+            .kanban-card-title {
+                font-size: 0.9rem;
+            }
+
+            .kanban-card-client {
+                font-size: 0.8rem;
+            }
+
+            .kanban-card-phone {
+                font-size: 0.75rem;
+            }
+
+            .kanban-card-description {
+                font-size: 0.75rem;
+            }
+
+            .modal-dialog {
+                margin: 8px;
+            }
+
+            h1 {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Animações de entrada */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .kanban-column {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .kanban-card {
+            animation: fadeInUp 0.4s ease-out;
+        }
+
+        /* Scrollbar personalizada */
+        .kanban-cards::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .kanban-cards::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 3px;
+        }
+
+        .kanban-cards::-webkit-scrollbar-thumb {
+            background: #c1c1c1;
+            border-radius: 3px;
+        }
+
+        .kanban-cards::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8;
+        }
+
+        /* Estados de loading */
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, .3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div class="clearfix" style="display: none;">{%BTNCONFIRMACANCELAMENTO%}</div>
+
+    <section class="card">
+        <h2 class="card-header bg-primary text-white">Kanban de Tickets de WhatsApp </h2>
+
+        <div class="card-body">
+            <div class="container-fluid mt-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <!-- <h1 class="text-primary">📱 Kanban de Tickets de WhatsApp</h1> -->
+                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addTicketModal">
+                        <i class="bi bi-plus-circle"></i> Novo Ticket
+                    </button>
+                </div>
+
+                <div class="row justify-content-center" id="kanban-board">
+                    <!-- Coluna: Novos -->
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="kanban-column" data-status="novo">
+                            <h2 class="text-info">🆕 Novos</h2>
+                            <div class="kanban-cards" id="novo-cards">
+                                <!-- Cards serão adicionados aqui -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Coluna: Em Andamento -->
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="kanban-column" data-status="andamento">
+                            <h2 class="text-warning">⏳ Em Andamento</h2>
+                            <div class="kanban-cards" id="andamento-cards">
+                                <!-- Cards serão adicionados aqui -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Coluna: Aguardando Cliente -->
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="kanban-column" data-status="aguardando">
+                            <h2 class="text-secondary">⏰ Aguardando Cliente</h2>
+                            <div class="kanban-cards" id="aguardando-cards">
+                                <!-- Cards serão adicionados aqui -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Coluna: Resolvidos -->
+                    <div class="col-lg-3 col-md-6 mb-4">
+                        <div class="kanban-column" data-status="resolvido">
+                            <h2 class="text-success">✅ Resolvidos</h2>
+                            <div class="kanban-cards" id="resolvido-cards">
+                                <!-- Cards serão adicionados aqui -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <div class="modal fade" id="addTicketModal" tabindex="-1" aria-labelledby="addTicketModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addTicketModalLabel">Novo Ticket</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="ticketForm">
+                        <div class="mb-3">
+                            <label for="ticketTitle" class="form-label">Título do Ticket</label>
+                            <input type="text" class="form-control" id="ticketTitle" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="ticketClient" class="form-label">Nome do Cliente</label>
+                            <input type="text" class="form-control" id="ticketClient" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="ticketPhone" class="form-label">Telefone</label>
+                            <input type="tel" class="form-control" id="ticketPhone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="ticketDescription" class="form-label">Descrição</label>
+                            <textarea class="form-control" id="ticketDescription" rows="3" required></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="ticketPriority" class="form-label">Prioridade</label>
+                            <select class="form-select" id="ticketPriority">
+                                <option value="baixa">Baixa</option>
+                                <option value="media" selected>Média</option>
+                                <option value="alta">Alta</option>
+                                <option value="urgente">Urgente</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="ticketStatus" class="form-label">Status</label>
+                            <select class="form-select" id="ticketStatus">
+                                <option value="novo" selected>Novo</option>
+                                <option value="andamento">Em Andamento</option>
+                                <option value="aguardando">Aguardando Cliente</option>
+                                <option value="resolvido">Resolvido</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="saveTicket">Salvar Ticket</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Classe principal do Kanban
+        class KanbanBoard {
+            constructor() {
+                this.tickets = JSON.parse(localStorage.getItem('kanban-tickets')) || [];
+                this.currentEditingId = null;
+                this.draggedElement = null;
+
+                this.init();
+            }
+
+            init() {
+                this.setupEventListeners();
+                this.renderAllTickets();
+                this.setupDragAndDrop();
+            }
+
+            // Configurar event listeners
+            setupEventListeners() {
+                // Botão salvar ticket
+                document.getElementById('saveTicket').addEventListener('click', () => {
+                    this.saveTicket();
+                });
+
+                // Reset do modal quando fechado
+                document.getElementById('addTicketModal').addEventListener('hidden.bs.modal', () => {
+                    this.resetModal();
+                });
+
+                // Submissão do formulário
+                document.getElementById('ticketForm').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    this.saveTicket();
+                });
+            }
+
+            // Configurar drag and drop
+            setupDragAndDrop() {
+                // Configurar cards como draggable
+                this.setupCardDragEvents();
+
+                // Configurar colunas como drop zones
+                const columns = document.querySelectorAll('.kanban-cards');
+                columns.forEach(column => {
+                    column.addEventListener('dragover', this.handleDragOver.bind(this));
+                    column.addEventListener('drop', this.handleDrop.bind(this));
+                    column.addEventListener('dragenter', this.handleDragEnter.bind(this));
+                    column.addEventListener('dragleave', this.handleDragLeave.bind(this));
+                });
+            }
+
+            setupCardDragEvents() {
+                const cards = document.querySelectorAll('.kanban-card');
+                cards.forEach(card => {
+                    card.draggable = true;
+                    card.addEventListener('dragstart', this.handleDragStart.bind(this));
+                    card.addEventListener('dragend', this.handleDragEnd.bind(this));
+                });
+            }
+
+            handleDragStart(e) {
+                this.draggedElement = e.target;
+                e.target.classList.add('dragging');
+                e.dataTransfer.effectAllowed = 'move';
+                e.dataTransfer.setData('text/html', e.target.outerHTML);
+                e.dataTransfer.setData('text/plain', e.target.dataset.ticketId);
+            }
+
+            handleDragEnd(e) {
+                e.target.classList.remove('dragging');
+                this.draggedElement = null;
+            }
+
+            handleDragOver(e) {
+                e.preventDefault();
+                e.dataTransfer.dropEffect = 'move';
+            }
+
+            handleDragEnter(e) {
+                e.preventDefault();
+                e.target.classList.add('drag-over');
+            }
+
+            handleDragLeave(e) {
+                if (!e.target.contains(e.relatedTarget)) {
+                    e.target.classList.remove('drag-over');
+                }
+            }
+
+            handleDrop(e) {
+                e.preventDefault();
+                e.target.classList.remove('drag-over');
+
+                const ticketId = e.dataTransfer.getData('text/plain');
+                const newStatus = e.target.id.replace('-cards', '');
+
+                if (ticketId && newStatus) {
+                    this.updateTicketStatus(ticketId, newStatus);
+                }
+            }
+
+            // Atualizar status do ticket
+            updateTicketStatus(ticketId, newStatus) {
+                const ticket = this.tickets.find(t => t.id === ticketId);
+                if (ticket && ticket.status !== newStatus) {
+                    ticket.status = newStatus;
+                    ticket.updatedAt = new Date().toISOString();
+                    this.saveToStorage();
+                    this.renderAllTickets();
+                    this.showNotification(`Ticket movido para ${this.getStatusLabel(newStatus)}`, 'success');
+                }
+            }
+
+            // Salvar ticket (novo ou editado)
+            saveTicket() {
+                const form = document.getElementById('ticketForm');
+                const formData = new FormData(form);
+
+                const ticketData = {
+                    title: document.getElementById('ticketTitle').value.trim(),
+                    client: document.getElementById('ticketClient').value.trim(),
+                    phone: document.getElementById('ticketPhone').value.trim(),
+                    description: document.getElementById('ticketDescription').value.trim(),
+                    priority: document.getElementById('ticketPriority').value,
+                    status: document.getElementById('ticketStatus').value
+                };
+
+                // Validação
+                if (!this.validateTicketData(ticketData)) {
+                    return;
+                }
+
+                if (this.currentEditingId) {
+                    // Editar ticket existente
+                    const ticket = this.tickets.find(t => t.id === this.currentEditingId);
+                    if (ticket) {
+                        Object.assign(ticket, ticketData);
+                        ticket.updatedAt = new Date().toISOString();
+                        this.showNotification('Ticket atualizado com sucesso!', 'success');
+                    }
+                } else {
+                    // Criar novo ticket
+                    const newTicket = {
+                        id: this.generateId(),
+                        ...ticketData,
+                        createdAt: new Date().toISOString(),
+                        updatedAt: new Date().toISOString()
+                    };
+                    this.tickets.push(newTicket);
+                    this.showNotification('Ticket criado com sucesso!', 'success');
+                }
+
+                this.saveToStorage();
+                this.renderAllTickets();
+                this.closeModal();
+            }
+
+            // Validar dados do ticket
+            validateTicketData(data) {
+                if (!data.title) {
+                    this.showNotification('Título é obrigatório', 'error');
+                    return false;
+                }
+                if (!data.client) {
+                    this.showNotification('Nome do cliente é obrigatório', 'error');
+                    return false;
+                }
+                if (!data.phone) {
+                    this.showNotification('Telefone é obrigatório', 'error');
+                    return false;
+                }
+                if (!data.description) {
+                    this.showNotification('Descrição é obrigatória', 'error');
+                    return false;
+                }
+                return true;
+            }
+
+            // Editar ticket
+            editTicket(ticketId) {
+                const ticket = this.tickets.find(t => t.id === ticketId);
+                if (!ticket) return;
+
+                this.currentEditingId = ticketId;
+
+                // Preencher formulário
+                document.getElementById('ticketTitle').value = ticket.title;
+                document.getElementById('ticketClient').value = ticket.client;
+                document.getElementById('ticketPhone').value = ticket.phone;
+                document.getElementById('ticketDescription').value = ticket.description;
+                document.getElementById('ticketPriority').value = ticket.priority;
+                document.getElementById('ticketStatus').value = ticket.status;
+
+                // Alterar título do modal
+                document.getElementById('addTicketModalLabel').textContent = 'Editar Ticket';
+
+                // Abrir modal
+                const modal = new bootstrap.Modal(document.getElementById('addTicketModal'));
+                modal.show();
+            }
+
+            // Excluir ticket
+            deleteTicket(ticketId) {
+                if (confirm('Tem certeza que deseja excluir este ticket?')) {
+                    this.tickets = this.tickets.filter(t => t.id !== ticketId);
+                    this.saveToStorage();
+                    this.renderAllTickets();
+                    this.showNotification('Ticket excluído com sucesso!', 'success');
+                }
+            }
+
+            // Renderizar todos os tickets
+            renderAllTickets() {
+                const statuses = ['novo', 'andamento', 'aguardando', 'resolvido'];
+
+                statuses.forEach(status => {
+                    const container = document.getElementById(`${status}-cards`);
+                    const tickets = this.tickets.filter(t => t.status === status);
+                    container.innerHTML = tickets.map(ticket => this.createTicketHTML(ticket)).join('');
+                });
+
+                // Reconfigurar drag and drop após renderização
+                setTimeout(() => {
+                    this.setupCardDragEvents();
+                }, 100);
+            }
+
+            // Criar HTML do ticket
+            createTicketHTML(ticket) {
+                const createdDate = new Date(ticket.createdAt).toLocaleDateString('pt-BR');
+                const priorityClass = `priority-${ticket.priority}`;
+
+                return `
+            <div class="kanban-card" data-ticket-id="${ticket.id}" draggable="true">
+                <div class="kanban-card-header">
+                    <div class="kanban-card-title">${this.escapeHtml(ticket.title)}</div>
+                </div>
+                <div class="kanban-card-client">${this.escapeHtml(ticket.client)}</div>
+                <div class="kanban-card-phone">${this.escapeHtml(ticket.phone)}</div>
+                <div class="kanban-card-description">${this.escapeHtml(ticket.description)}</div>
+                <div class="kanban-card-footer">
+                    <span class="kanban-card-priority ${priorityClass}">${ticket.priority}</span>
+                    <div class="kanban-card-actions">
+                        <button class="card-action-btn edit-btn" onclick="kanban.editTicket('${ticket.id}')" title="Editar">
+                            ✏️
+                        </button>
+                        <button class="card-action-btn delete-btn" onclick="kanban.deleteTicket('${ticket.id}')" title="Excluir">
+                            🗑️
+                        </button>
+                    </div>
+                </div>
+                <div class="text-muted small mt-2">Criado em: ${createdDate}</div>
+            </div>
+        `;
+            }
+
+            // Utilitários
+            generateId() {
+                return 'ticket_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            }
+
+            escapeHtml(text) {
+                const div = document.createElement('div');
+                div.textContent = text;
+                return div.innerHTML;
+            }
+
+            getStatusLabel(status) {
+                const labels = {
+                    'novo': 'Novos',
+                    'andamento': 'Em Andamento',
+                    'aguardando': 'Aguardando Cliente',
+                    'resolvido': 'Resolvidos'
+                };
+                return labels[status] || status;
+            }
+
+            // Gerenciamento do modal
+            resetModal() {
+                this.currentEditingId = null;
+                document.getElementById('ticketForm').reset();
+                document.getElementById('addTicketModalLabel').textContent = 'Novo Ticket';
+                document.getElementById('ticketStatus').value = 'novo';
+            }
+
+            closeModal() {
+                const modal = bootstrap.Modal.getInstance(document.getElementById('addTicketModal'));
+                if (modal) {
+                    modal.hide();
+                }
+            }
+
+            // Persistência de dados
+            saveToStorage() {
+                localStorage.setItem('kanban-tickets', JSON.stringify(this.tickets));
+            }
+
+            // Notificações
+            showNotification(message, type = 'info') {
+                // Remover notificação existente
+                const existingNotification = document.querySelector('.notification');
+                if (existingNotification) {
+                    existingNotification.remove();
+                }
+
+                // Criar nova notificação
+                const notification = document.createElement('div');
+                notification.className = `notification alert alert-${type === 'error' ? 'danger' : type === 'success' ? 'success' : 'info'} alert-dismissible fade show`;
+                notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            min-width: 300px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        `;
+
+                notification.innerHTML = `
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+
+                document.body.appendChild(notification);
+
+                // Auto remover após 5 segundos
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.remove();
+                    }
+                }, 5000);
+            }
+
+            // Métodos para demonstração (dados de exemplo)
+            loadSampleData() {
+                if (this.tickets.length === 0) {
+                    const sampleTickets = [
+                        {
+                            id: this.generateId(),
+                            title: 'Problema com entrega',
+                            client: 'João Silva',
+                            phone: '(11) 99999-9999',
+                            description: 'Cliente relatou que o produto chegou com defeito',
+                            priority: 'alta',
+                            status: 'novo',
+                            createdAt: new Date().toISOString(),
+                            updatedAt: new Date().toISOString()
+                        },
+                        {
+                            id: this.generateId(),
+                            title: 'Dúvida sobre produto',
+                            client: 'Maria Santos',
+                            phone: '(11) 88888-8888',
+                            description: 'Cliente quer saber sobre disponibilidade de cores',
+                            priority: 'media',
+                            status: 'andamento',
+                            createdAt: new Date().toISOString(),
+                            updatedAt: new Date().toISOString()
+                        },
+                        {
+                            id: this.generateId(),
+                            title: 'Solicitação de troca',
+                            client: 'Pedro Costa',
+                            phone: '(11) 77777-7777',
+                            description: 'Cliente quer trocar o tamanho do produto',
+                            priority: 'baixa',
+                            status: 'aguardando',
+                            createdAt: new Date().toISOString(),
+                            updatedAt: new Date().toISOString()
+                        }
+                    ];
+
+                    this.tickets = sampleTickets;
+                    this.saveToStorage();
+                    this.renderAllTickets();
+                }
+            }
+
+            // Exportar dados
+            exportData() {
+                const dataStr = JSON.stringify(this.tickets, null, 2);
+                const dataBlob = new Blob([dataStr], { type: 'application/json' });
+                const url = URL.createObjectURL(dataBlob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'kanban-tickets.json';
+                link.click();
+                URL.revokeObjectURL(url);
+            }
+
+            // Importar dados
+            importData(file) {
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    try {
+                        const importedTickets = JSON.parse(e.target.result);
+                        if (Array.isArray(importedTickets)) {
+                            this.tickets = importedTickets;
+                            this.saveToStorage();
+                            this.renderAllTickets();
+                            this.showNotification('Dados importados com sucesso!', 'success');
+                        } else {
+                            this.showNotification('Formato de arquivo inválido', 'error');
+                        }
+                    } catch (error) {
+                        this.showNotification('Erro ao importar dados', 'error');
+                    }
+                };
+                reader.readAsText(file);
+            }
+        }
+
+        // Inicializar o Kanban quando a página carregar
+        let kanban;
+
+        document.addEventListener('DOMContentLoaded', function () {
+            kanban = new KanbanBoard();
+
+            // Carregar dados de exemplo se não houver tickets
+            kanban.loadSampleData();
+
+            // Adicionar funcionalidades extras
+            addExtraFeatures();
+        });
+
+        // Funcionalidades extras
+        function addExtraFeatures() {
+            // Adicionar botões de ação no header
+            const header = document.querySelector('.d-flex.justify-content-between');
+            const extraButtons = document.createElement('div');
+            extraButtons.className = 'd-flex gap-2';
+            extraButtons.innerHTML = `
+        <button class="btn btn-outline-primary btn-sm" onclick="kanban.exportData()" title="Exportar dados">
+            📥 Exportar
+        </button>
+        <input type="file" id="importFile" accept=".json" style="display: none" onchange="handleImport(this)">
+        <button class="btn btn-outline-secondary btn-sm" onclick="document.getElementById('importFile').click()" title="Importar dados">
+            📤 Importar
+        </button>
+        <button class="btn btn-outline-info btn-sm" onclick="showStats()" title="Estatísticas">
+            📊 Stats
+        </button>
+    `;
+
+            header.appendChild(extraButtons);
+        }
+
+        // Função para importar dados
+        function handleImport(input) {
+            const file = input.files[0];
+            if (file) {
+                kanban.importData(file);
+            }
+        }
+
+        // Mostrar estatísticas
+        function showStats() {
+            const stats = {
+                total: kanban.tickets.length,
+                novo: kanban.tickets.filter(t => t.status === 'novo').length,
+                andamento: kanban.tickets.filter(t => t.status === 'andamento').length,
+                aguardando: kanban.tickets.filter(t => t.status === 'aguardando').length,
+                resolvido: kanban.tickets.filter(t => t.status === 'resolvido').length,
+                alta: kanban.tickets.filter(t => t.priority === 'alta').length,
+                urgente: kanban.tickets.filter(t => t.priority === 'urgente').length
+            };
+
+            const message = `
+        📊 Estatísticas do Kanban:
+        
+        Total de tickets: ${stats.total}
+        
+        Por status:
+        • Novos: ${stats.novo}
+        • Em andamento: ${stats.andamento}
+        • Aguardando: ${stats.aguardando}
+        • Resolvidos: ${stats.resolvido}
+        
+        Prioridade alta/urgente: ${stats.alta + stats.urgente}
+    `;
+
+            alert(message);
+        }
+
+
+
+
+    </script>
+
+
+</body>
+
+</html>

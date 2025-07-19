@@ -1,0 +1,79 @@
+object FrmBase: TFrmBase
+  Left = 0
+  Top = 0
+  Width = 721
+  Height = 367
+  RenderInvisibleControls = True
+  AllowPageAccess = True
+  ConnectionMode = cmAny
+  OnCreate = IWAppFormCreate
+  Background.Fixed = False
+  LayoutMgr = TPS
+  HandleTabs = False
+  LeftToRight = True
+  LockUntilLoaded = True
+  LockOnSubmit = True
+  ShowHint = True
+  KeepAlive = True
+  DesignLeft = 2
+  DesignTop = 2
+  object BTN_POST: TIWButton
+    AlignWithMargins = False
+    Left = 168
+    Top = 320
+    Width = 120
+    Height = 30
+    Caption = 'Post'
+    Color = clBtnFace
+    FriendlyName = 'BTN_POST'
+  end
+  object BTN_CANCEL: TIWButton
+    AlignWithMargins = False
+    Left = 312
+    Top = 320
+    Width = 120
+    Height = 30
+    Caption = 'Cancel'
+    Color = clBtnFace
+    FriendlyName = 'BTN_CANCEL'
+  end
+  object Subtitulo: TIWLabel
+    AlignWithMargins = False
+    Left = 24
+    Top = 92
+    Width = 56
+    Height = 17
+    HasTabOrder = False
+    FriendlyName = 'Subtitulo'
+    Caption = 'Subtitulo'
+  end
+  object TITULO: TIWLabel
+    AlignWithMargins = False
+    Left = 25
+    Top = 71
+    Width = 46
+    Height = 17
+    HasTabOrder = False
+    FriendlyName = 'TITULO'
+    Caption = 'TITULO'
+  end
+  object BTNENCERRAR: TIWButton
+    AlignWithMargins = False
+    Left = 601
+    Top = 3
+    Width = 120
+    Height = 30
+    Caption = 'Encerrar'
+    Color = clBtnFace
+    FriendlyName = 'BTNENCERRAR'
+    OnAsyncClick = BTNENCERRARAsyncClick
+  end
+  object TPS: TIWTemplateProcessorHTML
+    MasterFormTag = False
+    TagType = ttIntraWeb
+    OnUnknownTag = TPSUnknownTag
+    RenderStyles = False
+    Left = 40
+    Top = 16
+  end
+end

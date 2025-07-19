@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-group .clear-button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #aaa;
+        }
+
+        .select2-dropdown-modal {
+            z-index: 99999 !important;
+        }
+
+        .select2-selection--multiple {
+            max-height: 120px !important;
+            overflow-y: auto !important;
+            overflow-x: hidden;
+        }
+
+        @media (min-width: 768px) {
+            .modal-xl {
+                max-width: 1024px;
+            }
+        }
+
+        .modal-body {
+            overflow-y: auto;
+            max-height: calc(100vh - 200px);
+        }
+
+        table.dataTable {
+            width: 100% !important;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="clearfix" style="display: none;">{%BTN_DELETE%}</div>
+
+    <section class="card">
+        <h2 class="card-header bg-primary text-white">Agendamentos</h2>
+
+        <div class="card-body">
+            <button type="button" class="btn btn-primary" title="Incluir Registro"
+                style="font-size: .8rem; margin-top: -4px;" id="BTN_ADICONAR">
+                <i class="fas fa-plus-circle"></i> Adicionar Agendamentos
+            </button>
+            <hr>
+
+            <div class="status">
+                <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        <label>Status</label>
+                        {%STATUS%}
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+            <div class="hr-dashed"></div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <table id="Lista" class="table table-bordered table-striped table-hover table-sm">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Contato</th>
+                                <th>Descrição</th>
+                                <th>Mensagem</th>
+                                <th>Data de Agendamento</th>
+                                <th>Salvar no Ticket</th>
+                                <th>Status</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div id="modal_adicionar" tabindex="-1" class="modal fade" data-backdrop="false" data-keyboard="false">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #25476a">
+                    <h4 class="modal-title text-white">
+                        <i class="fas fa-pencil-alt"></i> Adicionar/Alterar Agendamento
+                    </h4>
+                </div>
+
+                <div class="modal-body">
+                    <form>
+                        <div class="row align-items-end">
+                            <div class="col-xs-12 col-sm-9">
+                                <div class="form-group">
+                                    <label>Nome do Contato</label>
+                                    {%COMBO_CONTACTID placeholder="Nome do Contato"%}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-3">
+                                <div class="form-group d-flex gap-2">
+                                    <button type="button" id="btnSelecionarTodos"
+                                        class="btn btn-sm btn-outline-primary w-100">Selecionar Todos</button>
+                                    <button type="button" id="btnLimparContatos"
+                                        class="btn btn-sm btn-outline-danger w-100">Remover Todos</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <br>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Descrição do Agendamento</label>
+                                    {%DESCRICAO placeholder="Descrição do Agendamento"%}
+                                </div>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <div class="form-group">
+                                    <label>Data do Agendamento</label>
+                                    {%SENTAT placeholder="Data do Agendamento"%}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label>Mensagem do Agendamento</label>
+                                    {%BODY placeholder="Mensagem do Agendamento" rows="7"%}
+                                </div>
+                            </div>
+
+                            <div class="col-sm-5">
+                                <div class="form-group">
+                                    <label>Salvar Mensagem no Ticket</label>
+                                    {%SAVEMESSAGE placeholder="Salvar Mensagem no Ticket"%}
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="BTN_POST">Gravar</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).on('select2:open', function () {
+            setTimeout(function () {
+                document.querySelector('.select2-container--open .select2-search__field')?.focus();
+            }, 100);
+        });
+
+        $(document).ready(function () {
+            $('#COMBO_CONTACTID_SELECT').select2({
+                dropdownCssClass: 'select2-dropdown-modal',
+                width: '100%'
+            });
+
+            var table = $("#Lista").DataTable({
+                deferRender: true,
+                responsive: true,
+                pageLength: 10,
+                language: {
+                    url: "DataTables/Languagem/Portuguese-Brasil.json",
+                },
+                columnDefs: [
+                    { targets: 0, className: "text-left", width: "3%" },
+                    { targets: 1, className: "text-left", width: "330px" },
+                    { targets: 2, className: "text-left", width: "100px" },
+                    { targets: 3, className: "text-left", width: "350px" },
+                    { targets: 4, className: "text-left", width: "65px" },
+                    { targets: 5, className: "text-center", width: "35px" },
+                    { targets: 6, className: "text-center", width: "35px" },
+                    { targets: 7, className: "text-center", width: "35px" },
+                ],
+                order: [[0, "desc"]],
+                paging: true,
+                ordering: true,
+                searching: true,
+                serverSide: true,
+                processing: true,
+                ajax: "/$/callback?callback=ListaAgendamentos",
+            });
+
+            setInterval(function () {
+                if (!$('#modal_adicionar').hasClass('show')) {
+                    table.ajax.reload(null, false); // false = mantém página e scroll
+                }
+            }, 5000);
+
+        });
+
+
+
+
+
+        function clearInput(inputId) {
+            document.getElementById(inputId).value = '';
+            table.search(this.value).draw();
+        }
+
+        $('#btnSelecionarTodos').on('click', function (e) {
+            e.preventDefault();
+            const all = $('#COMBO_CONTACTID_SELECT option')
+                .map(function () { return $(this).val(); })
+                .get()
+                .filter(v => v !== '0' && v !== 'X');
+
+            $('#COMBO_CONTACTID_SELECT').val(all).trigger('change');
+        });
+
+        $('#btnLimparContatos').on('click', function (e) {
+            e.preventDefault();
+            $('#COMBO_CONTACTID_SELECT').val(null).trigger('change');
+        });
+
+
+
+
+
+    </script>
+</body>
+
+</html>

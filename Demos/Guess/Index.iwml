@@ -1,0 +1,10 @@
+ACORN 1.0 IWML 1.0
+Guess.Index
+  FocusControl: GuessEdit
+  ActionControl: GuessButton
+  SimpleStack
+    Edit:GuessEdit =this.Guess 
+    Text =this.Msg
+    Text Guess #[=this.Count]
+    Gap 15
+    Button:GuessButton Guess

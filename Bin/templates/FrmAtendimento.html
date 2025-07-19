@@ -1,0 +1,1664 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        @media (min-width: 768px) {
+            .w-md-250px {
+                width: 324px !important;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .mb-md-0 {
+                margin-bottom: 0 !important;
+            }
+        }
+
+        .content__wrap {
+            padding: 0.5rem 0.5rem;
+        }
+
+        .h-100 {
+            height: 95% !important;
+        }
+
+        .card-body {
+            flex: 1 1 auto;
+            padding: 0 !important;
+        }
+
+        .bg-gray-600 {
+            --bs-bg-opacity: 1;
+            background-image: url('./assets/whats/wa-background.png');
+        }
+
+        .w-md-250px {
+
+            margin-right: 0.5rem;
+
+        }
+
+        .divlinha {
+            background-color: #bababa;
+            padding: 0.1rem;
+
+        }
+
+        .list-group-item {
+            color: #75868f;
+            font-size: 0.875rem;
+        }
+
+        .mb-1 {
+            margin-bottom: .10rem !important;
+        }
+
+        .fa-eye {
+            color: rgb(25, 118, 210) !important;
+            cursor: pointer !important;
+        }
+
+        .icon-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Tooltip escondido */
+        .tooltip {
+            visibility: hidden;
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            border-radius: 4px;
+            padding: 5px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            /* Ajusta a posição acima do ícone */
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .tooltip::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            /* Embaixo da tooltip */
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: black transparent transparent transparent;
+        }
+
+        .icon-container:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* #card_aguardando {
+            height: 100%;
+            overflow-y: auto !important;
+        } */
+
+        #card_aguardando {
+            max-height: 75vh;
+            /* usa 75% da altura da tela (pode ajustar) */
+            overflow-y: auto;
+            /* ativa scroll somente se necessário */
+            padding-right: 10px;
+            /* evita corte de conteúdo à direita */
+            scroll-behavior: smooth;
+        }
+
+        #card_atendimento {
+            max-height: 75vh;
+            /* usa 75% da altura da tela (pode ajustar) */
+            overflow-y: auto;
+            /* ativa scroll somente se necessário */
+            padding-right: 10px;
+            /* evita corte de conteúdo à direita */
+            scroll-behavior: smooth;
+        }
+
+        .chat-item {
+            display: flex;
+            align-items: flex-start;
+            border: 1px solid #ddd;
+            padding: 2px;
+            border-radius: 8px;
+            margin: 10px;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .chat-item img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        .chat-content {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding-left: 0.5rem !important;
+        }
+
+        .chat-content .phone-number {
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: #000;
+            margin-top: 0.9rem;
+        }
+
+        .chat-content .phone-number .eye-icon {
+            margin-left: 10px;
+            color: #007bff;
+        }
+
+        .chat-content .message {
+            font-size: 14px !important;
+            color: #000;
+            margin-top: 5px;
+        }
+
+        .label {
+            display: inline-block;
+            padding: 5px 5px;
+            border-radius: 4px;
+            font-size: 8px;
+            color: #fff;
+            margin-right: 5px;
+        }
+
+        .label.teste {
+            background-color: #28a745;
+        }
+
+        .label.sem-fila {
+            background-color: #6c757d;
+        }
+
+        .acao {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            margin-top: 4px;
+        }
+
+
+        .time {
+            position: absolute;
+            top: 0px;
+            right: 10px;
+            font-weight: bold;
+            font-size: 15px !important;
+            color: #000;
+        }
+
+        .content__wrap {
+            width: 100% !important;
+        }
+
+        .classlink {
+            color: #25476a;
+            font-weight: bold;
+        }
+
+        .destaklink a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #25476a !important;
+            font-weight: bold;
+        }
+
+        .destaklink i {
+            margin-right: 8px;
+            /* Espaço entre o ícone e o texto */
+        }
+
+        .bubble {
+            background-color: var(--bs-card-bg);
+            border-radius: 1.5rem;
+            border-end-start-radius: 0;
+            color: var(--bs-card-color);
+            display: inline-flex;
+            flex-direction: column;
+            max-width: Min(443px, 80%);
+            padding: .5rem 1rem;
+            position: relative;
+        }
+
+        .text-muted {
+            --bs-text-opacity: 1;
+            color: #0b0b0b !important;
+            justify-content: flex-end;
+            display: flex;
+            font-weight: bold;
+        }
+
+        .semmessage {
+            display: flex;
+            align-items: center !important;
+            font-weight: bold;
+            justify-content: center;
+            font-size: 19px;
+            align-content: center;
+            color: #25476a;
+        }
+
+        #EDT_MESSAGE {
+            width: 100% !important;
+            border-radius: 0.5rem !important;
+            padding: 0.5rem !important;
+            border: 1px solid #ccc !important;
+            font-size: 14px !important;
+        }
+
+        .video {
+            width: 312px !important;
+            height: 330px !important;
+        }
+
+        .card-body {
+            flex: 1 1 auto;
+            padding-top: 1rem !important;
+            padding-left: 1rem !important;
+        }
+
+        .custom-menu {
+            position: absolute;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            width: 250px;
+            z-index: 9999;
+            padding: 10px 0;
+        }
+
+        .custom-menu ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .custom-menu li {
+            padding: 10px 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .custom-menu li:hover {
+            background-color: #f0f0f0;
+        }
+
+        .custom-menu hr {
+            margin: 5px 0;
+            border-color: #ddd;
+        }
+
+        .d-none {
+            display: none;
+        }
+
+        .custom-menu {
+            position: absolute;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            width: 230px;
+            z-index: 9999;
+            padding: 8px 0;
+        }
+
+        .custom-menu ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .custom-menu li {
+            padding: 10px 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: background-color 0.2s ease;
+        }
+
+        .custom-menu li:hover {
+            background-color: #f5f5f5;
+        }
+
+        .custom-menu hr {
+            margin: 6px 0;
+            border: 0;
+            border-top: 1px solid #eee;
+        }
+
+        .d-none {
+            display: none !important;
+        }
+
+        .bubble {
+            background-color: var(--bs-card-bg);
+            border-radius: 1.5rem;
+            border-end-start-radius: 0;
+            color: var(--bs-card-color);
+            display: inline-flex;
+            flex-direction: column;
+            max-width: Min(443px, 80%);
+            /* padding: .5rem 1rem; */
+            padding-left: 1rem;
+            position: relative;
+            padding-left: 1.7rem;
+        }
+
+        .bubble-check {
+            width: 18px;
+            height: 18px;
+        }
+
+
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-blue));
+            color: white;
+            border-radius: 12px 12px 0 0;
+            padding: 1.5rem;
+            border-bottom: none;
+        }
+
+        .modal-title {
+            font-weight: 600;
+            font-size: 1.25rem;
+        }
+
+        .btn-close {
+            filter: invert(1);
+            opacity: 0.8;
+        }
+
+        .btn-close:hover {
+            opacity: 1;
+        }
+
+        .upload-only-layout {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 400px;
+        }
+
+        .upload-area {
+            border: 2px dashed var(--border-gray);
+            border-radius: 8px;
+            padding: 3rem 2rem;
+            text-align: center;
+            background-color: #FAFAFA;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .upload-area:hover {
+            border-color: var(--primary-blue);
+            background-color: #F8FAFF;
+        }
+
+        .upload-area.dragover {
+            border-color: var(--success-green);
+            background-color: #F0FDF4;
+        }
+
+        .upload-icon {
+            font-size: 3rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .preview-layout {
+            display: none;
+        }
+
+        .file-preview {
+            background-color: rgb(252, 252, 252);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+            border: 1px solid var(--border-gray);
+        }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            border-radius: 6px;
+            background-color: #F9FAFB;
+            margin-bottom: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .file-item:hover {
+            background-color: #F3F4F6;
+        }
+
+        .file-item.selected {
+            background-color: #EBF8FF;
+            border: 1px solid var(--primary-blue);
+        }
+
+        .file-icon {
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-blue);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-right: 1rem;
+        }
+
+        .file-info {
+            flex: 1;
+        }
+
+        .file-name {
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 0.25rem;
+        }
+
+        .file-size {
+            font-size: 0.875rem;
+            color: #6B7280;
+        }
+
+        .remove-file {
+            background: none;
+            border: none;
+            color: #EF4444;
+            font-size: 1.25rem;
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .remove-file:hover {
+            background-color: #FEE2E2;
+        }
+
+        .preview-section {
+            border: 1px solid var(--border-gray);
+            border-radius: 8px;
+            background-color: white;
+            height: fit-content;
+        }
+
+        .preview-header {
+            background-color: #F9FAFB;
+            padding: 1rem;
+            border-bottom: 1px solid var(--border-gray);
+            border-radius: 8px 8px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .preview-title {
+            font-weight: 600;
+            color: #374151;
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .preview-content {
+            padding: 1.5rem;
+            max-height: 400px;
+            overflow-y: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #FAFAFA;
+            min-height: 300px;
+        }
+
+        .preview-image {
+            max-width: 100%;
+            max-height: 350px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .preview-video {
+            max-width: 100%;
+            max-height: 350px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .preview-document {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .preview-document-icon {
+            font-size: 4rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        .preview-document-name {
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+        }
+
+        .preview-document-info {
+            color: #6B7280;
+            font-size: 0.875rem;
+        }
+
+        .preview-audio {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .no-preview {
+            text-align: center;
+            padding: 2rem;
+            color: #6B7280;
+        }
+
+        .btn-primary {
+            border: none;
+            border-radius: 6px;
+            /* padding: 0.75rem 2rem; */
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(46, 91, 186, 0.3);
+        }
+
+        .btn-outline-secondary {
+            border-color: var(--border-gray);
+            color: #6B7280;
+            border-radius: 6px;
+            padding: 0.75rem 2rem;
+            font-weight: 500;
+        }
+
+        .btn-outline-secondary:hover {
+            background-color: #F9FAFB;
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+        }
+
+        .supported-formats {
+            font-size: 0.875rem;
+            color: #6B7280;
+            margin-top: 1rem;
+        }
+
+        .format-tag {
+            display: inline-block;
+            background-color: #E5E7EB;
+            color: #374151;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            margin: 0.125rem;
+            font-size: 0.75rem;
+        }
+
+        .preview-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background-color: #F9FAFB;
+            border-top: 1px solid var(--border-gray);
+            border-radius: 0 0 8px 8px;
+        }
+
+        .preview-counter {
+            font-size: 0.875rem;
+            color: #6B7280;
+        }
+
+        .preview-nav-btn {
+            background: none;
+            border: none;
+            color: var(--primary-blue);
+            font-size: 1.25rem;
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .preview-nav-btn:hover {
+            background-color: #E5E7EB;
+        }
+
+        .preview-nav-btn:disabled {
+            color: #9CA3AF;
+            cursor: not-allowed;
+        }
+
+        .upload-area-compact {
+            border: 2px dashed var(--border-gray);
+            border-radius: 8px;
+            padding: 2rem 1rem;
+            text-align: center;
+            background-color: #FAFAFA;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin-bottom: 1rem;
+        }
+
+        .upload-area-compact:hover {
+            border-color: var(--primary-blue);
+            background-color: #F8FAFF;
+        }
+
+        .upload-area-compact .upload-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .upload-area-compact h6 {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .upload-area-compact p {
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+        }
+
+        .caption-section {
+            background: linear-gradient(135deg, var(--dark-surface) 0%, #1a1a2e 50%, #16213e 100%);
+            padding: 1.5rem;
+            border-top: 1px solid var(--glass-border);
+            flex-shrink: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .caption-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 50%, var(--neon-blue) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, var(--neon-purple) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, var(--neon-cyan) 0%, transparent 50%);
+            opacity: 0.03;
+            animation: particleFloat 8s ease-in-out infinite alternate;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(0px) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(-10px) rotate(2deg);
+            }
+        }
+
+        .caption-container {
+            display: flex;
+            align-items: flex-end;
+            gap: 1rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 1rem 1.25rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow:
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .caption-container:hover::before {
+            left: 100%;
+        }
+
+        .caption-input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: #000;
+            font-size: 1rem;
+            font-weight: 400;
+            resize: none;
+            outline: none;
+            min-height: 24px;
+            max-height: 120px;
+            overflow-y: auto;
+            line-height: 1.5;
+            padding: 0.25rem 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .caption-input::placeholder {
+            color: rgba(8, 8, 8, 0.5);
+            font-weight: 300;
+            transition: color 0.3s ease;
+        }
+
+        .caption-input:focus::placeholder {
+            color: #000;
+        }
+
+        .caption-input::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .caption-input::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .caption-input::-webkit-scrollbar-thumb {
+            background: var(--neon-blue);
+            border-radius: 2px;
+        }
+
+        .emoji-button {
+            background: linear-gradient(135deg, var(--glass-bg), rgba(139, 92, 246, 0.1));
+            border: 1px solid var(--glass-border);
+            color: var(--neon-purple);
+            font-size: 1.25rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            z-index: 2;
+        }
+
+        .emoji-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: radial-gradient(circle, var(--neon-purple) 0%, transparent 70%);
+            transition: all 0.3s ease;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+        }
+
+        .emoji-button:hover {
+            color: #E9EDEF;
+            border-color: var(--neon-purple);
+            box-shadow:
+                0 4px 15px rgba(139, 92, 246, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .emoji-button:hover::before {
+            width: 100%;
+            height: 100%;
+            opacity: 0.1;
+        }
+
+        .emoji-button:active {
+            transform: translateY(0);
+        }
+
+        .send-button {
+            background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-blue) 100%);
+            border: none;
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #0F0F23;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow:
+                0 4px 15px rgba(6, 255, 165, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            z-index: 2;
+        }
+
+        .send-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--neon-blue) 0%, var(--neon-purple) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .send-button:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow:
+                0 8px 25px rgba(6, 255, 165, 0.5),
+                0 0 20px rgba(6, 255, 165, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+        }
+
+        .send-button:hover::before {
+            opacity: 1;
+        }
+
+        .send-button:active {
+            transform: translateY(-1px) scale(1.02);
+        }
+
+        .send-button:disabled {
+            background: linear-gradient(135deg, #3C4043 0%, #2A3942 100%);
+            color: #8696A0;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .send-button:disabled::before {
+            display: none;
+        }
+
+        .send-button:disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+        .send-button.active {
+            animation: pulseGlow 2s infinite;
+        }
+
+        @keyframes pulseGlow {
+
+            0%,
+            100% {
+                box-shadow:
+                    0 4px 15px rgba(6, 255, 165, 0.4),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            }
+
+            50% {
+                box-shadow:
+                    0 4px 20px rgba(6, 255, 165, 0.6),
+                    0 0 30px rgba(6, 255, 165, 0.4),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            }
+        }
+
+        .caption-input.typing {
+            color: var(--neon-cyan);
+        }
+
+        @media (max-width: 768px) {
+            .modal-dialog {
+                margin: 0;
+                max-width: 100vw;
+                max-height: 100vh;
+            }
+
+            .modal-content {
+                height: 100vh;
+                border-radius: 0;
+            }
+
+            .modal-header {
+                border-radius: 0;
+            }
+
+            .document-preview {
+                margin: 1rem;
+                padding: 1rem;
+            }
+
+            .caption-section {
+                padding: 1rem;
+            }
+
+            .caption-container {
+                padding: 0.75rem 1rem;
+                gap: 0.75rem;
+            }
+
+            .send-button {
+                width: 44px;
+                height: 44px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .caption-container {
+                border-radius: 25px;
+                padding: 1.25rem 1.5rem;
+            }
+
+            .send-button {
+                width: 52px;
+                height: 52px;
+            }
+        }
+
+        .img-fluid {
+
+            max-width: 330px !important;
+            max-height: 292.8px !important;
+        }
+
+
+
+        .barra-visivel {
+            display: flex !important;
+        }
+
+        .barra-oculta {
+            display: none !important;
+        }
+
+        .message {
+            word-wrap: break-word;
+            white-space: normal;
+            overflow-wrap: anywhere;
+        }
+
+        .chat-item.selecionado {
+            border: 2px solid #25476a;
+            /* Azul para destacar */
+            background-color: #e6f0ff;
+            /* Fundo levemente azul */
+            /* box-shadow: 0 0 10px #25476a; */
+        }
+
+        .d-flex.flex-column.flex-fill {
+            min-height: 0;
+        }
+
+        .scrollable-content {
+            flex-grow: 1;
+            overflow-y: auto;
+            min-height: 0;
+        }
+
+        #barra-inferior {
+            background: white;
+            z-index: 10;
+        }
+
+        @media (max-width: 768px) {
+            .d-flex.flex-column.flex-fill {
+                height: 100vh;
+            }
+
+            .scrollable-content {
+                max-height: calc(100vh - 200px);
+                /* ajuste esse valor conforme tamanho do topo + barra inferior */
+            }
+
+            #barra-inferior {
+                position: sticky;
+                bottom: 0;
+            }
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div class="clearfix" style="display:none">{%UPFILE%}</div>
+
+
+    <div class="clearfix" style="display: none;">{%BTNCONFIRMACANCELAMENTO%}</div>
+
+    <div id="root" class="root mn--max hd--expanded">
+
+        <section id="content" class="content">
+
+            <div class="content__boxed single-content-md">
+                <div class="content__wrap">
+                    <div class="card h-100">
+                        <div class="card-body h-100">
+                            {%MENSAGEM_UPDATE%}
+                            <div class="d-md-flex h-100">
+
+                                <div class="w-md-250px flex-shrink-0 d-flex flex-column mb-3 mb-md-0">
+                                    <div class="tabs-section">
+
+                                        <ul class="nav nav-pills mb-3" role="tablist">
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link active" data-bs-toggle="tab"
+                                                    data-bs-target="#_dm-pillsAbertas" type="button" role="tab"
+                                                    aria-controls="abertas" aria-selected="true"
+                                                    onclick="ajaxCall('Action','TabIndex=1');">ABERTAS</button>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link" data-bs-toggle="tab"
+                                                    data-bs-target="#_dm-pillsResolvidos" type="button" role="tab"
+                                                    aria-controls="resolvidos" aria-selected="false"
+                                                    onclick="ajaxCall('Action','TabIndex=2');">RESOLVIDOS</button>
+                                            </li>
+                                            <li class="nav-item" role="presentation">
+                                                <button class="nav-link" data-bs-toggle="tab"
+                                                    data-bs-target="#_dm-pillsBusca" type="button" role="tab"
+                                                    aria-controls="busca" aria-selected="false"
+                                                    onclick="ajaxCall('Action','TabIndex=3');">BUSCA</button>
+                                            </li>
+                                        </ul>
+
+                                        <div class="tab-content">
+                                            <div id="_dm-pillsAbertas" class="tab-pane fade show active" role="tabpanel"
+                                                aria-labelledby="abertas-tab">
+                                                <ul class="nav nav-pills mb-2" role="tablist">
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link active" data-bs-toggle="tab"
+                                                            onclick="ajaxCall('Action','TabIndex=4');"
+                                                            data-bs-target="#_dm-pillsAtendimento" type="button"
+                                                            role="tab" aria-controls="atendimento"
+                                                            aria-selected="true">ATENDIMENTO <span
+                                                                class="badge bg-success rounded-circle">{%ATENDIMENTO_COUNT%}</span></button>
+                                                    </li>
+                                                    <li class="nav-item" role="presentation">
+                                                        <button class="nav-link" data-bs-toggle="tab"
+                                                            onclick="ajaxCall('Action','TabIndex=5');"
+                                                            data-bs-target="#_dm-pillsAguardando" type="button"
+                                                            role="tab" aria-controls="aguardando"
+                                                            aria-selected="false">AGUARDANDO <span
+                                                                class="badge bg-danger rounded-circle">{%AGUARDANDO_COUNT%}</span></button>
+
+                                                    </li>
+                                                </ul>
+
+                                                <div class="tab-content">
+                                                    <div id="_dm-pillsAtendimento" class="tab-pane fade show active"
+                                                        role="tabpanel" aria-labelledby="atendimento-tab">
+
+                                                        <div id="card_atendimento">
+                                                            {%CARDATENDIMENTO%}
+                                                        </div>
+                                                    </div>
+                                                    <div id="_dm-pillsAguardando" class="tab-pane fade" role="tabpanel"
+                                                        aria-labelledby="aguardando-tab">
+                                                        <div id="card_aguardando">
+                                                            {%CARDAGUARDANDO%}
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="_dm-pillsResolvidos" class="tab-pane fade" role="tabpanel"
+                                                aria-labelledby="resolvidos-tab">
+
+                                                {%CARDRESOLVIDOS%}
+                                            </div>
+                                            <div id="_dm-pillsBusca" class="tab-pane fade" role="tabpanel"
+                                                aria-labelledby="busca-tab">
+                                                <h5 class="card-title text-center">Buscas Tab</h5>
+                                                <h1 class="text-center">busca</h1>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+
+                                <div class="divlinha"></div>
+
+                                <div id="chat-content-message" style="display: none;">
+
+                                    <div class="d-flex flex-column flex-fill">
+
+                                        {%CAR_CHAT_TOP%}
+
+
+                                        <div
+                                            class="bg-gray-600 d-flex flex-column-reverse flex-fill min-h-0 overflow-auto scrollable-content p-4 rounded-3">
+                                            <div class="justify-content-end">
+                                                {%LABEL_CHAT%}
+
+                                                <div id="bubbleMenu" class="custom-menu d-none">
+                                                    <ul>
+                                                        <li><i class="fa fa-info-circle"></i> Dados da mensagem</li>
+                                                        <li onclick="mostrarCheckboxes()"><i class="fa fa-reply"></i>
+                                                            Responder</li>
+                                                        <li><i class="fa fa-copy"></i> Copiar</li>
+                                                        <li><i class="fa fa-smile"></i> Reagir</li>
+                                                        <li><i class="fa fa-download"></i> Baixar</li>
+                                                        <li onclick="mostrarCheckboxes()"
+                                                            onclick="ativarSelecaoMensagens()"><i
+                                                                class="fa fa-share"></i>
+                                                            Encaminhar</li>
+                                                        <li><i class="fa fa-thumbtack"></i> Fixar</li>
+                                                        <li><i class="fa fa-star"></i> Favoritar</li>
+                                                        <hr>
+                                                        <li><i class="fa fa-trash"></i> Apagar</li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+
+
+                                            <div id="customMenu" class="custom-menu d-none">
+                                                <ul>
+                                                    <li><i class="fa fa-info-circle"></i> Dados do contato</li>
+                                                    <li><i class="fa fa-check-square"></i> Selecionar mensagens</li>
+                                                    <li><i class="fa fa-bell-slash"></i> Silenciar notificações</li>
+                                                    <li><i class="fa fa-clock"></i> Mensagens temporárias</li>
+                                                    <li><i class="fa fa-heart"></i> Adicionar aos favoritos</li>
+                                                    <li><i class="fa fa-times-circle"></i> Fechar conversa</li>
+                                                    <hr>
+                                                    <li><i class="fa fa-flag"></i> Denunciar</li>
+                                                    <li><i class="fa fa-ban"></i> Bloquear</li>
+                                                    <li><i class="fa fa-eraser"></i> Limpar conversa</li>
+                                                    <li><i class="fa fa-trash"></i> Apagar conversa</li>
+                                                </ul>
+                                            </div>
+
+                                        </div>
+
+                                        <!-- <form class="d-flex align-items-center gap-1 pt-1"> -->
+
+                                        <div class="d-flex align-items-center gap-1 pt-1" id="barra-inferior">
+
+
+                                            <button class="btn btn-icon bg-transparent"></button>
+                                            <i class="demo-pli-smile fs-3"></i>
+                                            </button>
+
+                                            <button class="btn btn-icon bg-transparent" id="BTN_ANEXO"
+                                                data-bs-toggle="modal" data-bs-target="#uploadModal">
+                                                <i class="demo-pli-paperclip fs-3"></i>
+                                            </button>
+
+                                            {%EDT_MESSAGE%}
+                                            <button type="button" class="btn btn-icon btn-primary" id="BTN_ENVIAR">
+                                                <i class="demo-pli-paper-plane fs-3"></i>
+                                            </button>
+
+
+                                            <div id="barra-inferior-selecao"
+                                                class="d-flex justify-content-between align-items-center px-3 py-2 bg-light border-top"
+                                                style="display: none; position: absolute; bottom: 0; left: 0; right: 0; z-index: 999;">
+
+                                                <button class="btn btn-icon" onclick="fecharSelecao()">
+                                                    <i class="bi bi-x"></i>
+                                                </button>
+                                                <span id="contador-selecionadas">0 selecionadas</span>
+                                                <button class="btn btn-icon btn-primary">
+                                                    <i class="fa fa-share"></i>
+                                                </button>
+
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <div class="modal fade" id="uploadModal" tabindex="-1" aria-labelledby="uploadModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="uploadModalLabel">
+                        <i class="bi bi-paperclip me-2"></i>
+                        Selecionar Documentos e Arquivos
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Layout inicial - apenas upload -->
+                    <div class="upload-only-layout" id="uploadOnlyLayout">
+                        <div>
+                            <div class="upload-area" id="uploadArea">
+                                <div class="upload-icon">
+                                    <i class="bi bi-cloud-upload"></i>
+                                </div>
+                                <h5 class="mb-3">Arraste e solte seus arquivos aqui</h5>
+                                <!-- <p class="text-muted mb-3">ou clique para selecionar arquivos</p> -->
+                                <input type="file" id="fileInput" multiple
+                                    accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt,.jpg,.jpeg,.png,.gif,.mp4,.mp3,.wav,.avi,.mov"
+                                    style="display: none;">
+                                <!-- <button type="button" class="btn btn-outline-secondary"
+                                    onclick="document.getElementById('fileInput').click()">
+                                    <i class="bi bi-folder2-open me-2"></i>
+                                    Selecionar Arquivos
+                                </button> -->
+                                <button type="button" class="btn btn-outline-secondary" onclick="buscarFile()">
+                                    <i class="bi bi-folder2-open me-2"></i>
+                                    Selecionar Arquivos
+                                </button>
+                            </div>
+
+                            <div class="file-preview">
+                                <h6 class="mb-3">Arquivos Selecionados:</h6>
+                                <div id="fileList">{%LISTA_UPLOAD%}</div>
+                            </div>
+
+
+                            <!-- Formatos Suportados -->
+                            <div class="supported-formats text-center">
+                                <strong>Formatos suportados:</strong><br>
+                                <span class="format-tag">PDF</span>
+                                <span class="format-tag">DOC</span>
+                                <span class="format-tag">DOCX</span>
+                                <span class="format-tag">XLS</span>
+                                <span class="format-tag">XLSX</span>
+                                <span class="format-tag">PPT</span>
+                                <span class="format-tag">PPTX</span>
+                                <span class="format-tag">TXT</span>
+                                <span class="format-tag">JPG</span>
+                                <span class="format-tag">PNG</span>
+                                <span class="format-tag">GIF</span>
+                                <span class="format-tag">MP4</span>
+                                <span class="format-tag">MP3</span>
+                                <span class="format-tag">WAV</span>
+                                <span class="format-tag">AVI</span>
+                                <span class="format-tag">MOV</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Layout com preview - duas colunas -->
+                    <div class="preview-layout" id="previewLayout">
+                        <div class="row">
+                            <!-- Coluna da esquerda: Upload e Lista de Arquivos -->
+                            <div class="col-md-6">
+                                <!-- Área de Upload Compacta -->
+                                <div class="upload-area-compact" id="uploadAreaCompact">
+                                    <div class="upload-icon">
+                                        <i class="bi bi-plus-circle"></i>
+                                    </div>
+                                    <h6>Adicionar mais arquivos</h6>
+                                    <p class="text-muted">Arraste e solte ou clique aqui</p>
+                                    <!-- <button type="button" class="btn btn-outline-secondary btn-sm"
+                                        onclick="document.getElementById('fileInput').click()">
+                                        <i class="bi bi-plus me-1"></i>
+                                        Adicionar
+                                    </button> -->
+                                </div>
+
+                                <!-- Lista dos Arquivos -->
+                                <!-- <div class="file-preview">
+                                    <h6 class="mb-3">Arquivos Selecionados:</h6>
+                                    <div id="fileList">{%LISTA_UPLOAD%}</div>
+                                </div> -->
+                            </div>
+
+                            <!-- Coluna da direita: Preview Visual -->
+                            <div class="col-md-6">
+                                <div class="preview-section" id="previewSection">
+                                    <div class="preview-header">
+                                        <h6 class="preview-title" id="previewTitle">Preview do Arquivo</h6>
+                                    </div>
+                                    <div class="preview-content" id="previewContent">
+                                        <div class="no-preview">
+                                            <i class="bi bi-eye-slash" style="font-size: 3rem; color: #9CA3AF;"></i>
+                                            <p class="mt-2">Selecione um arquivo para visualizar</p>
+                                        </div>
+                                    </div>
+                                    <div class="preview-navigation" id="previewNavigation" style="display: none;">
+                                        <button class="preview-nav-btn" id="prevBtn" onclick="navigatePreview(-1)">
+                                            <i class="bi bi-chevron-left"></i>
+                                        </button>
+                                        <span class="preview-counter" id="previewCounter">1 de 1</span>
+                                        <button class="preview-nav-btn" id="nextBtn" onclick="navigatePreview(1)">
+                                            <i class="bi bi-chevron-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Seção de Legenda FUTURISTA -->
+                    <div class="caption-section">
+                        <div class="caption-container">
+                            <button class="emoji-button" type="button" title="Adicionar emoji">
+                                <i class="bi bi-emoji-smile"></i>
+                            </button>
+                            <textarea class="caption-input" id="captionInput" placeholder="Adicione uma legenda"
+                                rows="1"></textarea>
+                            <button class="send-button" id="sendButton" type="button" title="Enviar">
+                                <i class="bi bi-send-fill"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                        <i class="bi bi-x-circle me-2"></i>
+                        Fechar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <script>
+
+        function chamaMsgHoldon(msg) {
+            var options = {
+                theme: "sk-cube-grid",
+                message: msg,
+                textColor: "white",
+            };
+
+            HoldOn.open(options);
+        }
+
+
+        $(document).ready(function () {
+            chamaMsgHoldon('Aguarde,Sincronizando as Mensagens com o Servidor...')
+
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabs = document.querySelectorAll('[data-bs-toggle="tab"]');
+
+            tabs.forEach(function (tab) {
+                tab.addEventListener('shown.bs.tab', function (event) {
+                    ajaxCall("Action", "Atualizar=Sim");
+                });
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const chatItems = document.querySelectorAll('.chat-item');
+            console.log(chatItems);
+            chatItems.forEach(function (chatItem) {
+                chatItem.addEventListener('click', function () {
+                    const chatId = this.getAttribute('id');
+                    // console.log('id do chat ' + chatId);
+                    ajaxCall("Action", "SelecionaCard=" + chatId);
+                });
+            });
+
+            // Impede a propagação do evento de clique para os botões e ícone
+            const buttonsAndIcons = document.querySelectorAll('.chat-item button, .eye-icon');
+
+            buttonsAndIcons.forEach(function (element) {
+                element.addEventListener('click', function (event) {
+                    event.stopPropagation();
+                });
+            });
+
+            atualizarBarraInferior()
+
+        });
+
+
+
+        function clearInput(inputId) {
+            document.getElementById(inputId).value = '';
+            table.search(this.value).draw();
+        }
+
+        // const target = document.querySelector('.bg-gray-600');
+        // const menu = document.getElementById('customMenu');
+
+        // // Mostra o menu ao clicar com o botão direito
+        // target.addEventListener('contextmenu', function (e) {
+        //     e.preventDefault();
+
+        //     menu.style.left = `${e.pageX}px`;
+        //     menu.style.top = `${e.pageY}px`;
+        //     menu.classList.remove('d-none');
+        // });
+
+        // // Esconde o menu ao clicar em qualquer outro lugar
+        // document.addEventListener('click', function () {
+        //     menu.classList.add('d-none');
+        // });
+
+        const bubbles = document.querySelectorAll('.bubble');
+        const menu = document.getElementById('bubbleMenu');
+
+        document.addEventListener('click', () => {
+            menu.classList.add('d-none');
+        });
+
+        bubbles.forEach(bubble => {
+            bubble.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+
+                // Obter a posição da bolha
+                const rect = bubble.getBoundingClientRect();
+                const scrollTop = window.scrollY || document.documentElement.scrollTop;
+
+                // Temporariamente exibe o menu fora da tela para medir
+                menu.style.visibility = 'hidden';
+                menu.classList.remove('d-none');
+                menu.style.top = '0px';
+                menu.style.left = '-9999px';
+
+                const menuHeight = menu.offsetHeight;
+
+                // Agora posiciona acima da bubble
+                const top = Math.max(rect.top + scrollTop - menuHeight - 10, 0);
+                const left = rect.left;
+
+                // Aplica posição correta e torna visível
+                menu.style.top = `${top}px`;
+                menu.style.left = `${left}px`;
+                menu.style.visibility = 'visible';
+            });
+        });
+
+
+        function buscarFile() {
+            IW.FileUploader("UPFILE").selectFile();
+        }
+
+        $('#btnUploadModal').on('click', function () {
+            $('#uploadModal').modal('show');
+        });
+
+
+
+
+        function mostrarCheckboxes() {
+            console.log("Mostrando checkboxes");
+            document.querySelectorAll('.bubble-check').forEach(cb => {
+                cb.style.display = 'block';
+            });
+        }
+
+        function atualizarBarraInferior() {
+            // console.log("Atualizando barra inferior");
+            const selecionados = document.querySelectorAll('.bubble-check:checked').length;
+            const barra = document.getElementById('barra-inferior-selecao');
+            const contador = document.getElementById('contador-selecionadas');
+            // console.log('Sele' + selecionados);
+
+            if (selecionados > 0) {
+                barra.classList.remove('barra-oculta');
+                barra.classList.add('barra-visivel');
+                contador.textContent = `${selecionados} selecionada${selecionados > 1 ? 's' : ''}`;
+            } else {
+                barra.classList.remove('barra-visivel');
+                barra.classList.add('barra-oculta');
+                document.querySelectorAll('.bubble-check').forEach(cb => cb.style.display = 'none');
+            }
+
+
+        }
+
+        function fecharSelecao() {
+            console.log("Fechando seleção");
+            document.querySelectorAll('.bubble-check').forEach(cb => {
+                cb.style.display = 'none';
+                cb.checked = false;
+            });
+            atualizarBarraInferior(); // Garante ocultação
+        }
+
+
+        document.getElementById('captionInput').addEventListener('input', function () {
+            document.getElementById('EDT_MESSAGE').value = this.value;
+            AddChangedControl('EDT_MESSAGE');
+        });
+
+
+        document.getElementById('captionInput').addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') {
+                console.log('Enter pressed');
+                document.getElementById('EDT_MESSAGE').value = this.value;
+                AddChangedControl('EDT_MESSAGE');
+                // document.getElementById('EDT_MESSAGE').innerText = this.value; // Atualiza o valor do textarea
+                event.preventDefault(); // Evita a quebra de linha no textarea
+                document.getElementById('BTN_ENVIAR').click(); // Aciona o clique do botão
+            }
+        });
+
+
+        document.getElementById('sendButton').addEventListener('click', function () {
+            // document.getElementById('EDT_MESSAGE').value = this.value;
+            // AddChangedControl('EDT_MESSAGE');
+            document.getElementById('BTN_ENVIAR').click();
+        });
+
+
+        document.getElementById('BTN_ENVIAR').addEventListener('click', function () {
+            // ... aqui pode vir a lógica de envio da mensagem
+            document.getElementById('captionInput').value = ''; // limpa o campo após o envio
+        });
+
+
+        function selecionarCard(cardClicado) {
+            // Remove a seleção de todos os cards
+            document.querySelectorAll('.chat-item').forEach(card => {
+                card.classList.remove('selecionado');
+            });
+
+            // Adiciona a seleção ao card clicado
+            cardClicado.classList.add('selecionado');
+        }
+
+        
+        function isMobile() {
+            return window.innerWidth <= 768;
+        }
+
+        function mostrarChat() {
+            if (!isMobile()) return;
+
+            document.getElementById("chat-content-message")?.style.setProperty("display", "block", "important");
+            document.getElementById("card_atendimento")?.style.setProperty("display", "none", "important");
+            document.getElementById("card_aguardando")?.style.setProperty("display", "none", "important");
+            document.getElementById("_dm-pillsResolvidos")?.style.setProperty("display", "none", "important");
+        }
+
+        function esconderChat() {
+            if (!isMobile()) return;
+
+            document.getElementById("chat-content-message")?.style.setProperty("display", "none", "important");
+            document.getElementById("card_atendimento")?.style.setProperty("display", "block", "important");
+            document.getElementById("card_aguardando")?.style.setProperty("display", "block", "important");
+            document.getElementById("_dm-pillsResolvidos")?.style.setProperty("display", "block", "important");
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            // Ao clicar em qualquer card de conversa
+            document.querySelectorAll(".chat-item").forEach(function (card) {
+                card.addEventListener("click", function () {
+                    mostrarChat();
+                });
+            });
+
+            // Ao clicar nas abas (nav-pills ou similares)
+            document.querySelectorAll(".nav-link").forEach(function (aba) {
+                aba.addEventListener("click", function () {
+                    esconderChat();
+                });
+            });
+        });
+
+
+
+
+
+
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+
+
+    <style>
+        .input-group {
+            position: relative;
+        }
+
+        .input-group .clear-button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #aaa;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div class="clearfix" style="display: none;">{%BTNCONFIRMACANCELAMENTO%}</div>
+
+    <section class="card">
+        <h2 class="card-header bg-primary text-white">Informativos </h2>
+
+        <div class="card-body">
+            <div class="card-body">
+
+
+
+                <button type="button" class="btn btn-primary" title="Incluir Registro"
+                    style="font-size: .8rem; margin-top: -4px;" id="BTN_ADICONAR"> <i class="fas fa-plus-circle"></i>
+                    Adicionar </button>
+
+                <div class="hr-dashed"></div>
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                        <table id="Lista" class="table table-bordered table-striped table-hover table-sm"
+                            style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <th>Titulo</th>
+                                    <th>Prioridade</th>
+                                    <th>Arquivo</th>
+                                    <th>Status</th>
+                                    <th>Ação</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+
+
+    </section>
+
+
+    <script>
+
+
+$(document).ready(function () {
+
+$('#NUMBER').mask('99 (99) 9999-9999?9');
+
+var table = $("#Lista").DataTable({
+
+    responsive: true,
+    pageLength: 10,
+    language: {
+        url: "DataTables/Languagem/Portuguese-Brasil.json",
+    },
+    columnDefs: [
+            {
+            targets: 0,
+            className: "text-left",
+            width: "20%",
+        },
+        {
+            targets: 1,
+            className: "text-center",
+            width: "7%",
+        },
+
+        {
+            targets: 2,
+            className: "text-left",
+            width: "35%",
+        },
+        {
+            targets: 3,
+            className: "text-center",
+            width: "8%",
+
+        },
+        {
+            targets: 4,
+            className: "text-center",
+            width: "8%",
+
+        },
+
+    ],
+
+    order: [[0, "desc"]],
+    paging: true,
+    ordering: true,
+    searching: true,
+    serverSide: true,
+    processing: true,
+    ajax: "/$/callback?callback=ListaInformativo",
+});
+
+
+});
+
+function clearInput(inputId) {
+document.getElementById(inputId).value = '';
+table.search(this.value).draw();
+}
+
+
+
+    </script>
+
+
+</body>
+
+</html>

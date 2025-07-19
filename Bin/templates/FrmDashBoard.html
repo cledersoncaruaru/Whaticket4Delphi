@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    .card.card-dashboard {
+      width: 100%;
+      min-height: 95px;
+    }
+  </style>
+
+
+</head>
+
+<body>
+  <div class="clearfix" style="display: none;">{%BTNCONFIRMACANCELAMENTO%}</div>
+
+  <section class="card">
+    <h2 class="card-header bg-primary text-white">DashBoard Gerencial </h2>
+
+    <div class="card-body">
+
+      <div class="card-body">
+
+        <div class="row">
+          <div class="col-12 col-sm-6 col-lg-4">
+
+            {%CADATENDIMENTOSEMATENDIMENTOS%}
+
+          </div>
+
+          <div class="col-12 col-sm-6 col-lg-4">
+
+            {%CADATENDIMENTOSFINALIZADOS%}
+
+          </div>
+
+          <div class="col-12 col-sm-6 col-lg-4">
+
+            {%CADATENDIMENTOSAGUARDANDO%}
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+  </section>
+
+</body>
+
+</html>

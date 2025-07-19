@@ -1,0 +1,22 @@
+{
+	"hash": "d41d8cd98f00b204e9800998ecf8427e",
+	"updated": "2024-08-21T23:17:26.3720047-03:00",
+	"installedModules": {
+		"https://github.com/viniciussanchez/bcrypt": {
+			"name": "bcrypt",
+			"version": "1.0.8",
+			"hash": "69891b745eb58d4f9803acfb84163313",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		},
+		"https://github.com/viniciussanchez/restrequest4delphi": {
+			"name": "restrequest4delphi",
+			"version": "v4.0.19",
+			"hash": "c2fae550dc1da6015b13d44b4e9f82e0",
+			"artifacts": {},
+			"failed": false,
+			"changed": false
+		}
+	}
+}

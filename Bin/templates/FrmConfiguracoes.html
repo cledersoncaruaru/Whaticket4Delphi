@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+
+
+
+    <style>
+        .input-group {
+            position: relative;
+        }
+
+        .input-group .clear-button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #aaa;
+        }
+
+
+        .modal {
+            overflow-y: hidden;
+        }
+
+        .modal-header {
+            cursor: move;
+        }
+
+        @media (min-width: 576px) {
+            .modal-dialog {
+                max-width: 850px;
+                margin: 1.75rem auto;
+            }
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div class="clearfix" style="display: none;">{%BTNCONFIRMACANCELAMENTO%}</div>
+
+    <section class="card">
+        <h2 class="card-header bg-primary text-white">Configurações do Sistema </h2>
+
+        <div class="card-body">
+
+
+            <div class="tabs-section">
+
+                <ul class="nav nav-pills mb-3" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#_dm-pillsopcoes"
+                            type="button" role="tab" aria-controls="opcoes" aria-selected="true">Opções</button>
+                    </li>
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#_dm-pillsempresas" type="button"
+                            role="tab" aria-controls="empresas" aria-selected="false">Empresas</button>
+                    </li>
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#_dm-pillsplanos" type="button"
+                            role="tab" aria-controls="planos" aria-selected="false">Planos</button>
+                    </li>
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#_dm-pillsajuda" type="button"
+                            role="tab" aria-controls="ajuda" aria-selected="false">Ajuda</button>
+                    </li>
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#_dm-pillswhitelabel"
+                            type="button" role="tab" aria-controls="whitelabel"
+                            aria-selected="false">WhiteLabel</button>
+                    </li>
+
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#_dm-pillspagamentos"
+                            type="button" role="tab" aria-controls="pagamentos" aria-selected="false">Pagamentos
+                            GateWays</button>
+                    </li>
+
+
+
+                </ul>
+
+                <div class="tab-content">
+
+                    <div class="tab-content">
+                        <div id="_dm-pillsopcoes" class="tab-pane fade show active" role="tabpanel"
+                            aria-labelledby="opcoes-tab">
+                            <p class="text-center text-muted">OPÇÕES</p>
+                        </div>
+
+                        <div id="_dm-pillsempresas" class="tab-pane fade" role="tabpanel"
+                            aria-labelledby="empresas-tab">
+                            <p class="text-center">Empresas</p>
+                        </div>
+
+                        <div id="_dm-pillsplanos" class="tab-pane fade" role="tabpanel" aria-labelledby="planos-tab">
+                            <p class="text-center">Planos</p>
+                        </div>
+
+                        <div id="_dm-pillsajuda" class="tab-pane fade" role="tabpanel" aria-labelledby="ajuda-tab">
+                            <p class="text-center">Ajuda</p>
+                        </div>
+
+
+                        <div id="_dm-pillswhitelabel" class="tab-pane fade" role="tabpanel"
+                            aria-labelledby="whitelabel-tab">
+                            <p class="text-center">WhiteLabel</p>
+                        </div>
+
+                        <div id="_dm-pillspagamentos" class="tab-pane fade" role="tabpanel"
+                            aria-labelledby="pagamentos-tab">
+                            <p class="text-center">Pagamentos
+                                GateWays</p>
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+
+
+
+
+
+            <div class="hr-dashed"></div>
+            <!-- <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <table id="Lista" class="table table-bordered table-striped table-hover table-sm"
+                        style="width: 100%">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Email</th>
+                                <th>Perfil</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div> -->
+
+
+
+    </section>
+
+
+    <div id="modal_adicionar_usuario" tabindex="-1" class="modal fade" data-backdrop="false" data-keyboard="false">
+        <div class="modal-dialog" style="width: 850px !important">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #25476a">
+                    <h4 class="modal-title" style="color: #fff">
+                        <i class="fa-solid fa-users-gear fa-1x"></i> Adicionar Usuario
+                    </h4>
+                </div>
+
+                <div class="modal-body">
+
+                    <form>
+
+                        <div class="row">
+
+                            <div class="col-xs-12 col-sm-7 col-md-7 col-lg-7 col-xl-7">
+                                <div class="form-group">
+                                    <label>Nome do Usuario</label>
+                                    {%NAME placeholder="Nome do Contato"%}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5 col-xl-5">
+                                <div class="form-group">
+                                    <label>Senha</label>
+                                    {%PASSWORDHASH placeholder="Senha"%}
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    {%EMAIL placeholder="Informe o Email"%}
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <div class="form-group">
+                                    <label>Perfil</label>
+                                    {%PROFILE%}
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <div class="form-group">
+                                    <label>Filas</label>
+                                    {%USERQUEUES%}
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="BTN_ATUALIZA_EDICAO">
+                        Atualizar
+                    </button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                        Sair
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+
+
+
+        $(document).ready(function () {
+
+            $('#NUMBER').mask('99 (99) 9999-9999?9');
+
+            // var table = $("#Lista").DataTable({
+
+            //     responsive: true,
+            //     pageLength: 10,
+            //     language: {
+            //         url: "DataTables/Languagem/Portuguese-Brasil.json",
+            //     },
+            //     columnDefs: [
+            //         {
+            //             targets: 0,
+            //             className: "text-center",
+            //             width: "15%",
+            //         },
+            //         {
+            //             targets: 1,
+            //             className: "text-center",
+            //             width: "15%",
+            //         },
+
+            //         {
+            //             targets: 2,
+            //             className: "text-center",
+            //             width: "6%",
+            //         },
+            //         {
+            //             targets: 3,
+            //             className: "text-center",
+            //             width: "6%",
+
+            //         },
+
+            //     ],
+
+            //     order: [[0, "desc"]],
+            //     paging: true,
+            //     ordering: true,
+            //     searching: true,
+            //     serverSide: true,
+            //     processing: true,
+            //     ajax: "/$/callback?callback=ListaUsuarios",
+            // });
+
+
+        });
+
+        function clearInput(inputId) {
+            document.getElementById(inputId).value = '';
+            table.search(this.value).draw();
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>

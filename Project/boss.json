@@ -1,0 +1,12 @@
+{
+	"name": "Whaticket Intraweb\u001b[3~",
+	"description": "Whaticket for Delphi + Intraweb",
+	"version": "1.0.0",
+	"homepage": "",
+	"mainsrc": "./src",
+	"projects": [],
+	"dependencies": {
+		"https://github.com/viniciussanchez/bcrypt": "^1.0.8",
+		"https://github.com/viniciussanchez/restrequest4delphi": "^v4.0.19"
+	}
+}

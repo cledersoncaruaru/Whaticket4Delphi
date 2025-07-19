@@ -1,0 +1,1152 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="keywords" content="nfse Nota Fiscal de Serviço" />
+  <meta name="description" content="Sistema Para Emissão de NFS-e (Nota Fiscal de Serviço)">
+  <meta name="author" content="Clederson Maia Ferreira">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <link rel="icon" type="image/x-icon" href="/assets/img/ico/logo.ico" />
+
+  <title>{%APPNAME%} | </title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&family=Ubuntu:wght@400;500;700&display=swap"
+    rel="stylesheet">
+
+  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800|Shadows+Into+Light"
+    rel="stylesheet" type="text/css">
+
+  <script type="text/javascript" src="./assets/js/jquery.min.js"></script>
+  <script type="text/javascript" src="./assets/js/jquery-ui.js"></script>
+  <link href="DataTables/datatables.min.css" />
+  <script src="DataTables/datatables.min.js"></script>
+  <link rel="stylesheet" href="DataTables/Responsive-2.4.0/css/responsive.bootstrap.min.css">
+
+  <link class="main-stylesheet" href="holdonjs/HoldOn.min.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" language="javascript" src="holdonjs/HoldOn.min.js"></script>
+
+  <link class="main-stylesheet" href="sweetalert2/sweetalert2.min.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" language="javascript" src="sweetalert2/sweetalert2.all.min.js"></script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link href="select2/css/select2.min.css" rel="stylesheet" />
+  <script src="select2/js/select2.min.js"></script>
+
+  <!-- <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
+
+
+
+  <script src="maskinput/jquery.maskedinput.min.js"></script>
+  <script src="maskmoney/jquery.maskMoney.min.js"></script>
+  <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="./assets/css/nifty.min.css">
+  <link rel="stylesheet" href="./assets/css/demo-purpose/demo-icons.min.css">
+  <link rel="stylesheet" href="./assets/css/demo-purpose/demo-settings.min.css">
+
+  <style>
+    .dados_empresa_h2 {
+
+      margin-top: 0.7rem !important;
+    }
+
+    .header__content-end {
+      display: flex;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: .3rem;
+    }
+
+    #badge-ambiente {
+      display: flex !important;
+      --bs-bg-opacity: 1;
+      height: 1.9rem !important;
+      width: 6rem !important;
+      justify-content: center !important;
+      align-items: center !important;
+    }
+
+
+    #REFRESH {
+      height: 1.5rem !important;
+      margin-left: 0.2rem !important;
+      width: 1.5rem !important;
+    }
+
+    .select2-container {
+      width: 100% !important;
+      margin-left: 0px !important;
+      align-items: flex-end !important;
+      text-align: left !important;
+    }
+
+    .select2-container--default .select2-selection--single {
+      display: flex;
+      background-color: #f3f5f9;
+      border: 1px solid #aaa;
+      border-radius: 4px;
+      height: 35px;
+      align-items: center;
+      height: 2.4rem !important;
+      padding-top: 0.3rem !important;
+      font-weight: bold !important;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__arrow b {
+      border-color: #888 transparent transparent transparent;
+      border-style: solid;
+      border-width: 5px 4px 0 4px;
+      height: 0;
+      left: 50%;
+      margin-left: -4px;
+      margin-top: -2px;
+      position: absolute;
+      top: 71%;
+      width: 0;
+    }
+
+    .select2-container--default .select2-selection--single .select2-selection__arrow b {
+      border-color: #888 transparent transparent transparent;
+      border-style: solid;
+      border-width: 5px 4px 0 4px;
+      height: 0;
+      left: 50%;
+      margin-left: -4px;
+      margin-top: -2px;
+      position: absolute;
+      top: 71%;
+      width: 0;
+    }
+
+    /* 
+     .select2-container {
+      z-index: 99999;
+    } */
+
+    #icon-whatsapp {
+      font-size: 1.7rem !important;
+    }
+
+    .card-header {
+      min-height: 2.5rem !important;
+      height: 2.65rem !important;
+      display: flex !important;
+      align-items: center !important;
+    }
+
+
+    .modal-header {
+      background: #25476a !important;
+      color: #fff !important;
+      padding: 6px 1rem !important;
+      height: 3rem !important;
+    }
+
+    .modal-title {
+      margin-bottom: 0;
+      line-height: 1.5;
+      color: white;
+    }
+
+    #container .table-bordered,
+    #container .table-bordered td,
+    #container .table-bordered th {
+      border-color: rgba(0, 0, 0, 0.07) !important;
+    }
+
+    table.dataTable {
+      clear: both;
+      margin-top: 6px !important;
+      margin-bottom: 6px !important;
+      max-width: none !important;
+      border-collapse: separate !important;
+    }
+
+    .table-bordered {
+      border: 1px solid #ddd !important;
+      border-top-color: rgb(221, 221, 221) !important;
+      border-right-color: rgb(221, 221, 221) !important;
+      border-bottom-color: rgb(221, 221, 221) !important;
+      border-left-color: rgb(221, 221, 221) !important;
+    }
+
+    .table {
+      width: 100% !important;
+      max-width: 100% !important;
+      margin-bottom: 20px !important;
+    }
+
+    table {
+      background-color: transparent !important;
+    }
+
+    table.table-bordered.dataTable tbody th,
+    table.table-bordered.dataTable tbody td {
+      border-bottom-width: 0 !important;
+    }
+
+    table.table-bordered.dataTable th,
+    table.table-bordered.dataTable td {
+      border-left-width: 0 !important;
+    }
+
+    .table>tbody>tr>td,
+    .table>tbody>tr>th {
+      line-height: 1.42857143 !important;
+    }
+
+    table.dataTable td,
+    table.dataTable th {
+      -webkit-box-sizing: content-box !important;
+      box-sizing: content-box !important;
+    }
+
+    .table-bordered td,
+    .table-bordered th {
+      border: 1px solid #dee2e6 !important;
+      border-bottom-width: 1px !important;
+      border-left-width: 1px !important;
+    }
+
+    .table-sm td,
+    .table-sm th {
+      padding: 0.3rem !important;
+    }
+
+    .table td,
+    .table th {
+      padding: 0.75rem !important;
+      vertical-align: top !important;
+      border-top: 1px solid #dee2e6 !important;
+    }
+
+    th,
+    td {
+      margin: 10px !important;
+      padding: 10px 10px !important;
+      padding-top: 10px !important;
+      padding-top: 10px !important;
+    }
+
+    .table>thead>tr>td,
+    .table>thead>tr>th {
+      line-height: 1.42857143;
+      color: #25476a;
+      width: 10px;
+      font-size: 12px;
+    }
+
+    table.dataTable tbody>tr.selected,
+    table.dataTable tbody>tr>.selected {
+      background-color: #25476a !important;
+    }
+
+    table.dataTable {
+      clear: both;
+      margin-top: 6px !important;
+      margin-bottom: 6px !important;
+      max-width: none !important;
+      border-collapse: separate !important;
+    }
+
+    .table-bordered {
+      border: 1px solid #ddd !important;
+      border-top-color: rgb(221, 221, 221) !important;
+      border-right-color: rgb(221, 221, 221) !important;
+      border-bottom-color: rgb(221, 221, 221) !important;
+      border-left-color: rgb(221, 221, 221) !important;
+    }
+
+    table {
+      width: 100%;
+      margin-bottom: 1rem;
+      color: #212529;
+      background-color: transparent;
+    }
+
+    table.table-bordered.dataTable tbody th,
+    table.table-bordered.dataTable tbody td {
+      border-bottom-width: 0 !important;
+    }
+
+    table.table-bordered.dataTable th,
+    table.table-bordered.dataTable td {
+      border-left-width: 0 !important;
+    }
+
+    .table>tbody>tr>td,
+    .table>tbody>tr>th {
+      line-height: 1.42857143 !important;
+    }
+
+    table.dataTable td,
+    table.dataTable th {
+      -webkit-box-sizing: content-box !important;
+      box-sizing: content-box !important;
+    }
+
+    .table-bordered td,
+    .table-bordered th {
+      border: 1px solid #dee2e6 !important;
+      border-bottom-width: 1px !important;
+      border-left-width: 1px !important;
+    }
+
+    .table-sm td,
+    .table-sm th {
+      padding: 0.3rem !important;
+    }
+
+    .table td,
+    .table th {
+      padding: 0.75rem !important;
+      vertical-align: top !important;
+      border-top: 1px solid #dee2e6 !important;
+    }
+
+    div.dataTables_wrapper div.dataTables_filter {
+      text-align: right;
+      display: block;
+    }
+
+    .table td,
+    .table th {
+      padding: 0.4rem !important;
+      vertical-align: top !important;
+      border-top: 1px solid #dee2e6 !important;
+    }
+
+    .table tbody tr td {
+      padding-top: 1px !important;
+      padding-bottom: 1px !important;
+      margin-top: 1px !important;
+      margin-bottom: 1px !important;
+      padding-left: 7px;
+      padding-right: 7px;
+    }
+
+    table.table-bordered.dataTable th,
+    table.table-bordered.dataTable td {
+      border-bottom-width: 0 !important;
+      font-size: 13px !important;
+    }
+
+    table.dataTable.table-striped>tbody>tr.odd>* {
+      box-shadow: inset 0 0 0 9999px rgba(0, 0, 0, 0.16);
+    }
+
+    table.table-bordered.dataTable thead tr:first-child th,
+    table.table-bordered.dataTable thead tr:first-child td {
+      border-top-width: 1px;
+      background-color: #25476a !important;
+      color: white;
+      font-weight: revert;
+    }
+
+    table.dataTable.table-striped>tbody>tr.odd.selected>* {
+      box-shadow: inset 0 0 0 9999px rgba(0, 136, 204, 0.923) !important;
+    }
+
+    table.dataTable.table-striped>tbody>tr>* {
+      color: black !important;
+    }
+
+    .pagination>.active>a,
+    .pagination>.active>a:focus,
+    .pagination>.active>a:hover,
+    .pagination>.active>span,
+    .pagination>.active>span:focus,
+    .pagination>.active>span:hover {
+      z-index: 3;
+      color: #fff;
+      cursor: default;
+      background-color: #25476a;
+      border-color: #25476a;
+    }
+
+    .pagination>li>a,
+    .pagination>li>span {
+      position: relative;
+      float: left;
+      padding: 6px 12px;
+      margin-left: -1px;
+      line-height: 1.42857143;
+      color: #25476a;
+      text-decoration: none;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-top-color: rgb(221, 221, 221);
+      border-right-color: rgb(221, 221, 221);
+      border-bottom-color: rgb(221, 221, 221);
+      border-left-color: rgb(221, 221, 221);
+    }
+
+    div.dataTables_wrapper div.dataTables_paginate {
+      margin: 0;
+      white-space: nowrap;
+      text-align: right;
+      float: right;
+    }
+
+    .div.dataTables_wrapper div.dataTables_filter {
+      text-align: right;
+      display: block;
+    }
+
+    .dataTables_info {
+      display: block !important;
+    }
+
+
+    .mainnav__caption {
+      color: #373c43 !important;
+      display: flex !important;
+      justify-content: left;
+      align-items: center !important;
+      font-size: large !important;
+      padding-left: 0.5rem;
+    }
+
+    @media (min-width: 992px) {
+      .mn--min .mainnav__avatar {
+        height: auto;
+        width: 2rem;
+        height: 2rem;
+      }
+
+      .mn--min .brand-title,
+      .mn--min .d-mn-max,
+      .mn--min .d-mn-max:not(.show),
+      .mn--min .mainnav__caption,
+      .mn--min .mainnav__menu>.has-sub>.nav-link::after,
+      .mn--min .mainnav__menu>.nav-item>.nav-link .nav-label:not(.show) {
+        display: none !important;
+      }
+
+    }
+
+    @media (max-width: 768px) {
+      .mobile-hide {
+        display: none;
+      }
+
+      .card-header {
+        min-height: 3rem !important;
+        height: 3rem !important;
+        display: flex !important;
+        align-items: center !important;
+      }
+    }
+
+    .modal {
+      overflow-y: hidden;
+    }
+
+    .modal-header {
+      cursor: move;
+    }
+
+    .root .mainnav__inner .nav-link {
+      color: #75868f !important;
+      font-size: 0.875rem !important;
+    }
+
+    body {
+      overflow: hidden;
+      overflow-y: hidden;
+      overflow-x: hidden;
+    }
+  </style>
+
+
+
+</head>
+
+<body class="jumping">
+  <div class="clearfix" style="display:none">{%BTNTROCARPRESTADOR%}{%BTNENCERRAR%}</div>
+  <div id="root" class="root mn--max">
+
+    <section id="content" class="content">
+
+      <div class="content__boxed">
+        <div class="content__wrap">
+          <div class="row">
+            <div class="col-xl-12 mb-12 mb-xl-0">
+
+              $body
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+      <footer class="content__boxed mt-auto">
+        <div class="content__wrap py-3 py-md-1 d-flex flex-column flex-md-row align-items-md-center">
+          <div class="text-nowrap mb-4 mb-md-0">Copyright &copy; 2022 <a href="#"
+              class="ms-1 btn-link fw-bold">{%EMPRESA%}</a></div>
+          <nav class="nav flex-column gap-1 flex-md-row gap-md-3 ms-md-auto" style="row-gap: 0 !important;">
+            <a class="nav-link px-0" href="#">Política de Privacidade</a>
+            <a class="nav-link px-0" href="#">Termos e Condições</a>
+            <a class="nav-link px-0" href="#">Contato</a>
+          </nav>
+        </div>
+      </footer>
+
+    </section>
+
+    <header class="header">
+      <div class="header__inner">
+        <div class="header__brand">
+          <div class="brand-wrap" id="brand-wrap">
+            <a href="#" class="brand-img stretched-link" id="logo_empresa">
+              <img src="./assets/img/logo.png" alt="Logo Empresa" class="Nifty logo logo-max" id="brandimage"
+                width="200" height="40">
+            </a>
+
+          </div>
+        </div>
+
+        <div class="header__content">
+          <div class="header__content-start">
+            <button type="button" id="btn_hamburguer" class="nav-toggler header__btn btn btn-icon btn-sm"
+              aria-label="Nav Toggler">
+              <i class="demo-psi-view-list"></i>
+            </button>
+            <div class="header-searchbox mobile-hide">
+              <h2 class="dados_empresa_h2" style="font-size:16px; color: white;">
+                <span style="color: white;"><b>{%TITLEHEADER%} </b></span>
+              </h2>
+
+
+
+            </div>
+          </div>
+
+          <div class="header__content-end">
+            <!-- 
+            <i class="pg-icon"><i class="fa-brands fa-whatsapp" id="icon-whatsapp" title="Status do WhatsApp"
+                style="color:green;"></i></i> -->
+
+            <!-- {%Ambiente%}
+            {%EMPRESAS%} -->
+
+            <!-- <button class="header__btn btn btn-icon btn-sm" type="button" data-bs-toggle="dropdown"
+              aria-label="Notification dropdown" aria-expanded="false">
+              <span class="d-block position-relative">
+                <i class="fa-solid fa-volume-high fa-2x"></i>
+                <span class="badge badge-super rounded bg-danger p-1">
+                </span>
+              </span>
+            </button> -->
+
+            <!-- <button type="button" id="REFRESH" class="btn btn-icon btn-warning rounded-circle">
+              <i class="fa-solid fa-arrows-rotate"></i>
+            </button> -->
+
+            <!-- <div class="dropdown">
+              <button class="header__btn btn btn-icon btn-sm" type="button" data-bs-toggle="dropdown"
+                aria-label="Notification dropdown" aria-expanded="false">
+                <span class="d-block position-relative">
+                  <i class="fa-brands fa-rocketchat  fa-2x"></i>
+                  <span class="badge badge-super rounded bg-danger p-1">
+
+                    <span class="visually-hidden">unread messages</span>
+                  </span>
+                </span>
+              </button>
+
+              <button class="header__btn btn btn-icon btn-sm" type="button" data-bs-toggle="dropdown"
+                aria-label="Notification dropdown" aria-expanded="false">
+                <span class="d-block position-relative">
+                  <i class="demo-psi-bell fa-2x"></i>
+                  <span class="badge badge-super rounded bg-danger p-1">
+
+                    <span class="visually-hidden">unread messages</span>
+                  </span>
+                </span>
+              </button>
+
+
+              <button class="header__btn btn btn-icon btn-sm" type="button" data-bs-toggle="dropdown"
+                aria-label="Notification dropdown" aria-expanded="false">
+                <span class="d-block position-relative">
+                  <i class="fa-solid fa-message  fa-2x"></i>
+                  <span class=" badge badge-super rounded bg-danger p-1">
+
+                    <span class="visually-hidden">unread messages</span>
+                  </span>
+                </span>
+              </button>
+              <div class="dropdown-menu dropdown-menu-end w-md-300px">
+                <div class="border-bottom px-3 py-2 mb-3">
+                  <h5>Notifications</h5>
+                </div>
+
+                <div class="list-group list-group-borderless">
+                  <div class="list-group-item list-group-item-action d-flex align-items-start mb-3">
+                    <div class="flex-shrink-0 me-3">
+                      <i class="demo-psi-data-settings text-muted fs-2"></i>
+                    </div>
+                    <div class="flex-grow-1 ">
+                      <a href="#" class="h6 d-block mb-0 stretched-link text-decoration-none">Your
+                        storage is full</a>
+                      <small class="text-muted">Local storage is nearly full.</small>
+                    </div>
+                  </div>
+                  <div class="list-group-item list-group-item-action d-flex align-items-start mb-3">
+                    <div class="flex-shrink-0 me-3">
+                      <i class="demo-psi-file-edit text-blue-200 fs-2"></i>
+                    </div>
+                    <div class="flex-grow-1 ">
+                      <a href="#" class="h6 d-block mb-0 stretched-link text-decoration-none">Writing a
+                        New Article</a>
+                      <small class="text-muted">Wrote a news article for the John Mike</small>
+                    </div>
+                  </div>
+                  <div class="list-group-item list-group-item-action d-flex align-items-start mb-3">
+                    <div class="flex-shrink-0 me-3">
+                      <i class="demo-psi-speech-bubble-7 text-green-300 fs-2"></i>
+                    </div>
+                    <div class="flex-grow-1 ">
+                      <div class="d-flex justify-content-between align-items-start">
+                        <a href="#" class="h6 mb-0 stretched-link text-decoration-none">Comment
+                          sorting</a>
+                        <span class="badge bg-info rounded ms-auto">NEW</span>
+                      </div>
+                      <small class="text-muted">You have 1,256 unsorted comments.</small>
+                    </div>
+                  </div>
+                  <div class="list-group-item list-group-item-action d-flex align-items-start mb-3">
+                    <div class="flex-shrink-0 me-3">
+                      <img class="img-xs rounded-circle" src="./assets/img/profile-photos/7.png" alt="Profile Picture"
+                        loading="lazy">
+                    </div>
+                    <div class="flex-grow-1 ">
+                      <a href="#" class="h6 d-block mb-0 stretched-link text-decoration-none">Lucy
+                        Sent you a message</a>
+                      <small class="text-muted">30 minutes ago</small>
+                    </div>
+                  </div>
+                  <div class="list-group-item list-group-item-action d-flex align-items-start mb-3">
+                    <div class="flex-shrink-0 me-3">
+                      <img class="img-xs rounded-circle" src="./assets/img/profile-photos/3.png" alt="Profile Picture"
+                        loading="lazy">
+                    </div>
+                    <div class="flex-grow-1 ">
+                      <a href="#" class="h6 d-block mb-0 stretched-link text-decoration-none">Jackson Sent
+                        you a message</a>
+                      <small class="text-muted">1 hours ago</small>
+                    </div>
+                  </div>
+
+                  <div class="text-center mb-2">
+                    <a href="#" class="btn-link">Show all Notifications</a>
+                  </div>
+
+                </div>
+              </div>
+            </div> -->
+
+            <div class="dropdown">
+              <button class="header__btn btn btn-icon btn-sm" type="button" data-bs-toggle="dropdown"
+                aria-label="User dropdown" aria-expanded="false">
+                <i class="fa-solid fa-users-line fa-2x"></i>
+              </button>
+
+              <div class="dropdown-menu dropdown-menu-end w-md-450px">
+                <div class="d-flex align-items-center border-bottom px-3 py-2">
+                  <div class="flex-shrink-0">
+                    <img class="img-sm rounded-circle" src="./assets/img/profile-photos/1.png" alt="Profile Picture"
+                      loading="lazy">
+                  </div>
+                  <div class="flex-grow-1 ms-3">
+                    <h5 class="mb-0">{%NOME_USUARIO%}</h5>
+                    <span class="text-muted fst-italic">{%EMAIL_USUARIO%}</span>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-md-7">
+                    <div class="list-group list-group-borderless mb-3">
+                      <div class="list-group-item text-center border-bottom mb-3">
+                        <p class="h1 display-1 text-green">17</p>
+                        <p class="h6 mb-0"><i class="demo-pli-basket-coins fs-3 me-2"></i> New
+                          orders</p>
+                        <small class="text-muted">You have new orders</small>
+                      </div>
+                      <div class="list-group-item py-0 d-flex justify-content-between align-items-center">
+                        Today Earning
+                        <small class="fw-bolder">$578</small>
+                      </div>
+                      <div class="list-group-item py-0 d-flex justify-content-between align-items-center">
+                        Tax
+                        <small class="fw-bolder text-danger">- $28</small>
+                      </div>
+                      <div class="list-group-item py-0 d-flex justify-content-between align-items-center">
+                        Total Earning
+                        <span class="fw-bold text-primary">$6,578</span>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="col-md-5">
+                    <div class="list-group list-group-borderless h-100 py-3">
+                      <a href="#"
+                        class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                        <span><i class="demo-pli-mail fs-5 me-2"></i> Messages</span>
+                        <span class="badge bg-danger rounded-pill">14</span>
+                      </a>
+                      <a href="#" class="list-group-item list-group-item-action">
+                        <i class="demo-pli-male fs-5 me-2"></i> Profile
+                      </a>
+                      <a href="#" class="list-group-item list-group-item-action">
+                        <i class="demo-pli-gear fs-5 me-2"></i> Settings
+                      </a>
+
+                      <a href="#" class="list-group-item list-group-item-action mt-auto">
+                        <i class="demo-pli-computer-secure fs-5 me-2"></i> Lock screen
+                      </a>
+                      <a href="#" onclick="sair();" class="list-group-item list-group-item-action">
+                        <i class="demo-pli-unlock fs-5 me-2"></i> Sair do Sistema
+                      </a>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <nav id="mainnav-container" class="mainnav">
+      <div class="mainnav__inner">
+        <div class="mainnav__top-content scrollable-content pb-5">
+          <div class="mainnav__profile mt-3 d-flex3">
+            <div class="mt-2 d-mn-max"></div>
+            <div class="mininav-toggle text-center py-2">
+              {%IMAGEM_PERFIL%}
+            </div>
+
+            <div class="mininav-content collapse d-mn-max">
+              <div class="d-grid">
+                <button class="d-block btn shadow-none p-2" data-bs-toggle="collapse" data-bs-target="#usernav"
+                  aria-expanded="false" aria-controls="usernav">
+                  <span class="dropdown-toggle d-flex justify-content-center align-items-center">
+                    <h6 class="mb-0 me-3">{%NOME_USUARIO%}</h6>
+                  </span>
+                  <small class="text-muted">Administrator</small>
+                </button>
+                <div id="usernav" class="nav flex-column collapse">
+                  <a href="#" class="nav-link d-flex justify-content-between align-items-center">
+                    <span><i class="demo-pli-mail fs-5 me-2"></i><span class="ms-1">Messages</span></span>
+                    <span class="badge bg-danger rounded-pill">14</span>
+                  </a>
+                  <a href="#" class="nav-link">
+                    <i class="demo-pli-male fs-5 me-2"></i>
+                    <span class="ms-1">Profile</span>
+                  </a>
+                  <a href="#" class="nav-link">
+                    <i class="demo-pli-gear fs-5 me-2"></i>
+                    <span class="ms-1">Settings</span>
+                  </a>
+                  <a href="#" class="nav-link">
+                    <i class="demo-pli-computer-secure fs-5 me-2"></i>
+                    <span class="ms-1">Lock screen</span>
+                  </a>
+                  <a href="#" onclick="sair();" class="nav-link">
+                    <i class="demo-pli-unlock fs-5 me-2"></i>
+                    <span class="ms-1">Sair do Sistema</span>
+                  </a>
+                </div>
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="mainnav__categoriy py-3">
+            <h6 class="mainnav__caption mt-0 px-3 fw-bold">Menu</h6>
+            <ul class="mainnav__menu nav flex-column">
+              {%menu%}
+            </ul>
+          </div>
+
+        </div>
+
+        <div class="mainnav__bottom-content border-top pb-2">
+          <ul id="mainnav" class="mainnav__menu nav flex-column">
+            <li class="nav-item has-sub">
+              <a href="#" class="nav-link mininav-toggle collapsed" aria-expanded="false">
+                <i class="demo-pli-unlock fs-5 me-2"></i>
+                <span class="nav-label ms-1">Sair</span>
+              </a>
+              <ul class="mininav-content nav flex-column collapse">
+                <li class="nav-item">
+                  <a href="#" onclick="sair();" class="nav-link">Sair do Sistema</a>
+                </li>
+
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+
+      </div>
+    </nav>
+
+    <aside class="sidebar">
+      <div class="sidebar__inner scrollable-content">
+
+        <div class="sidebar__stuck align-item-center mb-3 px-4">
+          <p class="m-0 text-danger">Close the sidebar =></p>
+          <button type="button" class="sidebar-toggler btn-close btn-lg rounded-circle ms-auto"
+            aria-label="Close"></button>
+        </div>
+
+        <div class="sidebar__wrap">
+          <nav class="px-3">
+            <div class="nav nav-callout nav-fill flex-nowrap" id="nav-tab" role="tablist">
+              <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#nav-chat" type="button" role="tab"
+                aria-controls="nav-chat" aria-selected="true">
+                <i class="d-block demo-pli-speech-bubble-5 fs-3 mb-2"></i>
+                <span>Chat</span>
+              </button>
+
+              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nav-reports" type="button" role="tab"
+                aria-controls="nav-reports" aria-selected="false">
+                <i class="d-block demo-pli-information fs-3 mb-2"></i>
+                <span>Reports</span>
+              </button>
+
+              <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nav-settings" type="button" role="tab"
+                aria-controls="nav-settings" aria-selected="false">
+                <i class="d-block demo-pli-wrench fs-3 mb-2"></i>
+                <span>Settings</span>
+              </button>
+            </div>
+          </nav>
+        </div>
+
+        <div class="tab-content sidebar__wrap" id="nav-tabContent">
+
+
+          <div id="nav-chat" class="tab-pane fade py-4 show active" role="tabpanel" aria-labelledby="nav-chat-tab">
+
+
+            <h5 class="px-3">Family</h5>
+            <div class="list-group list-group-borderless">
+
+              <div class="list-group-item list-group-item-action d-flex align-items-start mb-2">
+                <div class="flex-shrink-0 me-3">
+                  <img class="img-xs rounded-circle" src="./assets/img/profile-photos/2.png" alt="Profile Picture"
+                    loading="lazy">
+                </div>
+                <div class="flex-grow-1 ">
+                  <a href="#" class="h6 d-block mb-0 stretched-link text-decoration-none">Stephen
+                    Tran</a>
+                  <small class="text-muted">Available</small>
+                </div>
+              </div>
+
+              <div class="list-group-item list-group-item-action d-flex align-items-start mb-2">
+                <div class="flex-shrink-0 me-3">
+                  <img class="img-xs rounded-circle" src="./assets/img/profile-photos/8.png" alt="Profile Picture"
+                    loading="lazy">
+                </div>
+                <div class="flex-grow-1 ">
+                  <a href="#" class="h6 d-block mb-0 stretched-link text-decoration-none">Betty
+                    Murphy</a>
+                  <small class="text-muted">Iddle</small>
+                </div>
+              </div>
+
+              <div class="list-group-item list-group-item-action d-flex align-items-start mb-2">
+                <div class="flex-shrink-0 me-3">
+                  <img class="img-xs rounded-circle" src="./assets/img/profile-photos/7.png" alt="Profile Picture"
+                    loading="lazy">
+                </div>
+                <div class="flex-grow-1 ">
+                  <a href="#" class="h6 d-block mb-0 stretched-link text-decoration-none">Brittany
+                    Meyer</a>
+                  <small class="text-muted">I think so!</small>
+                </div>
+              </div>
+
+              <div class="list-group-item list-group-item-action d-flex align-items-start mb-2">
+                <div class="flex-shrink-0 me-3">
+                  <img class="img-xs rounded-circle" src="./assets/img/profile-photos/4.png" alt="Profile Picture"
+                    loading="lazy">
+                </div>
+                <div class="flex-grow-1 ">
+                  <a href="#" class="h6 d-block mb-0 stretched-link text-decoration-none">Jack
+                    George</a>
+                  <small class="text-muted">Last seen 2 hours ago</small>
+                </div>
+              </div>
+
+            </div>
+
+            <h5 class="d-flex mt-5 px-3">Friends <span class="badge bg-success ms-auto">587 +</span></h5>
+            <div class="list-group list-group-borderless">
+              <a href="#" class="list-group-item list-group-item-action">
+                <span class="d-inline-block bg-success rounded-circle p-1"></span>
+                Joey K. Greyson
+              </a>
+              <a href="#" class="list-group-item list-group-item-action">
+                <span class="d-inline-block bg-info rounded-circle p-1"></span>
+                Andrea Branden
+              </a>
+              <a href="#" class="list-group-item list-group-item-action">
+                <span class="d-inline-block bg-warning rounded-circle p-1"></span>
+                Johny Juan
+              </a>
+              <a href="#" class="list-group-item list-group-item-action">
+                <span class="d-inline-block bg-secondary rounded-circle p-1"></span>
+                Susan Sun
+              </a>
+            </div>
+
+            <div class="px-3">
+              <h5 class="mt-5">News</h5>
+              <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Qui consequatur ipsum porro a
+                repellat eaque exercitationem necessitatibus esse voluptate corporis.</p>
+              <small class="fst-italic">Last Update : Today 13:54</small>
+            </div>
+
+
+          </div>
+
+          <div id="nav-reports" class="tab-pane fade py-4" role="tabpanel" aria-labelledby="nav-reports-tab">
+
+
+            <div class="px-3">
+              <h5 class="mb-3">Billing &amp Reports</h5>
+              <p>Get <span class="badge bg-danger">$15.00 off</span> your next bill by making sure your
+                full payment reaches us before August 5th.</p>
+
+              <h5 class="mt-5 mb-0">Amount Due On</h5>
+              <p>August 17, 2028</p>
+              <p class="h1">$83.09</p>
+
+              <div class="d-grid">
+                <button class="btn btn-success" type="button">Pay now</button>
+              </div>
+            </div>
+
+            <h5 class="mt-5 px-3">Additional Actions</h5>
+            <div class="list-group list-group-borderless">
+              <a href="#" class="list-group-item list-group-item-action">
+                <i class="demo-pli-information me-2 fs-5"></i>
+                Services Information
+              </a>
+              <a href="#" class="list-group-item list-group-item-action">
+                <i class="demo-pli-mine me-2 fs-5"></i>
+                Usage
+              </a>
+              <a href="#" class="list-group-item list-group-item-action">
+                <i class="demo-pli-credit-card-2 me-2 fs-5"></i>
+                Payment Options
+              </a>
+              <a href="#" class="list-group-item list-group-item-action">
+                <i class="demo-pli-support me-2 fs-5"></i>
+                Messages Center
+              </a>
+            </div>
+
+            <div class="px-3 mt-5 text-center">
+              <div class="mb-3">
+                <i class="demo-pli-old-telephone display-4 text-primary"></i>
+              </div>
+              <p>Have a question ?</p>
+              <p class="h5 mb-0"> (415) 234-53454 </p>
+              <small><em>We are here 24/7</em></small>
+            </div>
+
+
+          </div>
+
+          <div id="nav-settings" class="tab-pane fade py-4" role="tabpanel" aria-labelledby="nav-settings-tab">
+
+
+            <h5 class="px-3">Account Settings</h5>
+            <div class="list-group list-group-borderless">
+
+              <div class="list-group-item mb-1">
+                <div class="d-flex justify-content-between mb-1">
+                  <label class="form-check-label" for="_dm-sbPersonalStatus">Show my personal
+                    status</label>
+                  <div class="form-check form-switch">
+                    <input id="_dm-sbPersonalStatus" class="form-check-input" type="checkbox" checked>
+                  </div>
+                </div>
+                <small class="text-muted">Lorem ipsum dolor sit amet, consectetuer adipiscing
+                  elit.</small>
+              </div>
+
+              <div class="list-group-item mb-1">
+                <div class="d-flex justify-content-between mb-1">
+                  <label class="form-check-label" for="_dm-sbOfflineContact">Show offline
+                    contact</label>
+                  <div class="form-check form-switch">
+                    <input id="_dm-sbOfflineContact" class="form-check-input" type="checkbox">
+                  </div>
+                </div>
+                <small class="text-muted">Aenean commodo ligula eget dolor. Aenean massa.</small>
+              </div>
+
+              <div class="list-group-item mb-1">
+                <div class="d-flex justify-content-between mb-1">
+                  <label class="form-check-label" for="_dm-sbInvisibleMode">Invisible Mode</label>
+                  <div class="form-check form-switch">
+                    <input id="_dm-sbInvisibleMode" class="form-check-input" type="checkbox">
+                  </div>
+                </div>
+                <small class="text-muted">Cum sociis natoque penatibus et magnis dis parturient montes,
+                  nascetur ridiculus mus.</small>
+              </div>
+
+            </div>
+
+            <h5 class="mt-5 px-3">Public Settings</h5>
+            <div class="list-group list-group-borderless">
+
+              <div class="list-group-item d-flex justify-content-between mb-1">
+                <label class="form-check-label" for="_dm-sbOnlineStatus">Online Status</label>
+                <div class="form-check form-switch">
+                  <input id="_dm-sbOnlineStatus" class="form-check-input" type="checkbox" checked>
+                </div>
+              </div>
+
+              <div class="list-group-item d-flex justify-content-between mb-1">
+                <label class="form-check-label" for="_dm-sbMuteNotifications">Mute Notifications</label>
+                <div class="form-check form-switch">
+                  <input id="_dm-sbMuteNotifications" class="form-check-input" type="checkbox" checked>
+                </div>
+              </div>
+
+              <div class="list-group-item d-flex justify-content-between mb-1">
+                <label class="form-check-label" for="_dm-sbMyDevicesName">Show my device name</label>
+                <div class="form-check form-switch">
+                  <input id="_dm-sbMyDevicesName" class="form-check-input" type="checkbox" checked>
+                </div>
+              </div>
+
+            </div>
+
+
+          </div>
+
+
+        </div>
+
+
+      </div>
+    </aside>
+
+  </div>
+
+  <div class="scroll-container">
+    <a href="#root" class="scroll-page rounded-circle ratio ratio-1x1" aria-label="Scroll button"></a>
+  </div>
+
+
+  <script src="./assets/vendors/popperjs/popper.min.js"></script>
+  <script src="./assets/vendors/bootstrap/bootstrap.min.js"></script>
+  <script src="./assets/js/nifty.js"></script>
+  <script src="./assets/js/demo-purpose-only.js"></script>
+
+  <script>
+
+    $(document).ready(function () {
+
+
+
+      // // Inicializa todos os select2 fora do modal
+      // $('.select2').not('#modal_adicionar .select2').select2();
+
+      // // Ao abrir o modal, inicializa os select2 DENTRO dele, se ainda não estiverem prontos
+      // $('#modal_adicionar').on('shown.bs.modal', function () {
+      //   const $select = $(this).find('.select2');
+      //   $select.each(function () {
+      //     if (!$(this).hasClass('select2-hidden-accessible')) {
+      //       $(this).select2({
+      //         dropdownParent: $('#modal_adicionar'),
+      //         escapeMarkup: function (text) { return text; }
+      //       });
+      //     }
+      //   });
+      // });
+
+      // $(document).on('select2:open', () => {
+      //   const searchField = document.querySelector('.select2-search__field');
+      //   if (searchField) {
+      //     searchField.focus();
+      //   }
+      // });
+
+
+      $('input').on("keypress", function (e) {
+        if (e.keyCode == 13) {
+          var inputs = $(this).parents("form").eq(0).find(":input");
+          var idx = inputs.index(this);
+          if (idx == inputs.length - 1) {
+            inputs[0].select()
+          } else {
+            inputs[idx + 1].focus();
+            inputs[idx + 1].select();
+          }
+          return false;
+        }
+      });
+
+    });
+
+
+    function movimentaMenu() {
+      const navToggler = document.querySelector(".nav-toggler");
+      if (navToggler) {
+        navToggler.click();
+      }
+    }
+
+
+    function sair() {
+      BTNENCERRAR.click();
+    }
+
+    function chamaMsgHoldon(msg) {
+      var options = {
+        theme: "sk-cube-grid",
+        message: msg,
+        textColor: "white",
+      };
+
+      HoldOn.open(options);
+    }
+
+
+    $(".modal").draggable({
+      handle: ".modal-header"
+    });
+
+
+
+  </script>
+
+
+
+</body>
+
+</html>

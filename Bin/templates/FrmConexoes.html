@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-group .clear-button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #aaa;
+        }
+
+
+        .modal {
+            overflow-y: hidden;
+        }
+
+        .modal-header {
+            cursor: move;
+        }
+
+        @media (min-width: 576px) {
+            .modal-dialog {
+                max-width: 850px;
+                margin: 1.75rem auto;
+            }
+        }
+
+        .custom-modal-body {
+            display: flex;
+            background-color: black;
+            color: white;
+            align-items: center;
+            justify-content: center !important;
+        }
+
+
+        #ISDEFAULT_CHECKBOX {
+            margin-top: 1.9rem !important;
+        }
+
+        .select2-close-mask {
+            z-index: 2099;
+        }
+
+        .select2-dropdown {
+            z-index: 3051;
+        }
+
+        @media (min-width: 768px) {
+            .modal-xl {
+                max-width: 1024px;
+            }
+        }
+
+        .modal-body {
+            overflow-y: auto;
+            max-height: calc(100vh - 200px);
+        }
+
+        table.dataTable {
+            width: 100% !important;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div class="clearfix" style="display: none;">{%BTNCONFIRMACANCELAMENTO%}{%BTN_DELETE%}</div>
+
+    <section class="card">
+        <h2 class="card-header bg-primary text-white">Conexões </h2>
+
+        <div class="card-body">
+
+            <button id="BTN_ADICIONAR" type="button" class="btn btn-primary" title="Importar Contatos"
+                style="font-size: .8rem; margin-top: -4px;"> <i class="fas fa-plus-circle"></i> Adicionar WhatsApp
+            </button>
+
+
+            <div class="hr-dashed"></div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <table id="Lista" class="table table-bordered table-striped table-hover table-sm"
+                        style="width: 100%">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Nome</th>
+                                <th>Status</th>
+                                <th>Sessão</th>
+                                <th>Ultima Atualização</th>
+                                <th>Padrão</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+
+    </section>
+
+
+    <div id="modal_adicionar_conexao" tabindex="-1"
+        class="modal fade callout-subtitle animate__animated animate__zoomInDown" data-bs-backdrop="static"
+        data-keyboard="false">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #25476a">
+                    <h4 class="modal-title" style="color: #fff">
+                        <i class="fa-brands fa-whatsapp fa-1x"></i> Adicionar WhatsApp
+                    </h4>
+                </div>
+
+                <div class="modal-body">
+
+                    <form>
+
+                        <div class="row">
+
+                            <div class="row">
+
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="form-group">
+                                        <label>Nome</label>
+                                        {%NAME placeholder="Nome da Conexão"%}
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                                    <div class="form-group">
+                                        <label>Número</label>
+                                        {%NUMBER%}
+                                    </div>
+                                </div>
+
+
+                                <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2 col-xl-2">
+                                    <div class="form-group">
+                                        {%ISDEFAULT%}
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                    <div class="form-group">
+                                        <label>Mensagem de Saldação</label>
+                                        {%GREETINGMESSAGE placeholder="Menssagem de Saudação"%}
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                    <div class="form-group">
+                                        <label>Mensagem de Conclusão</label>
+                                        {%COMPLATIONMESSAGE placeholder="Menssagem de Conclusão"%}
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                    <div class="form-group">
+                                        <label>Mensagem de Fora de Expediente</label>
+                                        {%OUTOFHOURSMESSAGE placeholder="Menssagem de Fora de Expediente"%}
+                                    </div>
+                                </div>
+
+
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                    <div class="form-group">
+                                        <label>Mensagem de Avaliação</label>
+                                        {%RATINGMESSAGE placeholder="Menssagem de Avaliação"%}
+                                    </div>
+                                </div>
+
+
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                    <div class="form-group">
+                                        <label>Token</label>
+                                        {%INSTANCEID placeholder="Token da API"%}
+                                    </div>
+                                </div>
+
+
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                    <div class="form-group">
+                                        <label>Filas</label>
+                                        {%FILAS placeholder="Filas de Atendimento"%}
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                    <div class="form-group">
+                                        <label>Redirecionar Para Fila de X Minutos</label>
+                                        {%TIMESENDQUEUE placeholder="Redirecionamento de Filas em X Minutos"%}
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                        Sair
+                    </button>
+
+                    <button type="button" class="btn btn-primary" id="BTN_POST">
+                        Gravar
+                    </button>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="modal_qrcode" tabindex="-1" class="modal fade callout-subtitle animate__animated animate__zoomInDown"
+        data-bs-backdrop="static" data-keyboard="false">
+        <!-- <div class="modal-dialog modal-xl modal-dialog-scrollable"> -->
+        <div class="modal-dialog" style="width: 400px !important">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #25476a">
+                    <h4 class="modal-title" style="color: #fff">
+                        <i class="fa-brands fa-whatsapp fa-1x"></i> Leitura do QrCode
+                    </h4>
+                </div>
+
+                <div class="modal-body custom-modal-body">
+
+                    <form>
+                        <div class="div">
+                            {%PAIRINGCODE%}
+                        </div>
+                        <div class="div">
+                            {%CONTADOR%}
+                        </div>
+                        <div class="row">
+
+                            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+                                <div class="form-group">
+                                    <!-- <label>QrCode</label> -->
+                                    {%QRCODE"%}
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="BTN_MODAL_FECHAR">
+                        Fechar
+                    </button>
+
+                    <button type="button" class="btn btn-primary" id="BTN_QRCODE"
+                        onclick="ajaxCall('Actions','GerarQrCode=1');">
+                        Gerar QrCode
+                    </button>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <script>
+
+
+
+        $(document).ready(function () {
+
+            $('#modal_adicionar_conexao').on('shown.bs.modal', function () {
+                // Aguarda o modal abrir totalmente antes de abrir o select2
+                setTimeout(function () {
+                    $('#PROFILE').select2('open');
+
+                    // Força o foco no campo de busca do select2
+                    setTimeout(function () {
+                        let searchInput = document.querySelector('.select2-container--open .select2-search__field');
+                        if (searchInput) {
+                            searchInput.focus();
+                        }
+                    }, 50);
+                }, 150); // tempo suficiente para o Bootstrap terminar o auto-focus
+            });
+
+
+            $('#NUMBER').mask('99 (99) 99999-9999');
+
+            var table = $("#Lista").DataTable({
+
+                responsive: true,
+                pageLength: 10,
+                language: {
+                    url: "DataTables/Languagem/Portuguese-Brasil.json",
+                },
+                columnDefs: [
+                    {
+                        targets: 0,
+                        className: "text-center",
+                        width: "3%",
+                    },
+                    {
+                        targets: 1,
+                        className: "text-center",
+                        width: "11%",
+                    },
+                    {
+                        targets: 2,
+                        className: "text-center",
+                        width: "5%",
+                    },
+
+                    {
+                        targets: 3,
+                        className: "text-center",
+                        width: "8%",
+                    },
+                    {
+                        targets: 4,
+                        className: "text-center",
+                        width: "16%",
+
+                    },
+                    {
+                        targets: 5,
+                        className: "text-center",
+                        width: "8%",
+
+                    },
+                    {
+                        targets: 6,
+                        className: "text-center",
+                        width: "8%",
+
+                    },
+
+                ],
+
+                order: [[0, "desc"]],
+                paging: true,
+                ordering: true,
+                searching: true,
+                serverSide: true,
+                processing: true,
+                ajax: "/$/callback?callback=ListaConexoes",
+            });
+
+
+        });
+
+        function clearInput(inputId) {
+            document.getElementById(inputId).value = '';
+            table.search(this.value).draw();
+        }
+
+        $("#BTN_POST").click(function () {
+            var options = {
+                theme: "sk-cube-grid",
+                message: "Criando Sua Instancia, Aguarde...",
+                textColor: "white",
+            };
+
+            HoldOn.open(options);
+        });
+
+
+    </script>
+
+
+</body>
+
+</html>

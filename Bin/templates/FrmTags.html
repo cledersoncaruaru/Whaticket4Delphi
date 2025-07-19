@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+
+        .input-group {
+            position: relative;
+        }
+
+        .input-group .clear-button {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #aaa;
+        }
+
+        @media (min-width: 768px) {
+            .modal-xl {
+                max-width: 1024px;
+            }
+        }
+
+        .modal-body {
+            overflow-y: auto;
+            max-height: calc(100vh - 200px);
+        }
+
+        table.dataTable {
+            width: 100% !important;
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div class="clearfix" style="display: none;">{%BTN_DELETE%}</div>
+
+    <section class="card">
+        <h2 class="card-header bg-primary text-white">Tags </h2>
+
+        <div class="card-body">
+
+            <button id="BTN_ADICONAR" type="button" class="btn btn-primary" title="Nova Tag"
+                style="font-size: .8rem; margin-top: -4px;"> <i class="fas fa-plus-circle"></i> Adicionar Tag
+            </button>
+
+            <hr>
+
+            <div class="status">
+                <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 col-xl-3">
+                    <div class="form-group">
+                        <label>Status</label>
+                        {%STATUS%}
+                    </div>
+                </div>
+
+
+
+            </div>
+
+            <hr>
+
+            <div class="hr-dashed"></div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <table id="Lista" class="table table-bordered table-striped table-hover table-sm"
+                        style="width: 100%">
+                        <thead>
+                            <tr>
+                                <th>Código</th>
+                                <th>Nome</th>
+                                <th>Color</th>
+                                <th>Kanban</th>
+                                <th>Ação</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+
+
+
+    </section>
+
+
+    <div id="modal_adicionar_tags" tabindex="-1" class="modal fade" data-backdrop="false" data-keyboard="false">
+         <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color: #25476a">
+                    <h4 class="modal-title" style="color: #fff">
+                        <i class="fas fa-pencil-alt"></i> Adicionar Tags
+                    </h4>
+                </div>
+
+                <div class="modal-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <div class="form-group">
+                                    <label>Nome da Tag</label>
+                                    {%NAME placeholder="Nome da Tag"%}
+                                </div>
+                            </div>
+
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <div class="form-group">
+                                    <label>Color</label>
+                                    {%COLOR placeholder="#FFF"%}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <div class="form-group">
+                                    <label>Kanban ?</label>
+                                    {%KANBAN%}
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="BTN_POST">
+                        Gravar
+                    </button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                        Sair
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+
+
+
+        $(document).ready(function () {
+
+            var table = $("#Lista").DataTable({
+
+                responsive: true,
+                pageLength: 10,
+                language: {
+                    url: "DataTables/Languagem/Portuguese-Brasil.json",
+                },
+                columnDefs: [
+                    {
+                        targets: 0,
+                        className: "text-left",
+                        width: "3%",
+                    },
+                    {
+                        targets: 1,
+                        className: "text-left",
+                        width: "30%",
+                    },
+                    {
+                        targets: 2,
+                        className: "text-center",
+                        width: "7%",
+                    },
+                    {
+                        targets: 3,
+                        className: "text-center",
+                        width: "7%",
+                    },
+
+                    {
+                        targets: 4,
+                        className: "text-left",
+                        width: "2%",
+                    },
+
+
+                ],
+
+                order: [[0, "desc"]],
+                paging: true,
+                ordering: true,
+                searching: true,
+                serverSide: true,
+                processing: true,
+                ajax: "/$/callback?callback=ListaTags",
+            });
+
+
+        });
+
+
+        function clearInput(inputId) {
+            document.getElementById(inputId).value = '';
+            table.search(this.value).draw();
+        }
+
+
+    </script>
+
+
+</body>
+
+</html>

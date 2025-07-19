@@ -1,0 +1,9 @@
+[Main]
+Parameters=
+DebugInfo=0
+SSL=0
+Browser=3
+RunInTray=1
+RunMinimized=0
+[HTTP]
+SpeedLimit=0
