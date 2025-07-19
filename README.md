@@ -27,10 +27,21 @@ Este projeto tem como objetivo fornecer uma alternativa 100% Delphi para integra
 - [Evolution API](https://github.com/EvolutionAPI/evolution-api)
 - [PostgreSQL](https://www.postgresql.org/)
 
+## Script de Criação do Banco de dados 
+BackupBancodeDados-whaticket4delphi.sql
+ - Execute ou restaure,e seu banco será criado
+ - no Banco da Evolution na tabela "Message" Crie o Campo "sicronizado" bool NULL, para o Whaticket4Delphi Sicronizar as mensagens com ele
+
+
 ## Usuario e Senha Padrão 
 
 Usuario:admin@admin.com
 Senha:123456
+
+## Exe Atualizado para Rodar Como Serviço
+ - Abra o prompt de Comando na Pasta a onde está o exe 
+ - e Rode o Comando WhaticketIW.exe /install
+ - Abra o Serviço marque Tipo de Inicialização para "Automatico", Clique em Iniciar, e pronto o serviço rodando 
 
 
 
