@@ -60,3 +60,21 @@ Senha:123456
 ├── Bin/Configuracao.ini          # Arquivo de configuração de Portas de SSL para Aplicação
 ├── README.md
 └── ...
+
+
+## Projetos
+- Esse Projeto pode ser utilizado com base para outros Projetos
+- Você tem o Demo de como trabalhar com Menus, chamando apartir de um FormBase
+- Você tem Demos de como Utilizar Modais
+- Você tem Demo de Como Abrir putros Forms 
+- Exemplo de Crud
+- Exemplos de Chamadas a APis com o RestRequest3Delphi
+- Exemplo de WebHook em uma Aplicação Intrawqeb
+- Exemplos de Utilização das Classes de Thread do Intraweb 
+- Mensageria
+- Criação de Componentes Html no Delphi e Passando para o renderizar no Html 
+- Pequenos Exemplos de JavaScript
+- Pequenos Exemplos de Css e Manipulação do DOM
+
+## Convite
+- Convido todos a participal do Projetos, fazer PullRequest,Melhorias no Código, melhorias no sistema em Geral, Ficarei contente em apontar falhas em codigos e Bugs e um pedido de desculpas aos amantes do Programadores que tem seu código formatado rsrsrs, conveso que não aplico isso nos meus projetos
