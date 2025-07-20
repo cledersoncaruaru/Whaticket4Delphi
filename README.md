@@ -29,6 +29,10 @@ Este projeto tem como objetivo fornecer uma alternativa 100% Delphi para integra
 - [Evolution API](https://github.com/EvolutionAPI/evolution-api)
 - [PostgreSQL](https://www.postgresql.org/)
 
+## Dependencias
+   - "https://github.com/viniciussanchez/bcrypt": "^1.0.8",
+   - "https://github.com/viniciussanchez/restrequest4delphi": "^v4.0.19"
+
 ## Script de Criação do Banco de dados 
 BackupBancodeDados-whaticket4delphi.sql
  - Execute ou restaure,e seu banco será criado
